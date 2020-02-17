@@ -7,8 +7,7 @@ data class Event(
     @PropertyName("name") val name: String?,
     @PropertyName("img") val img: String?,
     @PropertyName("id_user_admin") val id_user_admin: String?,
-    @PropertyName("id_user") val id_user: ArrayList<String>?,
-    @PropertyName("id_user") val id_school: ArrayList<String>?,
+    @PropertyName("id_subscribe_event") val id_subscribe_event: String?,
     @PropertyName("adresse") val adresse: String?,
     @PropertyName("zip") val zip :  String?,
     @PropertyName("city") val city :  String?,
@@ -21,7 +20,7 @@ data class Event(
 
 
 {
-    constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null)
+    constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null)
 }
 
 

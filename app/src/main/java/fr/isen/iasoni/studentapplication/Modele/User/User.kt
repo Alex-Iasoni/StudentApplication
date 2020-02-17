@@ -4,25 +4,28 @@ import com.google.firebase.database.PropertyName
 data class User(
 
       @PropertyName("id_user") val id_user: String?,
-        @PropertyName("name") val name: String?,
-        @PropertyName("prenom") val prenom: String?,
+      @PropertyName("name") val name: String?,
+      @PropertyName("surname") val surname: String?,
       @PropertyName("img_profil") val img_profil: String?,
       @PropertyName("img_cover") val img_cover: String?,
-        @PropertyName("email") val email: String?,
-        @PropertyName("birthday") val birthday : String?,
-        @PropertyName("id_school") val id_school :  String?,
-        @PropertyName("city") val city :  String?,
+      @PropertyName("email") val email: String?,
+      @PropertyName("birthday") val birthday : String?,
+      @PropertyName("id_school") val id_school :  String?,
+      @PropertyName("id_event") val id_event :  ArrayList<String>?,
+      @PropertyName("id_event_admin") val id_event_admin :  ArrayList<String>?,
+      @PropertyName("city") val city :  String?,
       @PropertyName("certified") val certified :  Boolean?,
-        @PropertyName("id_music") val id_music :  ArrayList<String>?,
-        @PropertyName("smoke") val smoke : Int?,
-        @PropertyName("drink") val drink : ArrayList<String>?,
+      @PropertyName("id_music") val id_music :  ArrayList<String>?,
+      @PropertyName("smoke") val smoke : Int?,
+      @PropertyName("drink") val drink : ArrayList<String>?,
         @PropertyName("sport") val sport : ArrayList<String>?,
         @PropertyName("level") val level : String?,
-        @PropertyName("badges") val badges : ArrayList<String>?,
-        @PropertyName("events") val events : ArrayList<String>?)
+      @PropertyName("id_swipe") val id_swipe : ArrayList<String>?,
+        @PropertyName("id_badge") val id_badge : ArrayList<String>?)
+
 
 {
-        constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+        constructor() : this(null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null,null,null,null)
     }
 
 
