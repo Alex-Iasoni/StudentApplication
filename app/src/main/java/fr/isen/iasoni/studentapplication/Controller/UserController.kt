@@ -4,12 +4,15 @@ import com.google.firebase.database.FirebaseDatabase
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import fr.isen.iasoni.studentapplication.Modele.School
 import fr.isen.iasoni.studentapplication.Modele.User.User
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class WriteUser {
+class UserController {
 
     companion object {
         private const val TAG = "WriteUser"
@@ -39,5 +42,35 @@ class WriteUser {
         dataPost.child(id).setValue(user)
 
     }
+
+    fun getUser(id_user: String?,callback: (User) -> Unit ) {
+        var user : User = User()
+        val myRef = database.getReference("Users")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+
+                    if(value.key.equals(id_user)){
+
+                        user  = value.getValue(User::class.java)!!
+
+                    }
+                }
+                callback.invoke(user)
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+                //Log.d
+            }
+        })
+
+    }
+    fun editEventArray(){
+
+
+    }
+
+
 
 }

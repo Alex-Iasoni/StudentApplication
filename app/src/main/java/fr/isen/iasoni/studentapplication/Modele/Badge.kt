@@ -3,7 +3,7 @@ package fr.isen.iasoni.studentapplication.Modele
 import com.google.firebase.database.PropertyName
 
 
-data class Badges(
+data class Badge(
 
     @PropertyName("id_badge") val id_badge: String?,
     @PropertyName("img") val name: String?,
