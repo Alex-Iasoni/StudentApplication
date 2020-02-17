@@ -5,4 +5,33 @@
     <string name="bottom_navigation_menu_tinder">Tinder</string>
     <string name="bottom_navigation_menu_event">Home</string>
     <string name="bottom_navigation_menu_profile">Profile</string>
+
+
+    <string name="login_title">Page de connexion</string>
+    <string name="login_identifier">Numéros / Email</string>
+    <string name="login_password">Mot de passe</string>
+    <string name="login_validate">Connexion</string>
+    <string name="login_register">S\'inscrire</string>
+    <string name="login_newUser">Tu n\'es toujours pas inscrit ?</string>
+
+
+    <string name="register_title">Page d\'inscription</string>
+    <string name="register_identifier">Numéros / Email</string>
+    <string name="register_password">Mot de passe</string>
+    <string name="register_password_again">Confirmer mot de passe</string>
+    <string name="register_validate">Connexion</string>
+    <string name="register_newUser">Tu n\'es toujours pas inscrit ?</string>
+    <string name="register_name">Nom</string>
+    <string name="register_surname">Prénom</string>
+    <string name="register_birthDate">Date de naissance</string>
+    <string name="register_school">Votre école</string>
+    <string name="register_city">Votre ville</string>
+    <string name="register_interest">Vos centre d\'intérêts</string>
+    <string name="register_skip">Passer cette étape</string>
+    <string name="register_why_interest">Aidez nous à vous proposer des événements adapté à vos préférences en répondant à quelques questions.</string>
+
+
+
+
+
 </resources>
