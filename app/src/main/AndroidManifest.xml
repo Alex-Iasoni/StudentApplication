@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.RegisterActivity"></activity>
-        <activity android:name=".View.ProfilActivity" />
+        <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.IntroductionActivity" />
-        <activity android:name=".View.LoginActivity">
+        <activity android:name=".View.ProfilActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

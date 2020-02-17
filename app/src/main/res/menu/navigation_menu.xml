@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Home"
+        android:id="@+id/action_home"
+        android:icon="@drawable/home_icon_app"/>
+    <item android:title="Notifications"
+        android:id="@+id/action_notification"
+        android:icon="@drawable/alert_icon"/>
+    <item android:title="Swipe"
+        android:id="@+id/action_swipe"
+        android:icon="@drawable/logo_flamme_toge"/>
+    <item android:title="Events"
+        android:id="@+id/action_events"
+        android:icon="@drawable/passed_event_icon"/>
+    <item android:title="Profil"
+        android:id="@+id/action_profil"
+        android:icon="@drawable/profil_icon_app"/>
+</menu>
