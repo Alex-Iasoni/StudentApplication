@@ -7,19 +7,19 @@
     tools:context=".View.ProfilActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="195dp"
-        android:layout_height="216dp"
-        android:layout_marginStart="123dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="93dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/pdp"
+        android:layout_width="413dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/alaiz"
+        app:civ_border_color="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:civ_border_width="5dp"
-        app:civ_border_color="@color/colorAccent">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/colorAccent"/>
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
