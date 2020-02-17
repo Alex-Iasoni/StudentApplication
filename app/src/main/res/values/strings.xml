@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">StudentApplication</string>
+    <string name="bottom_navigation_menu_home">Home</string>
+    <string name="bottom_navigation_menu_notif">Notif</string>
+    <string name="bottom_navigation_menu_tinder">Tinder</string>
+    <string name="bottom_navigation_menu_event">Home</string>
+    <string name="bottom_navigation_menu_profile">Profile</string>
 </resources>
