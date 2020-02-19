@@ -20,7 +20,6 @@
     <string name="register_password">Mot de passe</string>
     <string name="register_password_again">Confirmer mot de passe</string>
     <string name="register_validate">Valider</string>
-    <string name="register_newUser">Tu n\'es toujours pas inscrit ?</string>
     <string name="register_name">Nom</string>
     <string name="register_surname">Prénom</string>
     <string name="register_birthDate">Date de naissance</string>
@@ -38,6 +37,7 @@
     <string name="life_cycle">Cycle de Vie</string>
     <string name="stat_activity">Etat activité</string>
     <string name="frag_change">Changer de fragment</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

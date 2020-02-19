@@ -1,30 +1,45 @@
 package fr.isen.iasoni.studentapplication.View
 
-import android.content.Context
+
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import android.util.Log
+import java.util.*
+import android.content.Context
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import fr.isen.iasoni.studentapplication.R
+import kotlinx.android.synthetic.main.fragment_register__step_1.*
+import java.text.SimpleDateFormat
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class RegisterStep1 : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
+
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
+
+
+
     ): View? {
         Log.d("Message","onCreateView");
+
+
+
+
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register__step_1, container, false)
     }
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -34,6 +49,8 @@ class RegisterStep1 : Fragment() {
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -61,3 +78,6 @@ class RegisterStep1 : Fragment() {
     }
 
 }
+
+
+
