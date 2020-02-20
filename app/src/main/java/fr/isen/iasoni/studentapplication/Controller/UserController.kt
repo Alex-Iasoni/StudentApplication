@@ -66,11 +66,79 @@ class UserController {
         })
 
     }
-    fun editEventArray(){
+    fun editEventArray(id_user: String?, id_event: String) {
+        val dataPost = database.getReference("Users" + id_user)
+
+        var user: User = User()
+        getUser(id_user) {
+            user = it
+            var events: ArrayList<String>? = user!!.events
+
+            events!!.add(id_event)
+
+            val childUpdates = HashMap<String, Any>()
+            childUpdates.put("events", events)
+            dataPost.updateChildren(childUpdates)
+
+
+        }
 
 
     }
 
+    fun editBadgeArray(id_user: String?, id_badge: String) {
+        val dataPost = database.getReference("Users" + id_user)
+
+        var user: User = User()
+        getUser(id_user) {
+            user = it
+
+
+            var badges: ArrayList<String>? = user!!.badges
+
+            badges!!.add(id_badge)
+
+            val childUpdates = HashMap<String, Any>()
+            childUpdates.put("badges", badges)
+            dataPost.updateChildren(childUpdates)
+        }
+    }
+
+    fun editSwipeArray(id_user: String?, id_swipe: String) {
+        val dataPost = database.getReference("Users" + id_user)
+
+        var user: User = User()
+        getUser(id_user) {
+            user = it
+
+
+            var swipes: ArrayList<String>? = user!!.swipes
+
+            swipes!!.add(id_swipe)
+
+            val childUpdates = HashMap<String, Any>()
+            childUpdates.put("swipes", swipes)
+            dataPost.updateChildren(childUpdates)
+        }
+    }
+
+    fun editEventAdminArray(id_user: String?, id_event: String) {
+        val dataPost = database.getReference("Users" + id_user)
+
+        var user: User = User()
+        getUser(id_user) {
+            user = it
+
+
+            var events_admin: ArrayList<String>? = user!!.events_admin
+
+            events_admin!!.add(id_event)
+
+            val childUpdates = HashMap<String, Any>()
+            childUpdates.put("events_admin", events_admin)
+            dataPost.updateChildren(childUpdates)
+        }
+    }
 
 
 }
