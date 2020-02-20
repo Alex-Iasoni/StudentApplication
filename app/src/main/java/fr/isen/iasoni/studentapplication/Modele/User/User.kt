@@ -19,10 +19,10 @@ data class User(
       @PropertyName("level") var level : String?,
       @PropertyName("events") var events :  ArrayList<String>?, //EventModel
       @PropertyName("events_admin") var events_admin :  ArrayList<String>?,
-    @PropertyName("img_profil") val img_profil: String?,
+      @PropertyName("img_profil") val img_profil: String?,
       @PropertyName("id_music") var id_music :  ArrayList<String>?, //MusicModel
-    @PropertyName("img_cover") var img_cover: String?,
-@PropertyName("date_added") var date_added: String?)
+      @PropertyName("img_cover") var img_cover: String?,
+      @PropertyName("date_added") var date_added: String?)
 
 
 

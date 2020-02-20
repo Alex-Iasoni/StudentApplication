@@ -1,13 +1,17 @@
 package fr.isen.iasoni.studentapplication.Controller
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.google.firebase.database.*
 import fr.isen.iasoni.studentapplication.Modele.Badge
+import fr.isen.iasoni.studentapplication.Modele.Event.Event
+import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.Modele.School
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BadgeController {
+
 
 
     val database = FirebaseDatabase.getInstance()
@@ -34,4 +38,40 @@ class BadgeController {
         })
 
     }
+    fun BadgeExist(name : String?) : Boolean{
+        val data = database.getReference("Badges")
+        var exist : Boolean = false
+        data.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+
+                    var BadgeComp = value.getValue(Badge::class.java)!!
+                    if(BadgeComp.name != name){
+
+                        exist = false
+                    }else{
+                        exist = true
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+        return exist
+    }
+
+    fun addBadge(img : String?, name: String?){
+        val data = database.getReference("Badges")
+        val newId = data.push().key.toString()
+        if(!BadgeExist(name)) {
+            val badge = Badge(newId,img, name)
+            data.child(newId).setValue(badge)
+        }
+
+
+
+    }
+
+
 }

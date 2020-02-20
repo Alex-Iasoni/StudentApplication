@@ -67,7 +67,7 @@ class UserController {
 
     }
     fun editEventArray(id_user: String?, id_event: String) {
-        val dataPost = database.getReference("Users" + id_user)
+        val data = database.getReference("Users" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -78,7 +78,7 @@ class UserController {
 
             val childUpdates = HashMap<String, Any>()
             childUpdates.put("events", events)
-            dataPost.updateChildren(childUpdates)
+            data.updateChildren(childUpdates)
 
 
         }
@@ -87,7 +87,7 @@ class UserController {
     }
 
     fun editBadgeArray(id_user: String?, id_badge: String) {
-        val dataPost = database.getReference("Users" + id_user)
+        val data = database.getReference("Users" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -100,12 +100,12 @@ class UserController {
 
             val childUpdates = HashMap<String, Any>()
             childUpdates.put("badges", badges)
-            dataPost.updateChildren(childUpdates)
+            data.updateChildren(childUpdates)
         }
     }
 
     fun editSwipeArray(id_user: String?, id_swipe: String) {
-        val dataPost = database.getReference("Users" + id_user)
+        val data = database.getReference("Users" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -118,12 +118,12 @@ class UserController {
 
             val childUpdates = HashMap<String, Any>()
             childUpdates.put("swipes", swipes)
-            dataPost.updateChildren(childUpdates)
+            data.updateChildren(childUpdates)
         }
     }
 
     fun editEventAdminArray(id_user: String?, id_event: String) {
-        val dataPost = database.getReference("Users" + id_user)
+        val data = database.getReference("Users" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -136,7 +136,7 @@ class UserController {
 
             val childUpdates = HashMap<String, Any>()
             childUpdates.put("events_admin", events_admin)
-            dataPost.updateChildren(childUpdates)
+            data.updateChildren(childUpdates)
         }
     }
 
