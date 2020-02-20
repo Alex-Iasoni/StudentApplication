@@ -10,15 +10,15 @@ data class User(
       @PropertyName("birthday") var birthday : String?,
       @PropertyName("id_school") var id_school :  String?,
       @PropertyName("city") var city :  String?,
-      @PropertyName("id_swipe") var id_swipe : ArrayList<String>?, //SwipeUserModel
-      @PropertyName("id_badge") var id_badge : ArrayList<String>?, //BadgeModel
+      @PropertyName("swipes") var swipes : ArrayList<String>?, //SwipeUserModel
+      @PropertyName("badges") var badges : ArrayList<String>?, //BadgeModel
       @PropertyName("certified") var certified :  Boolean?,
       @PropertyName("smoke") var smoke : Boolean?,
       @PropertyName("drink") var drink : ArrayList<String>?,
       @PropertyName("sport") var sport : ArrayList<String>?,
       @PropertyName("level") var level : String?,
-      @PropertyName("id_event") var id_event :  ArrayList<String>?, //EventModel
-      @PropertyName("id_event_admin") var id_event_admin :  ArrayList<String>?,
+      @PropertyName("events") var events :  ArrayList<String>?, //EventModel
+      @PropertyName("events_admin") var events_admin :  ArrayList<String>?,
     @PropertyName("img_profil") val img_profil: String?,
       @PropertyName("id_music") var id_music :  ArrayList<String>?, //MusicModel
     @PropertyName("img_cover") var img_cover: String?,

@@ -52,7 +52,8 @@ class EventController {
         val dataPost = database.getReference("Events")
         val newId = dataPost.push().key.toString()
         val date = DateCurrent()
-       //editPostArray(newId,user_id)
+        val userController = UserController()
+        userController.editEventArray(id_user_admin, newId)
 
         val event = Event(newId,name, id_user_admin, id_subscribe_event, adresse,zip, city, start_date, end_date, description, limit_user, date)
         dataPost.child(newId).setValue(event)
