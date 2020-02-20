@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat
 
 class RegisterStep1 : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
+    var currentDate = Date()
+
 
 
 
@@ -32,7 +34,19 @@ class RegisterStep1 : Fragment() {
         Log.d("Message","onCreateView");
 
 
-
+        date_input.setOnFocusChangeListener { view, hasFocus ->
+            if(hasFocus) {
+                date_input.clearFocus()
+                val dialog = DatePickerDialog(requireContext(),
+                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                        onDateChoose(year, month, dayOfMonth)
+                    },
+                    1990,
+                    7,
+                    25)
+                dialog.show()
+            }
+        }
 
 
         // Inflate the layout for this fragment
@@ -40,6 +54,27 @@ class RegisterStep1 : Fragment() {
     }
 
 
+
+    fun onDateChoose(year: Int, month: Int, day: Int) {
+        date_input.setText(String.format("%02d/%02d/%04d", day, month+1, year))
+        Toast.makeText(requireContext(),
+            "date : ${date_input.text.toString()}",
+            Toast.LENGTH_LONG).show()
+    }
+
+    fun getAge(year: Int, month: Int, day: Int): Int {
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        val dateString = formatter.format(currentDate)
+        val components = dateString.split("/")
+        var age = components[2].toInt() - year
+        if(components[1].toInt() < month){
+            age--
+        } else if (components[1].toInt() == month &&
+            components[0].toInt() < day){
+            age --
+        }
+        return age
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

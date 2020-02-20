@@ -12,12 +12,7 @@ import java.util.*
 
 
 class RegisterActivity : AppCompatActivity(), OnFragmentInteractionListener {
-
-
     private var frag1Enable = true;
-    var currentDate = Date()
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,19 +30,7 @@ class RegisterActivity : AppCompatActivity(), OnFragmentInteractionListener {
         activity_state_text.text = "On Create"
 */
 
-        /*date_input.setOnFocusChangeListener { view, hasFocus ->
-            if(hasFocus) {
-                date_input.clearFocus()
-                val dialog = DatePickerDialog(this,
-                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                        onDateChoose(year, month, dayOfMonth)
-                    },
-                    1990,
-                    7,
-                    25)
-                dialog.show()
-            }
-        }*/
+
 
 
         button_switch.setOnClickListener {
@@ -59,26 +42,6 @@ class RegisterActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
 
 
-  /*  fun onDateChoose(year: Int, month: Int, day: Int) {
-        date_input.setText(String.format("%02d/%02d/%04d", day, month+1, year))
-        Toast.makeText(this,
-            "date : ${date_input.text.toString()}",
-            Toast.LENGTH_LONG).show()
-    }
-
-    fun getAge(year: Int, month: Int, day: Int): Int {
-        val formatter = SimpleDateFormat("dd/MM/yyyy")
-        val dateString = formatter.format(currentDate)
-        val components = dateString.split("/")
-        var age = components[2].toInt() - year
-        if(components[1].toInt() < month){
-            age--
-        } else if (components[1].toInt() == month &&
-            components[0].toInt() < day){
-            age --
-        }
-        return age
-    }*/
 
     override fun switchFrag() {
         countPage.text = "2/3";
