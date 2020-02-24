@@ -40,6 +40,13 @@ data class User(
 
         }
 
+    fun getNameUser(): String?{
+        return this.name
+    }
+    fun getIdUser(): String?{
+        return this.id_user
+    }
+
 }
 
 
