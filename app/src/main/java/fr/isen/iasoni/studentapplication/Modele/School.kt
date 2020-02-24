@@ -5,17 +5,25 @@ import com.google.firebase.database.PropertyName
 
 data class School(
 
-    @PropertyName("id_school") val id_school: String?,
-    @PropertyName("name") val name: String?,
-    @PropertyName("adresse") val adresse: String?,
-    @PropertyName("img") val img: String?,
-    @PropertyName("users") val users: ArrayList<String>?)
+    @PropertyName("id_school") var id_school: String?,
+    @PropertyName("name") var name: String?,
+    @PropertyName("adresse") var adresse: String?,
+    @PropertyName("img") var img: String?,
+    @PropertyName("users") var users: ArrayList<String>?,
+    @PropertyName("date_added") var date_added: String?)
 
 
 
 {
-    constructor() : this(null,null, null,null,null)
+    constructor() : this(null,null, null,null,null,null)
+    constructor(id : String?, name : String?, adresse: String?, img: String?,date_added: String? ) : this(){ //AddSchool
+        this.id_school = id
+        this.name = name
+        this.adresse = adresse
+        this.img = img
+        this.date_added = date_added
 
+    }
     fun getIdSchool(): String? {
         return this.id_school
     }
