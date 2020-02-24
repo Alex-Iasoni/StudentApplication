@@ -19,8 +19,7 @@
     <string name="register_identifier">Numéros / Email</string>
     <string name="register_password">Mot de passe</string>
     <string name="register_password_again">Confirmer mot de passe</string>
-    <string name="register_validate">Connexion</string>
-    <string name="register_newUser">Tu n\'es toujours pas inscrit ?</string>
+    <string name="register_validate">Valider</string>
     <string name="register_name">Nom</string>
     <string name="register_surname">Prénom</string>
     <string name="register_birthDate">Date de naissance</string>
@@ -29,6 +28,18 @@
     <string name="register_interest">Vos centre d\'intérêts</string>
     <string name="register_skip">Passer cette étape</string>
     <string name="register_why_interest">Aidez nous à vous proposer des événements adapté à vos préférences en répondant à quelques questions.</string>
+
+    <string name="profile_title">Mon Profil</string>
+
+
+    <string name="frag_two">Fragment 2</string>
+    <string name="frag_one">Fragment 1</string>
+    <string name="life_cycle">Cycle de Vie</string>
+    <string name="stat_activity">Etat activité</string>
+    <string name="frag_change">Changer de fragment</string>
+
+
+  
 
 
 </resources>

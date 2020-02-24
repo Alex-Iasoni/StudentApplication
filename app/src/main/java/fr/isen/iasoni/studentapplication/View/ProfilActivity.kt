@@ -28,5 +28,8 @@ class ProfilActivity : AppCompatActivity() {
 
             return@setOnNavigationItemSelectedListener true
         }
+
+
+
     }
 }
