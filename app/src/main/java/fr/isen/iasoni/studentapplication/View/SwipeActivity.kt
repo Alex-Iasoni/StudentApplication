@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import fr.isen.iasoni.studentapplication.Adapters.ImagePagerAdapter
 import fr.isen.iasoni.studentapplication.R
 
 class SwipeActivity : AppCompatActivity() {
@@ -23,7 +24,8 @@ class SwipeActivity : AppCompatActivity() {
         //get a reference to the ViewPager in the layout
         val viewPager: ViewPager = findViewById<View>(R.id.pager) as ViewPager
         //Initialize our adapter
-        val adapter: PagerAdapter= ImagePagerAdapter(this, images)
+        val adapter: PagerAdapter=
+            ImagePagerAdapter(this, images)
 
         // Binds the adapter to the viewPager
         viewPager.adapter = adapter

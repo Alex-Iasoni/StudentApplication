@@ -1,4 +1,4 @@
-package fr.isen.iasoni.studentapplication.View
+package fr.isen.iasoni.studentapplication.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
