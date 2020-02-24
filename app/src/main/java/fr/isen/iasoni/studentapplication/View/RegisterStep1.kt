@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import fr.isen.iasoni.studentapplication.R
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_register__step_1.*
 import java.text.SimpleDateFormat
 
@@ -30,14 +31,16 @@ class RegisterStep1 : Fragment() {
 
 
 
+
+
     ): View? {
         Log.d("Message","onCreateView");
 
-
+/*
         date_input.setOnFocusChangeListener { view, hasFocus ->
             if(hasFocus) {
                 date_input.clearFocus()
-                val dialog = DatePickerDialog(requireContext(),
+                val dialog = DatePickerDialog(this.requireContext(),
                     DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                         onDateChoose(year, month, dayOfMonth)
                     },
@@ -46,7 +49,7 @@ class RegisterStep1 : Fragment() {
                     25)
                 dialog.show()
             }
-        }
+        }*/
 
 
         // Inflate the layout for this fragment
@@ -54,13 +57,12 @@ class RegisterStep1 : Fragment() {
     }
 
 
-
-    fun onDateChoose(year: Int, month: Int, day: Int) {
+  /*  fun onDateChoose(year: Int, month: Int, day: Int) {
         date_input.setText(String.format("%02d/%02d/%04d", day, month+1, year))
-        Toast.makeText(requireContext(),
+        Toast.makeText(this.requireContext(),
             "date : ${date_input.text.toString()}",
             Toast.LENGTH_LONG).show()
-    }
+    }*/
 
     fun getAge(year: Int, month: Int, day: Int): Int {
         val formatter = SimpleDateFormat("dd/MM/yyyy")
@@ -76,7 +78,7 @@ class RegisterStep1 : Fragment() {
         return age
     }
 
-    override fun onAttach(context: Context) {
+/*    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             //listener?.switchFrag()
@@ -86,11 +88,12 @@ class RegisterStep1 : Fragment() {
         }
 
 
-    }
+    }*/
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Log.d("Message","onActivityCreate");
+
 
     }
 

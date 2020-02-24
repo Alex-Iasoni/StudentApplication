@@ -29,6 +29,17 @@
     <string name="register_skip">Passer cette étape</string>
     <string name="register_why_interest">Aidez nous à vous proposer des événements adapté à vos préférences en répondant à quelques questions.</string>
 
+    <string name="add_cover">+ Photo</string>
+    <string name="event_name">Titre de l\'événement </string>
+    <string name="event_place">Lieu de l\'événement</string>
+
+    <string name="event_start_date">Date de début</string>
+    <string name="event_end_date">Date de fin</string>
+    <string name="event_start_h">Heure de début</string>
+    <string name="event_end_h">Heure de fin</string>
+
+
+
     <string name="profile_title">Mon Profil</string>
 
 

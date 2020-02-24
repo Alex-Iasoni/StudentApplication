@@ -11,15 +11,20 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
+
 class RegisterActivity : AppCompatActivity(), OnFragmentInteractionListener {
     private var frag1Enable = true;
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
         countPage.text = "1/3";
+
+
+
 
 
         val registerStep1 = RegisterStep1()
@@ -44,13 +49,14 @@ class RegisterActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
 
     override fun switchFrag() {
-        countPage.text = "2/3";
         if (frag1Enable) {
             val registerStep2 = RegisterStep2()
+            countPage.text = "2/3";
             val ftm = supportFragmentManager.beginTransaction()
             ftm.replace(R.id.register, registerStep2).commit()
             frag1Enable = false;
         } else {
+            countPage.text = "1/3";
             val registerStep1 = RegisterStep1()
             val ftm = supportFragmentManager.beginTransaction()
             ftm.replace(R.id.register, registerStep1).commit()

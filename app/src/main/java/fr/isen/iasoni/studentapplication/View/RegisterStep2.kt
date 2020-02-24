@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import fr.isen.iasoni.studentapplication.R
+import kotlinx.android.synthetic.main.activity_register.*
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +27,7 @@ class RegisterStep2 : Fragment() {
         return inflater.inflate(R.layout.fragment_register_step_2, container, false)
     }
 
-    override fun onAttach(context: Context) {
+ /*   override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             //listener?.switchFrag()
@@ -34,11 +35,12 @@ class RegisterStep2 : Fragment() {
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
-    }
+    }*/
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Log.d("Message","onActivityCreate");
+
 
     }
 
