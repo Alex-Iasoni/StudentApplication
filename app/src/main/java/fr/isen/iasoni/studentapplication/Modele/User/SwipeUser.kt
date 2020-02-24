@@ -6,7 +6,7 @@ data class SwipeUser(
 
     @PropertyName("id_swipe") val id_swipe: String?,
     @PropertyName("id_event") val id_event: String?,
-    @PropertyName("position") val position: Int?,
+    @PropertyName("position") var position: Int?,
     @PropertyName("id_user") val id_user: String?)
 
 
