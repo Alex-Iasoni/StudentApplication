@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import fr.isen.iasoni.studentapplication.R
@@ -41,7 +42,7 @@ class ImagePagerAdapter (var context: Context, private var images: IntArray): Pa
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         //Remove pager_item layout to ViewPager
-        (container as ViewPager).removeView(`object` as RelativeLayout)
+        (container as ViewPager).removeView(`object` as ConstraintLayout)
     }
 
 }
