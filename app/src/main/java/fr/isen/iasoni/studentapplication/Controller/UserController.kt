@@ -57,15 +57,13 @@ class UserController {
                     }
                 }
                 callback.invoke(user)
-
             }
             override fun onCancelled(error: DatabaseError) {
-
                 //Log.d
             }
         })
-
     }
+
     fun editEventArray(id_user: String?, id_event: String) {
         val data = database.getReference("Users" + id_user)
 
