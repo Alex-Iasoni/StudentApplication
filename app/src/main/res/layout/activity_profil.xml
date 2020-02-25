@@ -115,16 +115,16 @@
         app:layout_constraintTop_toBottomOf="@+id/userSurname" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/badgeList"
+        android:id="@+id/badgeRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line"
-        android:orientation="vertical"/>
+        app:layout_constraintTop_toBottomOf="@+id/line" />
 
 
 

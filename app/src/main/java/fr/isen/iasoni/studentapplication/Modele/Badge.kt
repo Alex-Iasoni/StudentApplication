@@ -6,8 +6,8 @@ import com.google.firebase.database.PropertyName
 data class Badge(
 
     @PropertyName("id_badge") val id_badge: String?,
-    @PropertyName("img") val name: String?,
-    @PropertyName("name") val img: String?)
+    @PropertyName("img") var name: String?,
+    @PropertyName("name") var img: String?)
 
 
 {
