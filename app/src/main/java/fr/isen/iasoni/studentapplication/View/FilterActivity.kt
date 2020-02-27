@@ -3,9 +3,12 @@ package fr.isen.iasoni.studentapplication.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import fr.isen.iasoni.studentapplication.R
+import kotlinx.android.synthetic.main.activity_filter.*
 import kotlinx.android.synthetic.main.activity_profil.*
+import kotlinx.android.synthetic.main.activity_profil.navigation_view
 
 class FilterActivity : AppCompatActivity() {
 
@@ -44,6 +47,25 @@ class FilterActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
 
-
+        shadow_city.setOnClickListener {
+            val foo = Intent(this, EventActivity::class.java)
+            foo.putExtra("event_filter", "city")
+            this.startActivity(foo)
+        }
+        shadow_student.setOnClickListener {
+            val foo = Intent(this, EventActivity::class.java)
+            foo.putExtra("event_filter", "student")
+            this.startActivity(foo)
+        }
+        shadow_music.setOnClickListener {
+            val foo = Intent(this, EventActivity::class.java)
+            foo.putExtra("event_filter", "music")
+            this.startActivity(foo)
+        }
+        shadow_school.setOnClickListener {
+            val foo = Intent(this, EventActivity::class.java)
+            foo.putExtra("event_filter", "school")
+            this.startActivity(foo)
+        }
     }
 }
