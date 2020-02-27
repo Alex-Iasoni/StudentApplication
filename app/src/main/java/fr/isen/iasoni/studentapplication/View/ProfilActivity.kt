@@ -74,7 +74,7 @@ class ProfilActivity : AppCompatActivity() {
 
         badgeList.add(badge_fetard)
 
-       
+
         badgeList.add(badge_again)
 
 
