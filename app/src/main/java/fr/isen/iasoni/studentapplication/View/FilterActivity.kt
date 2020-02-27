@@ -3,22 +3,17 @@ package fr.isen.iasoni.studentapplication.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
-import fr.isen.iasoni.studentapplication.Adapters.ImagePagerAdapter
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_profil.*
 
-class SwipeActivity : AppCompatActivity() {
+class FilterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_swipe)
+        setContentView(R.layout.activity_filter)
 
-
-        navigation_view.setSelectedItemId(R.id.action_swipe);
+        navigation_view.setSelectedItemId(R.id.action_home);
 
 
         navigation_view.setOnNavigationItemSelectedListener {item ->
@@ -34,7 +29,7 @@ class SwipeActivity : AppCompatActivity() {
 
 
             }
-            Toast.makeText(this@SwipeActivity, "$activity clicked!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@FilterActivity, "$activity clicked!", Toast.LENGTH_SHORT).show()
 
             if(activity == "ProfilActivity"){
 
@@ -50,31 +45,5 @@ class SwipeActivity : AppCompatActivity() {
         }
 
 
-
-
-
-        //grab all the imagrs and stuff them in our array
-        val images: IntArray = intArrayOf(
-            R.drawable.louism,
-            R.drawable.iasoni,
-            R.drawable.berton,
-            R.drawable.ilane
-            )
-
-        val pseudoList = ArrayList<String>()
-        pseudoList.add("Louis Gnolfi")
-        pseudoList.add("Alexandre Iasoni")
-        pseudoList.add("Thomas Berton")
-        pseudoList.add("Ilane Lopez")
-
-
-        //get a reference to the ViewPager in the layout
-        val viewPager: ViewPager = findViewById<View>(R.id.pager) as ViewPager
-        //Initialize our adapter
-        val adapter: PagerAdapter=
-            ImagePagerAdapter(this, images, pseudoList)
-
-        // Binds the adapter to the viewPager
-        viewPager.adapter = adapter
     }
 }

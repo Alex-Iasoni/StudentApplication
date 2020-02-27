@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.FilterActivity">
+
+    <com.yinglan.shadowimageview.ShadowImageView
+        android:id="@+id/shadow_city"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_marginEnd="160dp"
+        app:layout_constraintBottom_toBottomOf="@+id/shadow_student"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/shadow_student"
+        app:shadowColor="@color/black"
+        app:shadowRound="20dp"
+        app:shadowSrc="@drawable/ville_arrondie" />
+
+    <com.yinglan.shadowimageview.ShadowImageView
+        android:id="@+id/shadow_student"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="160dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shadowColor="@color/black"
+        app:shadowRound="20dp"
+        app:shadowSrc="@drawable/universite_arrondie" />
+
+    <com.yinglan.shadowimageview.ShadowImageView
+        android:id="@+id/shadow_school"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_marginEnd="160dp"
+        app:layout_constraintBottom_toBottomOf="@+id/shadow_music"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/shadow_music"
+        app:shadowColor="@color/black"
+        app:shadowRound="20dp"
+        app:shadowSrc="@drawable/remember_school_arrondie" />
+
+    <com.yinglan.shadowimageview.ShadowImageView
+        android:id="@+id/shadow_music"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="175dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/shadow_student"
+        app:shadowColor="@color/black"
+        app:shadowRound="20dp"
+        app:shadowSrc="@drawable/musique_arrondie" />
+
+
+    <com.yinglan.shadowimageview.ShadowImageView
+        android:id="@+id/shadow_assoc"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="160dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/shadow_school"
+        app:shadowColor="@color/black"
+        app:shadowRound="20dp"
+        app:shadowSrc="@drawable/assoc_arrondie" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@drawable/nav_item_background"
+        app:itemTextColor="@drawable/nav_item_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/navigation_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

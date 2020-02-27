@@ -42,6 +42,9 @@ class ProfilActivity : AppCompatActivity() {
             if(activity == "SwipeActivity"){
                 startActivity(Intent(this, SwipeActivity::class.java))
             }
+            if(activity == "Home"){
+                startActivity(Intent(this, FilterActivity::class.java))
+            }
             return@setOnNavigationItemSelectedListener true
         }
 

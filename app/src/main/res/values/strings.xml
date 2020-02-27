@@ -39,7 +39,6 @@
     <string name="event_end_h">Heure de fin</string>
 
 
-
     <string name="profile_title">Mon Profil</string>
 
 
@@ -48,9 +47,6 @@
     <string name="life_cycle">Cycle de Vie</string>
     <string name="stat_activity">Etat activité</string>
     <string name="frag_change">Changer de fragment</string>
-
-
-
 
 
 </resources>
