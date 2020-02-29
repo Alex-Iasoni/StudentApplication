@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager
 import de.hdodenhof.circleimageview.CircleImageView
 import fr.isen.iasoni.studentapplication.R
 
-class ImagePagerAdapter (var context: Context, private var images: IntArray, val pseudoList: ArrayList<String>): PagerAdapter(){
+class SwipeAdapter (var context: Context, private var images: IntArray, val pseudoList: ArrayList<String>): PagerAdapter(){
 
     override fun getCount(): Int {
         return images.size
