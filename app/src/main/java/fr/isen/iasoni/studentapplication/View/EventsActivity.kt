@@ -1,24 +1,73 @@
 package fr.isen.iasoni.studentapplication.View
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import fr.isen.iasoni.studentapplication.Adapters.BadgeAdapter
 import fr.isen.iasoni.studentapplication.Adapters.EventAdapter
-import fr.isen.iasoni.studentapplication.Modele.Badge
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_event.*
-import kotlinx.android.synthetic.main.activity_profil.*
 
-class EventActivity : AppCompatActivity() {
+class EventsActivity : AppCompatActivity() {
 
     var event_filter: String? = ""
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
+
+
+        navigation_view_event.setSelectedItemId(R.id.action_home);
+
+
+        navigation_view_event.setOnNavigationItemSelectedListener {item ->
+
+            var activity = ""
+
+            when(item.itemId){
+                R.id.action_home -> activity = "Home"
+                R.id.action_notification -> activity = "Notification"
+                R.id.action_profil -> activity = "ProfilActivity"
+                R.id.action_events -> activity = "passedEventsActivity"
+                R.id.action_swipe -> activity = "SwipeActivity"
+
+
+            }
+            Toast.makeText(this@EventsActivity, "$activity clicked!", Toast.LENGTH_SHORT).show()
+
+            if(activity == "ProfilActivity"){
+
+                startActivity(Intent(this, ProfilActivity::class.java))
+            }
+            if(activity == "SwipeActivity"){
+                startActivity(Intent(this, SwipeActivity::class.java))
+            }
+            if(activity == "Home"){
+                startActivity(Intent(this, FilterActivity::class.java))
+            }
+            if(activity == "Notification"){
+                startActivity(Intent(this, NotifActivity::class.java))
+            }
+            if(activity == "passedEventsActivity"){
+                startActivity(Intent(this, PassedEventsActivity::class.java))
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
+
+        add_red.setOnClickListener {
+            val foo = Intent(this, CreateEventActivity::class.java)
+            this.startActivity(foo)
+        }
+        back_arrow.setOnClickListener {
+            val foo = Intent(this, FilterActivity::class.java)
+            this.startActivity(foo)
+        }
+
+
         var eventList = ArrayList<Event>()
         var interrested_list = ArrayList<Boolean>()
 

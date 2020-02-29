@@ -1,6 +1,5 @@
 package fr.isen.iasoni.studentapplication.Adapters
 
-import de.hdodenhof.circleimageview.CircleImageView
 import fr.isen.iasoni.studentapplication.Modele.Badge
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.recycler_view_badge_cell.view.*
@@ -12,12 +11,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.common.reflect.Reflection.getPackageName
 
 
-class BadgeAdapter (val badges: ArrayList<Badge>, val context: Context): RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>() {
+class BadgeProfilAdapter (val badges: ArrayList<Badge>, val context: Context): RecyclerView.Adapter<BadgeProfilAdapter.BadgeViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BadgeViewHolder {

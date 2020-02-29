@@ -47,6 +47,12 @@
     <string name="life_cycle">Cycle de Vie</string>
     <string name="stat_activity">Etat activité</string>
     <string name="frag_change">Changer de fragment</string>
+    <string name="passed_events">Evenements passés</string>
+    <string name="notifications">Notifications</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="surname_name">Prénom Nom</string>
+    <string name="my_school">Mon école</string>
+    <string name="my_city">Ma pur Ville</string>
 
 
 </resources>

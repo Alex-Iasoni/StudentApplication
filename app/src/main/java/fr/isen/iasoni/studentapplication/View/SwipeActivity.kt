@@ -17,27 +17,19 @@ class SwipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_swipe)
 
-
+        //----------------------Menu Navigation-----------------------------
         navigation_view.setSelectedItemId(R.id.action_swipe);
-
-
         navigation_view.setOnNavigationItemSelectedListener {item ->
-
             var activity = ""
-
             when(item.itemId){
                 R.id.action_home -> activity = "Home"
                 R.id.action_notification -> activity = "Notification"
                 R.id.action_profil -> activity = "ProfilActivity"
-                R.id.action_events -> activity = "EventsActivity"
+                R.id.action_events -> activity = "passedEventsActivity"
                 R.id.action_swipe -> activity = "SwipeActivity"
-
-
             }
             Toast.makeText(this@SwipeActivity, "$activity clicked!", Toast.LENGTH_SHORT).show()
-
             if(activity == "ProfilActivity"){
-
                 startActivity(Intent(this, ProfilActivity::class.java))
             }
             if(activity == "SwipeActivity"){
@@ -46,11 +38,16 @@ class SwipeActivity : AppCompatActivity() {
             if(activity == "Home"){
                 startActivity(Intent(this, FilterActivity::class.java))
             }
+            if(activity == "Notification"){
+                startActivity(Intent(this, NotifActivity::class.java))
+            }
+            if(activity == "passedEventsActivity"){
+                startActivity(Intent(this, PassedEventsActivity::class.java))
+            }
+
             return@setOnNavigationItemSelectedListener true
         }
-
-
-
+        //--------------------------------------------------------------------------
 
 
         //grab all the imagrs and stuff them in our array
