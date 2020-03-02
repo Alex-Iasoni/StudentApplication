@@ -15,13 +15,14 @@ data class Event(
     @PropertyName("start_date") var start_date : String?,
     @PropertyName("end_date") var end_date : String?,
     @PropertyName("description") var description : String?,
+    @PropertyName("type") var type : String?,
     @PropertyName("limit_user") var limit_user : Int?,
     @PropertyName("date_added") var date_added: String?)
 
 
 {
-    constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, start_date: String?, end_date: String?, description: String?, limit_user: Int?, date_added: String?) : this(){ //Inscription
+    constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, start_date: String?, end_date: String?, description: String?, type : String?,limit_user: Int?, date_added: String?) : this(){ //Inscription
         this.id_event = id
         this.name = name
         this.id_user_admin = id_user_admin
@@ -32,6 +33,7 @@ data class Event(
         this.start_date = start_date
         this.end_date = end_date
         this.description = description
+        this.type = type
         this.limit_user = limit_user
         this.date_added = date_added
 

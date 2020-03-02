@@ -40,7 +40,7 @@ class EventController {
         })
 
     }
-    fun FindUsersEvent(id_user : String?): ArrayList<String?>{
+    fun FindUsersEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
         val data = database.getReference("Events")
         var userevent : ArrayList<String?> = ArrayList<String?>()
         data.addValueEventListener(object : ValueEventListener {
@@ -60,12 +60,13 @@ class EventController {
                         }
                     }
                 }
+                callback.invoke(userevent)
             }
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-return userevent
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -75,9 +76,75 @@ return userevent
         val formatted = current.format(formatter)
         return formatted
     }
+    fun SortbyStartDateEvent(event : ArrayList<Event?>){
+        event.sortByDescending { it!!.start_date }
+
+
+    }
+
+    fun FindEventFilters(type: String?, callback: (ArrayList<Event?>) -> Unit){
+        val data = database.getReference("Events")
+        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
+        data.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+                    var event = value.getValue(Event::class.java)!!
+                        var eventmod: Event = Event()
+                        getEvent(event.id_event){
+                            eventmod = it
+                            if(eventmod.type.equals(type)){
+                                eventfilter.add(eventmod)
+                            }
+
+                        }
+
+                }
+                SortbyStartDateEvent(eventfilter)
+                callback.invoke(eventfilter)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
+
+    }
+
+    fun InterestByFilter(type: String?,id_user : String?): ArrayList<Boolean?>{
+
+        val data = database.getReference("Events")
+        var interest : ArrayList<Boolean?> = ArrayList<Boolean?>()
+        var events : ArrayList<Event?> = ArrayList<Event?>()
+        FindEventFilters(type){
+            events = it
+            for (event in events){
+                var subs : SubscribeEvent? = SubscribeEvent()
+                var subsCon : SubscribeEventController = SubscribeEventController()
+
+                subsCon.getSubscribeEvent(event!!.id_subscribe_event){
+                    subs = it
+                    var subsusers : ArrayList<String?> =  ArrayList<String?>()
+                   for(subsuser in subsusers){
+                       if(subsuser.equals(id_user)){
+                           interest.add(true)
+                       }else{
+                           interest.add(false)
+                       }
+
+                   }
+
+                }
+
+
+            }
+        }
+    return interest
+
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createEvent(name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, start_date: String?, end_date: String?, description: String?, limit_user: Int?){
+    fun createEvent(name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, start_date: String?, end_date: String?, description: String?,type : String?, limit_user: Int?){
 
         val data = database.getReference("Events")
         val newId = data.push().key.toString()
@@ -86,7 +153,7 @@ return userevent
         userController.editEventArray(id_user_admin, newId)
         userController.editEventAdminArray(id_user_admin, newId)
 
-        val event = Event(newId,name, id_user_admin, id_subscribe_event, adresse,zip, city, start_date, end_date, description, limit_user, date)
+        val event = Event(newId,name, id_user_admin, id_subscribe_event, adresse,zip, city, start_date, end_date, description,type, limit_user, date)
         data.child(newId).setValue(event)
     }
 
