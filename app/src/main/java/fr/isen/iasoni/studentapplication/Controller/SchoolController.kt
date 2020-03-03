@@ -10,17 +10,20 @@ import com.google.firebase.database.ValueEventListener
 import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.Modele.School
 import fr.isen.iasoni.studentapplication.Modele.User.User
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class SchoolController {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun DateCurrent() : String{
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
-        val formatted = current.format(formatter)
-        return formatted
+        var currentDate = Date()
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        val dateString = formatter.format(currentDate)
+        return dateString
     }
     val database = FirebaseDatabase.getInstance()
 
@@ -160,7 +163,7 @@ class SchoolController {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun addSchool(name: String?, adresse : String?, img: String?){
         val data = database.getReference("Schools")
         val newId = data.push().key.toString()

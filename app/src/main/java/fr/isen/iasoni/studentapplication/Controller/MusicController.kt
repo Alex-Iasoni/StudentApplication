@@ -10,17 +10,20 @@ import com.google.firebase.database.ValueEventListener
 import fr.isen.iasoni.studentapplication.Modele.Badge
 import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.Modele.School
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class MusicController {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun DateCurrent() : String{
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
-        val formatted = current.format(formatter)
-        return formatted
+        var currentDate = Date()
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        val dateString = formatter.format(currentDate)
+        return dateString
     }
     val database = FirebaseDatabase.getInstance()
 
@@ -95,7 +98,7 @@ class MusicController {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun addMusic( name: String?){
         val data = database.getReference("Musics")
         val newId = data.push().key.toString()

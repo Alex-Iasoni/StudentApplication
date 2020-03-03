@@ -10,8 +10,12 @@ import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.Modele.Event.SubscribeEvent
 import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.Modele.User.User
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class EventController {
     val database = FirebaseDatabase.getInstance()
@@ -86,12 +90,12 @@ class EventController {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun DateCurrent() : String{
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
-        val formatted = current.format(formatter)
-        return formatted
+    var currentDate = Date()
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        val dateString = formatter.format(currentDate)
+        return dateString
     }
     fun SortbyStartDateEvent(event : ArrayList<Event?>){
         event.sortByDescending { it!!.start_date }
@@ -99,7 +103,7 @@ class EventController {
 
 }
 
-//    fun FindEvent(type: String?, callback: (ArrayList<Event?>) -> Unit){
+//    fun FindEvent(, callback: (ArrayList<Event?>) -> Unit){
 //        val data = database.getReference("Events")
 //        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
 //        data.addValueEventListener(object : ValueEventListener {
@@ -127,6 +131,9 @@ class EventController {
 //
 //
 //    }
+//
+//
+
 
     fun  Interest(id_user: String, id_event: String){
         var user : UserController = UserController()
@@ -140,7 +147,7 @@ class EventController {
 
 
     }
-
+//
 //    fun InterestByFilter(type: String?,id_user : String?): ArrayList<Boolean?>{
 //
 //        val data = database.getReference("Events")
@@ -173,7 +180,7 @@ class EventController {
 //
 //    }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun createEvent(name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?, limit_user: Int?){
 
         val data = database.getReference("Events")
@@ -217,7 +224,7 @@ class EventController {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun editEvent(id_event : String?, name : String, adresse: String, zip: String, start_date: String, end_date: String, description: String, limit_user: Int){
 
         val data = database.getReference("Events" + id_event)

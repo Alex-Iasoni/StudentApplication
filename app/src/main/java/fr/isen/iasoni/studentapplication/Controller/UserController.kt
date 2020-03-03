@@ -9,8 +9,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import fr.isen.iasoni.studentapplication.Modele.School
 import fr.isen.iasoni.studentapplication.Modele.User.User
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class UserController {
 
@@ -20,15 +24,14 @@ class UserController {
 
     val database = FirebaseDatabase.getInstance()
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun DateCurrent() : String{
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
-        val formatted = current.format(formatter)
-        return formatted
+        var currentDate = Date()
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        val dateString = formatter.format(currentDate)
+        return dateString
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun Register(id: String, name: String?, surname: String?, email : String?, birthday: String?, school : String?, city : String?) {
         val formatted = DateCurrent()
         val  posts : ArrayList<String>? = ArrayList<String>()
