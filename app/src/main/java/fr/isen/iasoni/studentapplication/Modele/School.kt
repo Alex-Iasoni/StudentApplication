@@ -10,12 +10,13 @@ data class School(
     @PropertyName("adresse") var adresse: String?,
     @PropertyName("img") var img: String?,
     @PropertyName("users") var users: ArrayList<String>?,
+    @PropertyName("event") val event: ArrayList<String>?,
     @PropertyName("date_added") var date_added: String?)
 
 
 
 {
-    constructor() : this(null,null, null,null,null,null)
+    constructor() : this(null,null, null,null,null,null,null)
     constructor(id : String?, name : String?, adresse: String?, img: String?,date_added: String? ) : this(){ //AddSchool
         this.id_school = id
         this.name = name

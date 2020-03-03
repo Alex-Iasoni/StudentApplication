@@ -32,14 +32,22 @@ class UserController {
     fun Register(id: String, name: String?, surname: String?, email : String?, birthday: String?, school : String?, city : String?) {
         val formatted = DateCurrent()
         val  posts : ArrayList<String>? = ArrayList<String>()
-
+        var id_school : String? = ""
+        var id_city : String? = ""
         val schoolC = SchoolController()
-        val id_school = schoolC.getIdSchool(school)
-
+      schoolC.getIdSchool(school){
+          id_school = it
+      }
+        val cityC = CityController()
+        cityC.getIdCity(city){
+            id_city = it
+        }
 
         val dataPost = database.getReference("Users")
-        val user = User(id,name, surname, email, birthday, id_school, city)
+        val user = User(id,name, surname, email, birthday, id_school, id_city)
         dataPost.child(id).setValue(user)
+
+
 
     }
 
@@ -121,7 +129,7 @@ class UserController {
     }
 
     fun editEventAdminArray(id_user: String?, id_event: String) {
-        val data = database.getReference("Users" + id_user)
+               val data = database.getReference("Users" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -136,6 +144,20 @@ class UserController {
             childUpdates.put("events_admin", events_admin)
             data.updateChildren(childUpdates)
         }
+    }
+    fun UsserCertified(id_user: String?, callback: (Boolean) -> Unit){
+        var certified = false
+        var user: User = User()
+        getUser(id_user){
+            user = it
+            if(user.certified == true){
+                certified = true
+            }else{
+                certified = false
+            }
+            callback.invoke(certified)
+        }
+
     }
 
 

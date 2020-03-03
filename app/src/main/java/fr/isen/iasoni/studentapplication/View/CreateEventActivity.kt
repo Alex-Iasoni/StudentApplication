@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.isen.iasoni.studentapplication.Controller.EventController
 import kotlinx.android.synthetic.main.activity_create_event.*
 import java.io.File
 import java.security.AccessController.getContext
@@ -77,7 +78,7 @@ override fun onLocationChanged(location: Location?) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+       super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
 

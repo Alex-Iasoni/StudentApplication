@@ -38,7 +38,7 @@ class BadgeController {
         })
 
     }
-    fun BadgeExist(name : String?) : Boolean{
+    fun BadgeExist(name : String?,callback: (Boolean) -> Unit ){
         val data = database.getReference("Badges")
         var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
@@ -53,20 +53,25 @@ class BadgeController {
                         exist = true
                     }
                 }
+                callback.invoke(exist)
             }
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-        return exist
+
     }
 
     fun addBadge(img : String?, name: String?){
         val data = database.getReference("Badges")
         val newId = data.push().key.toString()
-        if(!BadgeExist(name)) {
-            val badge = Badge(newId,img, name)
-            data.child(newId).setValue(badge)
+
+       BadgeExist(name) {
+           if(!it){
+               val badge = Badge(newId,img, name)
+               data.child(newId).setValue(badge)
+           }
+
         }
 
 

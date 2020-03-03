@@ -8,12 +8,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import fr.isen.iasoni.studentapplication.Modele.Badge
+import fr.isen.iasoni.studentapplication.Modele.City
 import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.Modele.School
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MusicController {
+class CityController {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun DateCurrent() : String{
@@ -24,21 +25,21 @@ class MusicController {
     }
     val database = FirebaseDatabase.getInstance()
 
-    fun getMusics(callback: ( ArrayList<Music>) -> Unit ) {
-        var musics : ArrayList<Music> = ArrayList<Music>()
-        val myRef = database.getReference("Musics")
+    fun getCities(callback: ( ArrayList<City>) -> Unit ) {
+        var cities : ArrayList<City> = ArrayList<City>()
+        val myRef = database.getReference("Cities")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
 
-                    var music : Music = Music()
-                    music  = value.getValue(Music::class.java)!!
-                    musics.add(music)
+                    var city : City = City()
+                    city  = value.getValue(City::class.java)!!
+                    cities.add(city)
 
 
 
                 }
-                callback.invoke(musics)
+                callback.invoke(cities)
 
             }
             override fun onCancelled(error: DatabaseError) {
@@ -48,20 +49,20 @@ class MusicController {
         })
 
     }
-    fun getMusic (id_music: String?,callback: (Music) -> Unit ) {
-        var music : Music= Music()
-        val myRef = database.getReference("Musics")
+    fun getCity (id_city: String?,callback: (City) -> Unit ) {
+        var city : City= City()
+        val myRef = database.getReference("Cities")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
 
-                    if(value.key.equals(id_music)){
+                    if(value.key.equals(id_city)){
 
-                        music  = value.getValue(Music::class.java)!!
+                        city  = value.getValue(City::class.java)!!
 
                     }
                 }
-                callback.invoke(music)
+                callback.invoke(city)
 
             }
             override fun onCancelled(error: DatabaseError) {
@@ -71,15 +72,15 @@ class MusicController {
         })
 
     }
-    fun MusicExist(name : String?, callback: (Boolean) -> Unit){
-        val data = database.getReference("Musics")
+    fun CityExist(name : String?, callback: (Boolean) -> Unit){
+        val data = database.getReference("Cities")
         var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
 
-                    var MusicComp = value.getValue(Music::class.java)!!
-                    if(MusicComp.name != name){
+                    var CityComp = value.getValue(City::class.java)!!
+                    if(CityComp.name != name){
 
                         exist = false
                     }else{
@@ -96,16 +97,16 @@ class MusicController {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun addMusic( name: String?){
-        val data = database.getReference("Musics")
+    fun addCity( name: String?){
+        val data = database.getReference("Cities")
         val newId = data.push().key.toString()
         val date = DateCurrent()
         var exist : Boolean = false
-        MusicExist(name){
+        CityExist(name){
             exist = it
             if (!exist){
-                var music = Music(newId,name, date)
-                data.child(newId).setValue(music)
+                var city = City(newId,name, date)
+                data.child(newId).setValue(city)
             }
 
         }
@@ -114,15 +115,15 @@ class MusicController {
 
     }
 
-    fun editEventArray(id_music: String?, id_event: String) {
-        val data = database.getReference("Musics" + id_music)
+    fun editEventArray(id_city: String?, id_event: String) {
+        val data = database.getReference("Cities" + id_city)
 
-        var music: Music = Music()
-        getMusic(id_music) {
-            music = it
+        var city: City = City()
+        getCity(id_city) {
+            city = it
 
 
-            var events: ArrayList<String>? = music!!.event
+            var events: ArrayList<String>? = city!!.event
 
             events!!.add(id_event)
 
@@ -132,22 +133,21 @@ class MusicController {
         }
     }
 
+    fun getIdCity(name : String?,  callback: (String?) -> Unit){
 
-    fun getIdMusic(name : String?,  callback: (String?) -> Unit){
-
-        var idMusic : String? = ""
-        val myRef = database.getReference("Musics")
+        var idCity : String? = ""
+        val myRef = database.getReference("Cities")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
-                    var music  =   value.getValue(Music::class.java)!!
-                    if(music.name.equals(name)){
+                    var city  =   value.getValue(City::class.java)!!
+                    if(city.name.equals(name)){
 
-                        idMusic = music.id_music
+                        idCity = city.id_city
 
                     }
                 }
-                callback.invoke(idMusic)
+                callback.invoke(idCity)
             }
             override fun onCancelled(error: DatabaseError) {
 

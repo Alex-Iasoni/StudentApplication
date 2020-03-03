@@ -14,6 +14,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class SchoolController {
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun DateCurrent() : String{
         val current = LocalDateTime.now()
@@ -22,6 +23,31 @@ class SchoolController {
         return formatted
     }
     val database = FirebaseDatabase.getInstance()
+
+    fun getSchools(callback: ( ArrayList<School>) -> Unit ) {
+        var schools : ArrayList<School> = ArrayList<School>()
+        val myRef = database.getReference("Schools")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+
+                    var school : School = School()
+                    school  = value.getValue(School::class.java)!!
+                    schools.add(school)
+
+
+
+                }
+                callback.invoke(schools)
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+                //Log.d
+            }
+        })
+
+    }
     fun getSchool(school_id: String?,callback: (School) -> Unit ) {
         var school : School = School()
         val myRef = database.getReference("Schools")
@@ -47,7 +73,7 @@ class SchoolController {
     }
 
 
-    fun getIdSchool(name : String?) : String?{
+    fun getIdSchool(name : String?,callback: (String?) -> Unit ) {
 
     var idSchool : String? = ""
         val myRef = database.getReference("Schools")
@@ -59,22 +85,23 @@ class SchoolController {
                     var school  =   value.getValue(School::class.java)!!
                     if(school.name.equals(name)){
 
-                        idSchool = school.getIdSchool()
+                        idSchool = school.id_school
 
                     }
                 }
+                callback.invoke(idSchool)
             }
             override fun onCancelled(error: DatabaseError) {
 
                //Log.d
             }
         })
-        return idSchool
+
 
     }
 
     fun editUserArray(id_school: String?, id_user: String) {
-        val data = database.getReference("School" + id_school)
+        val data = database.getReference("Schools" + id_school)
 
         var school: School = School()
         getSchool(id_school) {
@@ -91,7 +118,25 @@ class SchoolController {
         }
     }
 
-    fun SchoolExist(name : String?) : Boolean{
+    fun editEventArray(id_school: String?, id_event: String) {
+        val data = database.getReference("Schools" + id_school)
+
+        var school: School = School()
+        getSchool(id_school) {
+            school = it
+
+
+            var events: ArrayList<String>? = school!!.event
+
+            events!!.add(id_event)
+
+            val childUpdates = HashMap<String, Any>()
+            childUpdates.put("event", events)
+            data.updateChildren(childUpdates)
+        }
+    }
+
+    fun SchoolExist(name : String?, callback: (Boolean) -> Unit){
         val data = database.getReference("Schools")
         var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
@@ -106,12 +151,13 @@ class SchoolController {
                         exist = true
                     }
                 }
+                callback.invoke(exist)
             }
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-        return exist
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -119,9 +165,13 @@ class SchoolController {
         val data = database.getReference("Schools")
         val newId = data.push().key.toString()
         val date = DateCurrent()
-        if(!SchoolExist(name)){
-            var school = School(newId,name, adresse,img, date)
-            data.child(newId).setValue(school)
+        SchoolExist(name){
+            if(!it){
+                var school = School(newId,name, adresse,img, date)
+
+                data.child(newId).setValue(school)
+            }
+
         }
     }
 

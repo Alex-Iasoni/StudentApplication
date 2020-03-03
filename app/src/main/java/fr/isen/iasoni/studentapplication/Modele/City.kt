@@ -3,9 +3,9 @@ package fr.isen.iasoni.studentapplication.Modele
 import com.google.firebase.database.PropertyName
 
 
-data class Music(
+data class City(
 
-    @PropertyName("id_music") var id_music: String?,
+    @PropertyName("id_city") var id_city: String?,
     @PropertyName("name") var name: String?,
     @PropertyName("event") val event: ArrayList<String>?,
     @PropertyName("date_added") var date : String?)
@@ -13,8 +13,8 @@ data class Music(
 
 {
     constructor() : this(null,null,null,null)
-    constructor(id_music : String?, name : String?, date: String?) : this(){ //AddSchool
-        this.id_music = id_music
+    constructor(id_city : String?, name : String?, date: String?) : this(){ //AddSchool
+        this.id_city = id_city
         this.name = name
 
         this.date = date
