@@ -53,6 +53,6 @@
     <string name="surname_name">Prénom Nom</string>
     <string name="my_school">Mon école</string>
     <string name="my_city">Ma pur Ville</string>
-
+    <string name="birth_date">Date de naissance</string>
 
 </resources>

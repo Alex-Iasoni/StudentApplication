@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.iasoni.studentapplication.Controller.EventController
 import kotlinx.android.synthetic.main.activity_create_event.*
-import kotlinx.android.synthetic.main.fragment_register__step_1.*
 import java.io.File
 import java.security.AccessController.getContext
 import java.security.acl.Permission
@@ -42,6 +41,8 @@ import java.util.jar.Manifest
 
 open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
+    lateinit var optionMusic : Spinner
+    lateinit var resultMusics: TextView
 
 lateinit  var locationManager: LocationManager
     var currentDate = Date()
@@ -132,6 +133,33 @@ override fun onLocationChanged(location: Location?) {
        /* requestPermission(android.Manifest.permission.READ_CONTACTS, contactPermissionRequestCode) {
             readContacts()
         }*/
+
+        optionMusic = findViewById(R.id.spinnerMusic) as Spinner
+        resultMusics = findViewById(R.id.resultMusics) as TextView
+
+        val options = arrayOf("Rap", "House", "Trap", "RnB", "Ragae", "Electro","Trans","HardStyle")
+
+        optionMusic.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, options)
+        
+        optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            resultMusics.text = "Selectionnez un genre"
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                resultMusics.text = options.get(position)
+            }
+
+        }
+
+
+
+
     }
 
 
@@ -170,7 +198,7 @@ override fun onLocationChanged(location: Location?) {
             privateorPublic.text = "Public"
         }
         else {
-            privateorPublic.text = "Private"
+            privateorPublic.text = "Etudiant"
         }
     }
 

@@ -1,15 +1,18 @@
 package fr.isen.iasoni.studentapplication.View
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import fr.isen.iasoni.studentapplication.Controller.MusicController
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_filter.*
 import kotlinx.android.synthetic.main.activity_profil.navigation_view
 
 class FilterActivity : AppCompatActivity() {
-
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
