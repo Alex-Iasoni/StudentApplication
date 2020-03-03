@@ -45,7 +45,7 @@ class MusicController {
         })
 
     }
-    fun MusicExist(name : String?) : Boolean{
+    fun MusicExist(name : String?, callback: (Boolean) -> Unit){
         val data = database.getReference("Musics")
         var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
@@ -60,23 +60,30 @@ class MusicController {
                         exist = true
                     }
                 }
+                callback.invoke(exist)
             }
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-        return exist
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun addMusic(img : String?, name: String?){
+    fun addMusic( name: String?){
         val data = database.getReference("Musics")
         val newId = data.push().key.toString()
-        val date = DateCurrent()
-        if(!MusicExist(name)){
-            var music = Music(newId,name, date)
-            data.child(newId).setValue(music)
+        //val date = DateCurrent()
+        var exist : Boolean = false
+        MusicExist(name){
+            exist = it
+            if (!exist){
+                var music = Music(newId,name, "03/03/2020")
+                data.child(newId).setValue(music)
+            }
+
         }
+
 
 
     }
