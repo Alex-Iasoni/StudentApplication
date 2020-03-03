@@ -32,15 +32,20 @@ class UserController {
     fun Register(id: String, name: String?, surname: String?, email : String?, birthday: String?, school : String?, city : String?) {
         val formatted = DateCurrent()
         val  posts : ArrayList<String>? = ArrayList<String>()
-
+        var id_school : String? = ""
+        var id_city : String? = ""
         val schoolC = SchoolController()
       schoolC.getIdSchool(school){
-
-          val dataPost = database.getReference("Users")
-          val user = User(id,name, surname, email, birthday, it, city)
-          dataPost.child(id).setValue(user)
+          id_school = it
       }
+        val cityC = CityController()
+        cityC.getIdCity(city){
+            id_city = it
+        }
 
+        val dataPost = database.getReference("Users")
+        val user = User(id,name, surname, email, birthday, id_school, id_city)
+        dataPost.child(id).setValue(user)
 
 
 

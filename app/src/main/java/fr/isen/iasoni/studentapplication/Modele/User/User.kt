@@ -9,7 +9,7 @@ data class User(
       @PropertyName("email") var email: String?,
       @PropertyName("birthday") var birthday : String?,
       @PropertyName("id_school") var id_school :  String?,
-      @PropertyName("city") var city :  String?,
+      @PropertyName("id_city") var id_city :  String?,
       @PropertyName("swipes") var swipes : ArrayList<String>?, //SwipeUserModel
       @PropertyName("badges") var badges : ArrayList<String>?, //BadgeModel
       @PropertyName("certified") var certified :  Boolean?,
@@ -29,14 +29,14 @@ data class User(
 {
 
         constructor() : this(null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, city: String?) : this(){ //Inscription
+        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?) : this(){ //Inscription
             this.id_user = id
             this.name = name
             this.surname = surname
             this.email = email
             this.birthday = birthday
             this.id_school = id_school
-            this.city = city
+            this.id_city = id_city
 
         }
 

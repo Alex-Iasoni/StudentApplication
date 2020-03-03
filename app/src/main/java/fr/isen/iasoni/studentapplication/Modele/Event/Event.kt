@@ -11,6 +11,7 @@ data class Event(
     @PropertyName("adresse") var adresse: String?,
     @PropertyName("zip") var zip :  String?,
     @PropertyName("id_city") var id_city :  String?,
+    @PropertyName("id_school") var id_school :  String?,
     @PropertyName("id_music") var id_music :  ArrayList<String>?, //MusicModel
     @PropertyName("start_date") var start_date : String?,
     @PropertyName("end_date") var end_date : String?,
@@ -21,8 +22,8 @@ data class Event(
 
 
 {
-    constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, id_city: String?,id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?,limit_user: Int?, date_added: String?) : this(){ //Inscription
+    constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, id_city: String?,id_school : String?, id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?,limit_user: Int?, date_added: String?) : this(){ //Inscription
         this.id_event = id
         this.name = name
         this.id_user_admin = id_user_admin
@@ -30,6 +31,7 @@ data class Event(
         this.adresse = adresse
         this.zip = zip
         this.id_city = id_city
+        this.id_school = id_school
         this.id_music = id_music
         this.start_date = start_date
         this.end_date = end_date

@@ -77,9 +77,7 @@ override fun onLocationChanged(location: Location?) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var event : EventController = EventController()
-        event.createEvent(name, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, start_date: String?, end_date: String?, description: String?,type : String?, limit_user: Int?)
-        super.onCreate(savedInstanceState)
+       super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
 
