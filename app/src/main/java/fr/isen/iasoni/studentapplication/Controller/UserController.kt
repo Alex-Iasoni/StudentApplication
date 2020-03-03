@@ -32,7 +32,7 @@ class UserController {
     }
 
 
-    fun Register(id: String, name: String?, surname: String?, email : String?, birthday: String?, school : String?, city : String?) {
+    fun register(id: String, name: String?, surname: String?, email : String?, birthday: String?, school : String?, city : String?) {
         val formatted = DateCurrent()
         val  posts : ArrayList<String>? = ArrayList<String>()
 
