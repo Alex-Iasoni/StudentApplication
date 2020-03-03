@@ -4,7 +4,10 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import fr.isen.iasoni.studentapplication.Controller.MusicController
+import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_register.*
 import java.text.SimpleDateFormat
@@ -19,6 +22,25 @@ class RegisterActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("dede","dedfr")
+        var test : ArrayList<Music> = ArrayList<Music>()
+        var c : MusicController = MusicController()
+        c.getMusics {
+
+            for(te in it){
+
+                test.add(te)
+
+            }
+
+
+        }
+        for(te in test){
+
+
+            Log.d("r",te.name)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         countPage.text = "1/3";
