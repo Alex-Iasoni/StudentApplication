@@ -34,12 +34,15 @@ class UserController {
         val  posts : ArrayList<String>? = ArrayList<String>()
 
         val schoolC = SchoolController()
-        val id_school = schoolC.getIdSchool(school)
+      schoolC.getIdSchool(school){
+
+          val dataPost = database.getReference("Users")
+          val user = User(id,name, surname, email, birthday, it, city)
+          dataPost.child(id).setValue(user)
+      }
 
 
-        val dataPost = database.getReference("Users")
-        val user = User(id,name, surname, email, birthday, id_school, city)
-        dataPost.child(id).setValue(user)
+
 
     }
 
@@ -121,7 +124,7 @@ class UserController {
     }
 
     fun editEventAdminArray(id_user: String?, id_event: String) {
-        val data = database.getReference("Users" + id_user)
+               val data = database.getReference("Users" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -136,6 +139,20 @@ class UserController {
             childUpdates.put("events_admin", events_admin)
             data.updateChildren(childUpdates)
         }
+    }
+    fun UsserCertified(id_user: String?, callback: (Boolean) -> Unit){
+        var certified = false
+        var user: User = User()
+        getUser(id_user){
+            user = it
+            if(user.certified == true){
+                certified = true
+            }else{
+                certified = false
+            }
+            callback.invoke(certified)
+        }
+
     }
 
 

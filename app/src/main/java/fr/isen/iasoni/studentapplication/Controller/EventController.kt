@@ -40,6 +40,23 @@ class EventController {
         })
 
     }
+
+    fun VerifiedEtudiantSchool(id_event: String?) : Boolean{
+    var etudiant = false
+        var event : Event = Event()
+        getEvent(id_event){
+            event = it
+         if(event.etudiant == true){
+             etudiant = true
+
+            }else{
+             etudiant = false
+         }
+        }
+
+   return etudiant
+    }
+
     fun FindUsersEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
         val data = database.getReference("Events")
         var userevent : ArrayList<String?> = ArrayList<String?>()
@@ -80,9 +97,9 @@ class EventController {
         event.sortByDescending { it!!.start_date }
 
 
-    }
+}
 
-    fun FindEventFilters(type: String?, callback: (ArrayList<Event?>) -> Unit){
+    fun FindEvent(type: String?, callback: (ArrayList<Event?>) -> Unit){
         val data = database.getReference("Events")
         var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
         data.addValueEventListener(object : ValueEventListener {
@@ -107,6 +124,19 @@ class EventController {
             }
         })
 
+
+
+    }
+
+    fun  Interest(id_user: String, id_event: String){
+        var user : UserController = UserController()
+        user.editEventArray(id_user, id_event)
+        var event : Event = Event()
+        getEvent(id_event){
+            event = it
+            var subs : SubscribeEventController = SubscribeEventController()
+            subs.addUserOnEvent(event.id_subscribe_event, id_user)
+        }
 
 
     }
@@ -144,7 +174,7 @@ class EventController {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createEvent(name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, start_date: String?, end_date: String?, description: String?,type : String?, limit_user: Int?){
+    fun createEvent(name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, id_city: String?, id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?,etudiant : Boolean?, limit_user: Int?){
 
         val data = database.getReference("Events")
         val newId = data.push().key.toString()
@@ -152,12 +182,24 @@ class EventController {
         val userController = UserController()
         userController.editEventArray(id_user_admin, newId)
         userController.editEventAdminArray(id_user_admin, newId)
+        var schoolController = SchoolController()
+        schoolController.editEventArray()
+        var cityController = CityController()
+        cityController.editEventArray()
+        var musicController = MusicController()
+        musicController.editEventArray()
 
-        val event = Event(newId,name, id_user_admin, id_subscribe_event, adresse,zip, city, start_date, end_date, description,type, limit_user, date)
+        val event = Event(newId,name, id_user_admin, id_subscribe_event, adresse,zip, id_city, id_music,start_date, end_date, description,etudiant, limit_user, date)
         data.child(newId).setValue(event)
+
+
+
+
+
     }
 
-    fun editEvent(id_event : String?, name : String, adresse: String, zip: String, city: String, start_date: String, end_date: String, description: String, limit_user: Int){
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun editEvent(id_event : String?, name : String, adresse: String, zip: String, start_date: String, end_date: String, description: String, limit_user: Int){
 
         val data = database.getReference("Events" + id_event)
         var event: Event = Event()
@@ -167,16 +209,19 @@ class EventController {
             event.name = name
             event.adresse = adresse
             event.zip = zip
-            event.city = city
+
             event.start_date = start_date
-            event.end_date = end_date
+            if(end_date.compareTo(DateCurrent()) > 0 ) {
+                event.end_date = end_date
+            }
+
             event.limit_user = limit_user
             event.description = description
             val childUpdates = HashMap<String, Any>()
             childUpdates.put("name", name)
             childUpdates.put("adresse", adresse)
             childUpdates.put("zip", zip)
-            childUpdates.put("city", city)
+
             childUpdates.put("start_date", start_date)
             childUpdates.put("end_date", end_date)
             childUpdates.put("description", description)

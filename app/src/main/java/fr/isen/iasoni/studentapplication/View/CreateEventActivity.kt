@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.isen.iasoni.studentapplication.Controller.EventController
 import kotlinx.android.synthetic.main.activity_create_event.*
 import kotlinx.android.synthetic.main.fragment_register__step_1.*
 import java.io.File
@@ -76,6 +77,8 @@ override fun onLocationChanged(location: Location?) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var event : EventController = EventController()
+        event.createEvent(name, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, start_date: String?, end_date: String?, description: String?,type : String?, limit_user: Int?)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
