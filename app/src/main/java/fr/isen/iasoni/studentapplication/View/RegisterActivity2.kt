@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import fr.isen.iasoni.studentapplication.Controller.MusicController
+import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_create_event.*
 import kotlinx.android.synthetic.main.activity_register.*
@@ -25,7 +26,9 @@ class RegisterActivity2 : AppCompatActivity() {
     var mdp: String? = ""
     var city: String? = ""
     var music: String? = ""
-    var drink: String? = ""
+    var drink: String? = "Un peu"
+    var smoke: String? = "Non Fumeur"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,26 +51,37 @@ class RegisterActivity2 : AppCompatActivity() {
         optionMusic = findViewById(R.id.spinnerMusic) as Spinner
 
         val musicController = MusicController()
-        //musicController.getMusics()
+        var musicList = ArrayList<Music>()
+        var options =  ArrayList<String?>()
 
-        val options = arrayOf("Rap", "House", "Trap", "RnB", "Ragae", "Electro","Trans","HardStyle")
 
-        optionMusic.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, options)
-
-        optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        musicController.getMusics{
+            musicList= it
+            for(music in musicList){
+                options.add(music.name)
             }
+//            optionMusic.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, options)
+//
+//            optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+//                override fun onNothingSelected(parent: AdapterView<*>?) {
+//                }
+//
+//                override fun onItemSelected(
+//                    parent: AdapterView<*>?,
+//                    view: View?,
+//                    position: Int,
+//                    id: Long
+//                ) {
+//                    music = options.get(position)
+//                }
+//
+//            }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                music = options.get(position)
-            }
+
 
         }
+
+
 
 
         optionDrink = findViewById(R.id.spinnerDrink) as Spinner
@@ -97,10 +111,10 @@ class RegisterActivity2 : AppCompatActivity() {
     fun onChangeSmoke(view: View){
 
         if(switchMaterial.isChecked == true){
-            privateorPublic.text = "Public"
+            smoke = "Fumeur"
         }
         else {
-            privateorPublic.text = "Etudiant"
+            smoke= "Non Fumeur"
         }
     }
 }
