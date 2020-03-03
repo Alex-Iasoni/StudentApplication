@@ -35,22 +35,24 @@ class UserController {
     fun Register(id: String, name: String?, surname: String?, email : String?, birthday: String?, school : String?, city : String?) {
         val formatted = DateCurrent()
         val  posts : ArrayList<String>? = ArrayList<String>()
-        var id_school : String? = ""
-        var id_city : String? = ""
+
         val schoolC = SchoolController()
       schoolC.getIdSchool(school){
+          var id_school : String? = ""
+
           id_school = it
-      }
+
         val cityC = CityController()
         cityC.getIdCity(city){
+            var id_city : String? = ""
             id_city = it
-        }
 
         val dataPost = database.getReference("Users")
         val user = User(id,name, surname, email, birthday, id_school, id_city)
         dataPost.child(id).setValue(user)
 
-
+        }
+      }
 
     }
 

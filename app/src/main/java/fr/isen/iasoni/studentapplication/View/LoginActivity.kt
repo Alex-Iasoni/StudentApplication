@@ -6,12 +6,16 @@ import android.os.Bundle
 import fr.isen.iasoni.studentapplication.R
 import android.graphics.Paint.UNDERLINE_TEXT_FLAG
 import android.graphics.Paint
+import android.util.Log
+import fr.isen.iasoni.studentapplication.Controller.MusicController
+import fr.isen.iasoni.studentapplication.Modele.Music
 import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(fr.isen.iasoni.studentapplication.R.layout.activity_login)
 

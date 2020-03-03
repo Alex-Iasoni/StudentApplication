@@ -33,16 +33,12 @@ class MusicController {
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
-
                     var music : Music = Music()
                     music  = value.getValue(Music::class.java)!!
                     musics.add(music)
-
-
-
                 }
-                callback.invoke(musics)
 
+                callback.invoke(musics)
             }
             override fun onCancelled(error: DatabaseError) {
 

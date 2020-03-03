@@ -45,7 +45,7 @@ class EventController {
 
     }
 
-    fun VerifiedEtudiantSchool(id_event: String?) : Boolean{
+    fun VerifiedEtudiantSchool(id_event: String?, callback: (Boolean) -> Unit){
     var etudiant = false
         var event : Event = Event()
         getEvent(id_event){
@@ -56,9 +56,10 @@ class EventController {
             }else{
              etudiant = false
          }
+callback.invoke(etudiant)
         }
 
-   return etudiant
+
     }
 
     fun FindUsersEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
@@ -79,9 +80,10 @@ class EventController {
                                 userevent.add(event.id_event)
                             }
                         }
+                        callback.invoke(userevent)
                     }
                 }
-                callback.invoke(userevent)
+
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -187,43 +189,57 @@ class EventController {
         val newId = data.push().key.toString()
         val date = DateCurrent()
         val userController = UserController()
-        var id_musics : ArrayList<String>? = ArrayList<String>()
-        var id_school : String? = ""
-        var id_city: String? = ""
+
+
+
         userController.editEventArray(id_user_admin, newId)
         userController.editEventAdminArray(id_user_admin, newId)
 
         var schoolController = SchoolController()
 
-        schoolController.getIdSchool(school){
+        schoolController.getIdSchool(school) {
+            var id_school: String? = ""
             id_school = it
             schoolController.editEventArray(it, newId)
-        }
 
 
-        var cityController = CityController()
-    cityController.getIdCity(city){
-        id_city = it
-        cityController.editEventArray(it,newId)
-    }
+            var cityController = CityController()
+            cityController.getIdCity(city) {
+                var id_city: String? = ""
+                id_city = it
+                cityController.editEventArray(it, newId)
 
-        var musicController = MusicController()
-        for(music in musics){
-            musicController.getIdMusic(music){
-                if (it != null) {
-                    id_musics!!.add(it)
-                }
-                musicController.editEventArray(it, newId)
-            }
-        }
+                FindMusic(newId,musics){
+                    var id_musics : ArrayList<String>? = ArrayList<String>()
+                    id_musics = it
+
+
 
 
 
         val event = Event(newId,name, id_user_admin, id_subscribe_event, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user, date)
         data.child(newId).setValue(event)
+                    }
+                }
+                }
 
     }
+fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<String>?) -> Unit){
+    var musicController = MusicController()
+    var id_musics: ArrayList<String>? = ArrayList<String>()
+    for (music in musics) {
+        musicController.getIdMusic(music) {
 
+            if (it != null) {
+                id_musics!!.add(it)
+            }
+            musicController.editEventArray(it, newId)
+
+        }
+        callback.invoke(id_musics)
+    }
+
+}
 
     fun editEvent(id_event : String?, name : String, adresse: String, zip: String, start_date: String, end_date: String, description: String, limit_user: Int){
 
