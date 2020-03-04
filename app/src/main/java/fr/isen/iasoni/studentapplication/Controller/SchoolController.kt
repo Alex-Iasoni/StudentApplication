@@ -141,10 +141,10 @@ class SchoolController {
 
     fun SchoolExist(name : String?, callback: (Boolean) -> Unit){
         val data = database.getReference("Schools")
-
+        var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var exist : Boolean = false
+
                 for (value in dataSnapshot.children){
 
                     var SchoolComp = value.getValue(School::class.java)!!

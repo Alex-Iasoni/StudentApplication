@@ -77,10 +77,10 @@ class CityController {
     }
     fun CityExist(name : String?, callback: (Boolean) -> Unit){
         val data = database.getReference("Cities")
-
+        var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var exist : Boolean = false
+
                 for (value in dataSnapshot.children){
 
                     var CityComp = value.getValue(City::class.java)!!
