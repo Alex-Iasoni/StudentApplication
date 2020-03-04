@@ -30,7 +30,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
+import fr.isen.iasoni.studentapplication.Controller.MusicController
+import fr.isen.iasoni.studentapplication.Controller.SchoolController
 import kotlinx.android.synthetic.main.activity_create_event.*
 import java.io.File
 import java.security.AccessController.getContext
@@ -43,10 +46,13 @@ import java.util.jar.Manifest
 open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
     private lateinit var mAuth: FirebaseAuth
-
-
+    lateinit var optionVille : Spinner
+    lateinit var optionSchool : Spinner
     lateinit var optionMusic : Spinner
-    lateinit var resultMusics: TextView
+
+    var ville: String? = ""
+    var music: String? = ""
+    var school: String? = ""
 
     lateinit  var locationManager: LocationManager
     var currentDate = Date()
@@ -123,34 +129,101 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
 
 
 
-        optionMusic = findViewById(R.id.spinnerMusic) as Spinner
-        resultMusics = findViewById(R.id.resultMusics) as TextView
+        optionVille = findViewById(R.id.spinnerVille) as Spinner
 
-        val options = arrayOf("Rap", "House", "Trap", "RnB", "Ragae", "Electro","Trans","HardStyle")
+        var cityController  = CityController()
+        var optionsVilles =  ArrayList<String?>()
 
-        optionMusic.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, options)
-        
-        optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            resultMusics.text = "Selectionnez un genre"
+
+        cityController.getCities{
+
+            for(city in it){
+                optionsVilles.add(city.name)
             }
+            optionVille.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsVilles)
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                resultMusics.text = options.get(position)
+            optionVille.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    ville = optionsVilles.get(position)
+                }
             }
-
         }
+
+
+        optionSchool = findViewById(R.id.spinnerSchool) as Spinner
+
+        var schoolController  = SchoolController()
+        var optionsSchools =  ArrayList<String?>()
+
+
+        schoolController.getSchools{
+
+            for(school in it){
+                optionsSchools.add(school.name)
+            }
+            optionSchool.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsSchools)
+
+            optionSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    school = optionsSchools.get(position)
+                }
+            }
+        }
+
+        optionMusic = findViewById(R.id.spinnerMusic) as Spinner
+
+        var musicController  = MusicController()
+        var optionsMusics =  ArrayList<String?>()
+
+
+        musicController.getMusics{
+
+            for(music in it){
+                optionsMusics.add(music.name)
+            }
+            optionMusic.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsMusics)
+
+            optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    music = optionsMusics.get(position)
+                }
+            }
+        }
+
+
 
 
         createButton.setOnClickListener {
             val user = mAuth?.currentUser
             var eventController = EventController()
-            eventController.createEvent(eventTitle.toString(), user!!.uid, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?, limit_user: Int?)
+            eventController.createEvent(eventTitle.toString(), user!!.uid,eventPlace.toString(), "", ville, school, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?, limit_user: Int?)
 
         }
 
