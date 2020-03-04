@@ -80,11 +80,7 @@ class RegisterActivity2 : AppCompatActivity() {
                 ) {
                     music = options.get(position)
                 }
-
             }
-
-
-
         }
 
 

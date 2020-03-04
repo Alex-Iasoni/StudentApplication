@@ -89,6 +89,7 @@ class CityController {
                         exist = false
                     }else{
                         exist = true
+                        break;
                     }
                 }
                 callback.invoke(exist)

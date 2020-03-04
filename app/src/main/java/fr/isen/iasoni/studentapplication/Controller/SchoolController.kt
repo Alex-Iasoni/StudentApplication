@@ -153,6 +153,7 @@ class SchoolController {
                         exist = false
                     }else{
                         exist = true
+                        break;
                     }
                 }
                 callback.invoke(exist)
@@ -171,6 +172,7 @@ class SchoolController {
         val date = DateCurrent()
         SchoolExist(name){
             if(it == false){
+
                 var school = School(newId,name, adresse,img, date)
 
                 data.child(newId).setValue(school)
