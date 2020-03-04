@@ -42,7 +42,7 @@ class RegisterActivity1 : AppCompatActivity() {
             foo.putExtra("mdp", mdp1.text.toString())
             foo.putExtra("surname", surname)
             foo.putExtra("birthDate", birthDate)
-            foo.putExtra("email", mail)
+            foo.putExtra("mail", mail)
             foo.putExtra("name", name)
             if(mdp1.text.toString() == mdp2.text.toString()){
                 this.startActivity(foo)

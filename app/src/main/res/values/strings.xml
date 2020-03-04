@@ -16,7 +16,7 @@
 
 
     <string name="register_title">Page d\'inscription</string>
-    <string name="register_identifier">Numéros / Email</string>
+    <string name="register_identifier">Email</string>
     <string name="register_password">Mot de passe</string>
     <string name="register_password_again">Confirmer mot de passe</string>
     <string name="register_validate">Valider</string>
