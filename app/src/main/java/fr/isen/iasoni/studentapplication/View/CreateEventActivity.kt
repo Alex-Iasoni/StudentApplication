@@ -48,34 +48,34 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
     lateinit var optionMusic : Spinner
     lateinit var resultMusics: TextView
 
-lateinit  var locationManager: LocationManager
+    lateinit  var locationManager: LocationManager
     var currentDate = Date()
 
 
     companion object {
-    val pictureRequestCode = 1
-    val contactPermissionRequestCode = 2
-    val gpsPermissionRequestCodde = 3
-}
-
-@SuppressLint("MissingPermission")
-fun startGPS(){
-    locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
-    val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-    location?.let{
-        refreshPositionUI(it)
+        val pictureRequestCode = 1
+        val contactPermissionRequestCode = 2
+        val gpsPermissionRequestCodde = 3
     }
-}
 
-fun refreshPositionUI(location: Location) {
-    locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
-}
-
-override fun onLocationChanged(location: Location?) {
-    location?.let {
-        refreshPositionUI(it)
+    @SuppressLint("MissingPermission")
+    fun startGPS(){
+        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
+        val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        location?.let{
+            refreshPositionUI(it)
+        }
     }
-}
+
+    fun refreshPositionUI(location: Location) {
+        locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
+    }
+
+    override fun onLocationChanged(location: Location?) {
+        location?.let {
+            refreshPositionUI(it)
+        }
+    }
 
 
 
@@ -85,6 +85,7 @@ override fun onLocationChanged(location: Location?) {
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
+        mAuth = FirebaseAuth.getInstance()
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         coverImage.setOnClickListener {
@@ -122,22 +123,6 @@ override fun onLocationChanged(location: Location?) {
 
 
 
-        /*   var COUNTRIES: Array<String> = arrayOf("green", "red", "blue")
-
-
-           ArrayAdapter<String> adapter =
-                               new ArrayAdapter<>(
-                                   getContext(),
-                                   R.layout.dropdown_menu_popup_item,
-                                   COUNTRIES);
-
-                       AutoCompleteTextView editTextFilledExposedDropdown =
-                           view.findViewById(R.id.filled_exposed_dropdown);
-                       editTextFilledExposedDropdown.setAdapter(adapter);*/
-       /* requestPermission(android.Manifest.permission.READ_CONTACTS, contactPermissionRequestCode) {
-            readContacts()
-        }*/
-
         optionMusic = findViewById(R.id.spinnerMusic) as Spinner
         resultMusics = findViewById(R.id.resultMusics) as TextView
 
@@ -163,8 +148,10 @@ override fun onLocationChanged(location: Location?) {
 
 
         createButton.setOnClickListener {
+            val user = mAuth?.currentUser
             var eventController = EventController()
-            eventController.createEvent()
+            eventController.createEvent(eventTitle.toString(), user!!.uid, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?, limit_user: Int?)
+
         }
 
 
@@ -172,22 +159,9 @@ override fun onLocationChanged(location: Location?) {
     }
 
 
- /*   override fun onCreateDialog(savedInstanceState: Bundle): Dialog {
-        // Use the current time as the default values for the picker
-        val c = Calendar.getInstance()
-        val hour = c.get(Calendar.HOUR_OF_DAY)
-        val minute = c.get(Calendar.MINUTE)
-
-        // Create a new instance of TimePickerDialog and return it
-        return TimePickerDialog(this, this, hour, minute, DateFormat.is24HourFormat(this))
-    }*/
-
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
         // Do something with the time chosen by the user
     }
- /*   fun showTimePickerDialog(v: View) {
-        Dialog.show(supportFragmentManager, "timePicker")
-    }*/
 
 
     fun onChangePhoto() {
@@ -211,22 +185,6 @@ override fun onLocationChanged(location: Location?) {
         }
     }
 
-
-
- /*   fun readContacts() {
-        val contactList = ArrayList<ContactModel>()
-        val contacts = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
-        while(contacts?.moveToNext() ?: false){
-            val displayName = contacts?.getString(contacts.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-            val contactModel = ContactModel()
-            contactModel.displayName = displayName.toString()
-            contactList.add(contactModel)
-        }
-        contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        contactRecyclerView.adapter = ContactsAdapter(contactList)
-        Log.d("contacts", "${contacts}")
-
-    }*/
 
     fun requestPermission(permissionToRequest: String, requestCode: Int, handler: ()-> Unit) {
         if(ContextCompat.checkSelfPermission(this, permissionToRequest) != PackageManager.PERMISSION_GRANTED) {
