@@ -42,6 +42,8 @@ class RegisterActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_register2)
         countPage.text = "3/3";
 
+        mAuth = FirebaseAuth.getInstance()
+
 
         surname =  intent.getStringExtra("surname")
         mail =  intent.getStringExtra("mail")
