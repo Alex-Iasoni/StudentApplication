@@ -115,8 +115,23 @@ callback.invoke(etudiant)
         var event : Event = Event()
         getEvent(id_event){
             event = it
-            var subs : SubscribeEventController = SubscribeEventController()
-            subs.addUserOnEvent(event.id_subscribe_event, id_user)
+            var user : UserController = UserController()
+            user.UsserCertified(id_user){
+                if(it == false and event.etudiant!! == false){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
+                }
+                else if(it == true and event.etudiant!! == true){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
+                }
+                else if(it == true and event.etudiant!! == false){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
+                }
+
+            }
+
         }
 
 
@@ -455,6 +470,8 @@ fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<St
 
 
     }
+
+
 
 
 

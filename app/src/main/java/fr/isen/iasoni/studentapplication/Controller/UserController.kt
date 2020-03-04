@@ -48,7 +48,7 @@ class UserController {
             id_city = it
 
         val dataPost = database.getReference("Users")
-        val user = User(id,name, surname, email, birthday, id_school, id_city)
+        val user = User(id,name, surname, email, birthday, id_school, id_city,false)
         dataPost.child(id).setValue(user)
 
         }
