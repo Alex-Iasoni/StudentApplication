@@ -29,7 +29,7 @@ data class User(
 {
 
         constructor() : this(null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?) : this(){ //Inscription
+        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?,certified : Boolean?) : this(){ //Inscription
             this.id_user = id
             this.name = name
             this.surname = surname
@@ -37,6 +37,7 @@ data class User(
             this.birthday = birthday
             this.id_school = id_school
             this.id_city = id_city
+            this.certified = certified
 
         }
 
