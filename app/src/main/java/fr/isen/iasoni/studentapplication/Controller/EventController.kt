@@ -105,36 +105,8 @@ callback.invoke(etudiant)
 
 }
 
-//    fun FindEvent(, callback: (ArrayList<Event?>) -> Unit){
-//        val data = database.getReference("Events")
-//        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
-//        data.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                for (value in dataSnapshot.children){
-//                    var event = value.getValue(Event::class.java)!!
-//                        var eventmod: Event = Event()
-//                        getEvent(event.id_event){
-//                            eventmod = it
-//                            if(eventmod.type.equals(type)){
-//                                eventfilter.add(eventmod)
-//                            }
-//
-//                        }
-//
-//                }
-//                SortbyStartDateEvent(eventfilter)
-//                callback.invoke(eventfilter)
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//
-//            }
-//        })
-//
-//
-//
-//    }
-//
-//
+
+
 
 
     fun  Interest(id_user: String, id_event: String){
@@ -149,38 +121,245 @@ callback.invoke(etudiant)
 
 
     }
-//
-//    fun InterestByFilter(type: String?,id_user : String?): ArrayList<Boolean?>{
-//
-//        val data = database.getReference("Events")
-//        var interest : ArrayList<Boolean?> = ArrayList<Boolean?>()
-//        var events : ArrayList<Event?> = ArrayList<Event?>()
-//        FindEventFilters(type){
-//            events = it
-//            for (event in events){
-//                var subs : SubscribeEvent? = SubscribeEvent()
-//                var subsCon : SubscribeEventController = SubscribeEventController()
-//
-//                subsCon.getSubscribeEvent(event!!.id_subscribe_event){
-//                    subs = it
-//                    var subsusers : ArrayList<String?> =  ArrayList<String?>()
-//                   for(subsuser in subsusers){
-//                       if(subsuser.equals(id_user)){
-//                           interest.add(true)
-//                       }else{
-//                           interest.add(false)
-//                       }
-//
-//                   }
-//
-//                }
-//
-//
-//            }
-//        }
-//    return interest
-//
-//    }
+    fun FilterMusicEvent(musics: ArrayList<String?>, callback: (ArrayList<Event?>) -> Unit){
+
+        val data = database.getReference("Events")
+        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
+        data.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+                    var event = value.getValue(Event::class.java)!!
+                    var eventmod: Event = Event()
+                    getEvent(event.id_event){
+
+                        eventmod = it
+                        for(music in musics){
+                            var musicController = MusicController()
+                            musicController.getIdMusic(music){
+
+                                musicController.getMusic(it){
+                                    var music_id : String? = it.id_music
+                                    var event_musicid : ArrayList<String>? =  eventmod.id_music
+                                    if (event_musicid != null) {
+                                        for(id_music in event_musicid){
+                                            if(music_id == id_music){
+                                                eventfilter.add(eventmod)
+                                            }
+
+                                        }
+                                    }
+
+
+                                }
+                            }
+
+
+                        }
+
+
+
+                    }
+
+                }
+                SortbyStartDateEvent(eventfilter)
+                callback.invoke(eventfilter)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
+    }
+
+    fun FilterSchoolEvent(school: String?, callback: (ArrayList<Event?>) -> Unit){
+
+        val data = database.getReference("Events")
+        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
+        data.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+                    var event = value.getValue(Event::class.java)!!
+                    var eventmod: Event = Event()
+                    getEvent(event.id_event){
+
+                        eventmod = it
+
+                            var schoolController = SchoolController()
+                        schoolController.getIdSchool(school) {
+                            schoolController.getSchool(it) {
+
+                                var school: String? = it.id_school
+                                var event_schoolid: String? = eventmod.id_school
+                                if (event_schoolid != null) {
+
+                                        if (event_schoolid == school) {
+                                            eventfilter.add(eventmod)
+                                        }
+
+
+                                }
+
+
+                            }
+
+                        }
+
+
+
+                    }
+
+                }
+                SortbyStartDateEvent(eventfilter)
+                callback.invoke(eventfilter)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+            }
+
+    fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
+
+        val data = database.getReference("Events")
+        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
+        data.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+                    var event = value.getValue(Event::class.java)!!
+                    var eventmod: Event = Event()
+                    getEvent(event.id_event){
+
+                        eventmod = it
+
+                        var cityController = CityController()
+                        cityController.getIdCity(city) {
+                            cityController.getCity(it) {
+
+                                var city: String? = it.id_city
+                                var event_cityid: String? = eventmod.id_city
+                                if (event_cityid != null) {
+
+                                    if (event_cityid == city) {
+                                        eventfilter.add(eventmod)
+                                    }
+
+
+                                }
+
+
+                            }
+
+                        }
+
+
+
+                    }
+
+                }
+                SortbyStartDateEvent(eventfilter)
+                callback.invoke(eventfilter)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
+    }
+
+    fun FilterEventInterestUser(city: String?, school : String?, musics: ArrayList<String?>,id_user : String,callback: (ArrayList<Boolean?>) -> Unit) {
+
+        val data = database.getReference("Events")
+        var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
+        var events: ArrayList<Event?> = ArrayList<Event?>()
+
+        if (city != null) {
+
+            FilterCityEvent(city) {
+                events = it
+                for (event in events) {
+                    var subs: SubscribeEvent? = SubscribeEvent()
+                    var subsCon: SubscribeEventController = SubscribeEventController()
+
+                    subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
+                        subs = it
+                        var subsusers: ArrayList<String?> = ArrayList<String?>()
+                        for (subsuser in subsusers) {
+                            if (subsuser.equals(id_user)) {
+                                interest.add(true)
+                            } else {
+                                interest.add(false)
+                            }
+
+                        }
+
+
+
+
+                }
+            }
+                callback.invoke(interest)
+        }
+
+        }
+        else if(school != null){
+            FilterSchoolEvent(school) {
+                events = it
+                for (event in events) {
+                    var subs: SubscribeEvent? = SubscribeEvent()
+                    var subsCon: SubscribeEventController = SubscribeEventController()
+
+                    subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
+                        subs = it
+                        var subsusers: ArrayList<String?> = ArrayList<String?>()
+                        for (subsuser in subsusers) {
+                            if (subsuser.equals(id_user)) {
+                                interest.add(true)
+                            } else {
+                                interest.add(false)
+                            }
+
+                        }
+
+
+
+
+                    }
+                }
+                callback.invoke(interest)
+            }
+
+        }else if (musics != null){
+            FilterMusicEvent(musics) {
+                events = it
+                for (event in events) {
+                    var subs: SubscribeEvent? = SubscribeEvent()
+                    var subsCon: SubscribeEventController = SubscribeEventController()
+
+                    subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
+                        subs = it
+                        var subsusers: ArrayList<String?> = ArrayList<String?>()
+                        for (subsuser in subsusers) {
+                            if (subsuser.equals(id_user)) {
+                                interest.add(true)
+                            } else {
+                                interest.add(false)
+                            }
+
+                        }
+
+
+
+
+                    }
+                }
+                callback.invoke(interest)
+            }
+
+        }
+
+    }
 
 
     fun createEvent(name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?, limit_user: Int?){

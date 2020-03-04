@@ -22,24 +22,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("dede","dedfr")
-        var test : ArrayList<Music> = ArrayList<Music>()
-        var c : MusicController = MusicController()
-        c.getMusics {
 
-            for(te in it){
-
-                test.add(te)
-
-            }
-
-
-        }
-        for(te in test){
-
-
-            Log.d("r",te.name)
-        }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
