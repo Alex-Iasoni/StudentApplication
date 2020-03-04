@@ -121,7 +121,7 @@ class RegisterActivity2 : AppCompatActivity() {
 
     fun onChangeSmoke(view: View){
 
-        if(switchMaterial.isChecked == true){
+        if(switchMaterialSmoke.isChecked == true){
             smoke = "Fumeur"
         }
         else {

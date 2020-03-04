@@ -77,9 +77,10 @@ class CityController {
     }
     fun CityExist(name : String?, callback: (Boolean) -> Unit){
         val data = database.getReference("Cities")
-        var exist : Boolean = false
+
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var exist : Boolean = false
                 for (value in dataSnapshot.children){
 
                     var CityComp = value.getValue(City::class.java)!!
@@ -107,7 +108,7 @@ class CityController {
         var exist : Boolean = false
         CityExist(name){
             exist = it
-            if (!exist){
+            if (exist == false){
                 var city = City(newId,name, date)
                 data.child(newId).setValue(city)
             }
