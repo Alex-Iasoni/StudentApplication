@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.RegisterActivity2"></activity>
+        <activity android:name=".View.EventInfoActivity"></activity>
+        <activity android:name=".View.RegisterActivity2" />
         <activity android:name=".View.RegisterActivity1" />
         <activity android:name=".View.PassedEventsActivity" />
         <activity android:name=".View.CreateEventActivity" />
@@ -18,9 +19,9 @@
         <activity android:name=".View.ProfilActivity" />
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.SwipeActivity" />
-        <activity android:name=".View.FilterActivity" />
+        <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.IntroductionActivity" />
-        <activity android:name=".View.LoginActivity">
+        <activity android:name=".View.FilterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
