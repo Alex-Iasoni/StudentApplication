@@ -18,9 +18,6 @@ import java.util.*
 class RegisterActivity : AppCompatActivity() {
     var currentDate = Date()
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -36,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
                     DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                         onDateChoose(year, month, dayOfMonth)
                     },
-                    1990,
+                    1997,
                     7,
                     25)
                 dialog.show()
@@ -50,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
             val foo = Intent(this, RegisterActivity1::class.java)
             foo.putExtra("surname", surnameEdit.text.toString())
             foo.putExtra("birthDate", date_input.text.toString())
-            foo.putExtra("email", mailEdit.text.toString())
+            foo.putExtra("mail", mailEdit.text.toString())
             foo.putExtra("name", nameEdit.text.toString())
             this.startActivity(foo)
         }

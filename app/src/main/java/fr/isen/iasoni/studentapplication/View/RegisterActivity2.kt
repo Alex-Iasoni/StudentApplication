@@ -109,7 +109,8 @@ class RegisterActivity2 : AppCompatActivity() {
 
         }
 
-
+        Log.d("MOTDEPASS",mdp.toString())
+        Log.d("MAILLL TOUTTT SES MORT", mail.toString())
 
 
 
@@ -128,7 +129,8 @@ class RegisterActivity2 : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun createUser(view: View){
-
+        Log.d("MOTDEPASS",mdp.toString())
+        Log.d("MAILLL TOUTTT SES MORT", mail.toString())
         mAuth?.createUserWithEmailAndPassword(mail.toString(), mdp.toString())?.addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 // Sign in success, update UI with the signed-in user's information
