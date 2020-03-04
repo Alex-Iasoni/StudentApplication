@@ -42,6 +42,8 @@ class RegisterActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_register2)
         countPage.text = "3/3";
 
+        mAuth = FirebaseAuth.getInstance()
+
 
         surname =  intent.getStringExtra("surname")
         mail =  intent.getStringExtra("mail")
@@ -109,7 +111,8 @@ class RegisterActivity2 : AppCompatActivity() {
 
         }
 
-
+        Log.d("MOTDEPASS",mdp.toString())
+        Log.d("MAILLL TOUTTT SES MORT", mail.toString())
 
 
 
@@ -118,7 +121,7 @@ class RegisterActivity2 : AppCompatActivity() {
 
     fun onChangeSmoke(view: View){
 
-        if(switchMaterial.isChecked == true){
+        if(switchMaterialSmoke.isChecked == true){
             smoke = "Fumeur"
         }
         else {
@@ -128,7 +131,8 @@ class RegisterActivity2 : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun createUser(view: View){
-
+        Log.d("MOTDEPASS",mdp.toString())
+        Log.d("MAILLL TOUTTT SES MORT", mail.toString())
         mAuth?.createUserWithEmailAndPassword(mail.toString(), mdp.toString())?.addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 // Sign in success, update UI with the signed-in user's information
