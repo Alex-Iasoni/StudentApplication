@@ -107,8 +107,8 @@ class RegisterActivity1 : AppCompatActivity() {
 
         button_switch.setOnClickListener {
             val foo = Intent(this, RegisterActivity2::class.java)
-            foo.putExtra("school", ville)
-            foo.putExtra("city", school)
+            foo.putExtra("school", school)
+            foo.putExtra("city", ville)
             foo.putExtra("mdp", mdp1.text.toString())
             foo.putExtra("surname", surname)
             foo.putExtra("birthDate", birthDate)
