@@ -72,9 +72,10 @@ class MusicController {
     }
     fun MusicExist(name : String?, callback: (Boolean) -> Unit){
         val data = database.getReference("Musics")
-        var exist : Boolean = false
+
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var exist : Boolean = false
                 for (value in dataSnapshot.children){
 
                     var MusicComp = value.getValue(Music::class.java)!!
@@ -102,7 +103,7 @@ class MusicController {
         var exist : Boolean = false
         MusicExist(name){
             exist = it
-            if (!exist){
+            if (exist == false){
                 var music = Music(newId,name, date)
                 data.child(newId).setValue(music)
             }

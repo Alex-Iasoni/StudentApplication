@@ -141,9 +141,10 @@ class SchoolController {
 
     fun SchoolExist(name : String?, callback: (Boolean) -> Unit){
         val data = database.getReference("Schools")
-        var exist : Boolean = false
+
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var exist : Boolean = false
                 for (value in dataSnapshot.children){
 
                     var SchoolComp = value.getValue(School::class.java)!!
@@ -169,7 +170,7 @@ class SchoolController {
         val newId = data.push().key.toString()
         val date = DateCurrent()
         SchoolExist(name){
-            if(!it){
+            if(it == false){
                 var school = School(newId,name, adresse,img, date)
 
                 data.child(newId).setValue(school)
