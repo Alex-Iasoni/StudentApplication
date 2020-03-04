@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Controller.EventController
 import kotlinx.android.synthetic.main.activity_create_event.*
 import java.io.File
@@ -40,6 +41,9 @@ import java.util.*
 import java.util.jar.Manifest
 
 open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
+
+    private lateinit var mAuth: FirebaseAuth
+
 
     lateinit var optionMusic : Spinner
     lateinit var resultMusics: TextView
@@ -157,6 +161,11 @@ override fun onLocationChanged(location: Location?) {
 
         }
 
+
+        createButton.setOnClickListener {
+            var eventController = EventController()
+            eventController.createEvent()
+        }
 
 
 
