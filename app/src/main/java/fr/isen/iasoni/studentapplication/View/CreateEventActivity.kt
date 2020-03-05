@@ -22,6 +22,7 @@ import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
@@ -29,6 +30,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
@@ -42,6 +44,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.jar.Manifest
+import kotlin.collections.ArrayList
 
 open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
@@ -52,6 +55,7 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
 
     var ville: String? = ""
     var music: String? = ""
+    var arrayMusic = ArrayList<String>()
     var school: String? = ""
 
     lateinit  var locationManager: LocationManager
@@ -213,17 +217,30 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
                     id: Long
                 ) {
                     music = optionsMusics.get(position)
+
                 }
             }
         }
 
+        buttonAdd.setOnClickListener {
+            val inflater = LayoutInflater.from(this@CreateEventActivity)
+            val chip_item = inflater.inflate(R.layout.chip_item, null, false) as Chip
+            chip_item.text = music
+            arrayMusic.add(music.toString())
+            chip_item.setOnCloseIconClickListener{view ->
+                chipGroupMusic.removeView(view)
+            }
+            chipGroupMusic.addView(chip_item)
+        }
 
 
 
         createButton.setOnClickListener {
             val user = mAuth?.currentUser
+            Log.d("School", school)
+            Log.d("Ville", ville)
             var eventController = EventController()
-            eventController.createEvent(eventTitle.toString(), user!!.uid,eventPlace.toString(), "", ville, school, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?, limit_user: Int?)
+            eventController.createEvent(eventTitle.toString(), user!!.uid,eventPlace.toString(), "", ville, school, arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), false,  100)
 
         }
 
