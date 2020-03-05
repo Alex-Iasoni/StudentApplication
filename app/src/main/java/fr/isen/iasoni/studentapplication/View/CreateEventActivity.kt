@@ -162,10 +162,10 @@ override fun onLocationChanged(location: Location?) {
         }
 
 
-        createButton.setOnClickListener {
-            var eventController = EventController()
-            eventController.createEvent()
-        }
+//        createButton.setOnClickListener {
+//            var eventController = EventController()
+//            eventController.createEvent()
+//        }
 
 
 
