@@ -1,22 +1,14 @@
 package fr.isen.iasoni.studentapplication.Adapters
 
-import de.hdodenhof.circleimageview.CircleImageView
-import fr.isen.iasoni.studentapplication.Modele.Badge
 import fr.isen.iasoni.studentapplication.R
-import kotlinx.android.synthetic.main.recycler_view_badge_cell.view.*
-
-
 
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.common.reflect.Reflection.getPackageName
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.View.EventInfoActivity
 import kotlinx.android.synthetic.main.recycler_view_event_cell.view.*
@@ -82,6 +74,7 @@ class EventAdapter (val interrested: ArrayList<Boolean>, val events: ArrayList<E
             view.eventDisplayInfoView.setOnClickListener{
                 val foo = Intent(context, EventInfoActivity::class.java)
                 foo.putExtra("idEvent", event.id_event)
+
 
                 context.startActivity(foo)
 

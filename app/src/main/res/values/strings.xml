@@ -38,6 +38,25 @@
     <string name="event_start_h">Heure de début</string>
     <string name="event_end_h">Heure de fin</string>
 
+    <string name="description">Description :</string>
+    <string name="style_music">Style de musique :</string>
+
+    <string name="text_long">Style de Feds wanna tap up man and wire up man like Chubbs did Detail
+    Back when Ricky was doin up Teesdale, I was doin dinner with Teezy
+    I didnt trust no one, so I know a lot of niggas got too greazy
+    Niko never move neeky, sweatsuit Nike, sweatsuit DGStyle de Feds wanna tap up man and wire up man like Chubbs did Detail
+    Back when Ricky was doin up Teesdale, I was doin dinner with Teezy
+    I didnt trust no one, so I know a lot of niggas got too greazy
+    Niko never move neeky, sweatsuit Nike, sweatsuit DGStyle de Feds wanna tap up man and wire up man like Chubbs did Detail
+    Back when Ricky was doin up Teesdale, I was doin dinner with Teezy
+    I didnt trust no one, so I know a lot of niggas got too greazy Niko never move neeky, sweatsuit Nike, sweatsuit DGStyle de Feds wanna tap up man and wire up man like Chubbs did Detail
+    Back when Ricky was doin up Teesdale, I was doin dinner with Teezy
+    I didnt trust no one, so I know a lot of niggas got too greazy
+    Niko never move neeky, sweatsuit Nike, sweatsuit DG</string>
+
+
+
+
 
     <string name="profile_title">Mon Profil</string>
 
@@ -47,12 +66,24 @@
     <string name="life_cycle">Cycle de Vie</string>
     <string name="stat_activity">Etat activité</string>
     <string name="frag_change">Changer de fragment</string>
-    <string name="passed_events">Evenements passés</string>
+    <string name="passed_events">Vos événements passés</string>
     <string name="notifications">Notifications</string>
     <string name="pseudo">Pseudo</string>
     <string name="surname_name">Prénom Nom</string>
     <string name="my_school">Mon école</string>
     <string name="my_city">Ma pur Ville</string>
     <string name="birth_date">Date de naissance</string>
+
+
+
+    <string name="music_rap">Rap</string>
+    <string name="music_pop">Pop</string>
+    <string name="music_trans">Trans</string>
+    <string name="music_house">House</string>
+    <string name="music_techno">Techno</string>
+    <string name="music_hard">Hard</string>
+    <string name="music_rnb">Rnb</string>
+
+
 
 </resources>
