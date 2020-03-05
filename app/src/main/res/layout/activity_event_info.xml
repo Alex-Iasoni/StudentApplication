@@ -7,37 +7,87 @@
     tools:context=".View.EventInfoActivity">
 
 
-        <ImageView
-            android:id="@+id/coverImage"
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:background="@color/grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/coverImage"
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:background="@drawable/assoc_arrondie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <View
-            android:id="@+id/country_list"
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:background="@color/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coverImage"></View>
+    <View
+        android:id="@+id/country_list"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="#80E84E3C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coverImage"></View>
 
     <TextView
-        android:id="@+id/date_time_event"
+        android:id="@+id/date_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:text="TOMORROW AT 18:00"
+        android:layout_marginTop="24dp"
+        android:text="Date event"
         android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/country_list" />
+
+    <TextView
+        android:id="@+id/zerId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="|"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/date_event"
+        app:layout_constraintStart_toEndOf="@+id/date_event"
+        app:layout_constraintTop_toTopOf="@+id/date_event" />
+
+    <TextView
+        android:id="@+id/zerId3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="-"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/date_event"
+        app:layout_constraintStart_toEndOf="@+id/start_time_event"
+        app:layout_constraintTop_toTopOf="@+id/date_event"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/start_time_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="start time"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/date_event"
+        app:layout_constraintStart_toEndOf="@+id/zerId"
+        app:layout_constraintTop_toTopOf="@+id/date_event"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/end_time_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="end time"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/date_event"
+        app:layout_constraintStart_toEndOf="@+id/zerId3"
+        app:layout_constraintTop_toTopOf="@+id/date_event"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/name_event"
@@ -47,19 +97,19 @@
         android:layout_marginTop="4dp"
         android:text="Nom de la Soirée "
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_time_event" />
+        app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
     <ImageView
         android:id="@+id/eventDisplayImageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/orga_even"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country_list"
+        app:layout_constraintTop_toTopOf="@+id/date_event"
         app:srcCompat="@drawable/star_empty" />
 
     <TextView
@@ -86,7 +136,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name_event" />
 
     <TextView
-        android:id="@+id/place_event"
+        android:id="@+id/city_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -95,36 +145,250 @@
         app:layout_constraintStart_toEndOf="@+id/dot"
         app:layout_constraintTop_toBottomOf="@+id/name_event" />
 
-    <View
-        android:id="@+id/barre2"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <ImageView
+        android:id="@+id/peopleImage"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orga_even"></View>
+        app:layout_constraintTop_toBottomOf="@+id/description_event"
+        app:srcCompat="@drawable/profil_icon_app" />
+
+    <ImageView
+        android:id="@+id/imageTicket"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/peopleImage"
+        app:srcCompat="@drawable/ticket" />
+
+    <TextView
+        android:id="@+id/people_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="personne(s) sont interrésé "
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/peopleImage"
+        app:layout_constraintStart_toEndOf="@+id/num_people_event"
+        app:layout_constraintTop_toTopOf="@+id/num_people_event" />
+
+    <TextView
+        android:id="@+id/tickets_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="tickets restants"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/num_tickets_event"
+        app:layout_constraintStart_toEndOf="@+id/num_tickets_event"
+        app:layout_constraintTop_toTopOf="@+id/num_tickets_event"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/adresse_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Adresse de l'evenement "
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/locImage"
+        app:layout_constraintStart_toEndOf="@+id/locImage"
+        app:layout_constraintTop_toTopOf="@+id/locImage" />
+
+    <TextView
+        android:id="@+id/num_people_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="25"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/peopleImage"
+        app:layout_constraintEnd_toStartOf="@+id/people_event"
+        app:layout_constraintStart_toEndOf="@+id/peopleImage"
+        app:layout_constraintTop_toTopOf="@+id/peopleImage" />
+
+    <TextView
+        android:id="@+id/num_tickets_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="132"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageTicket"
+        app:layout_constraintEnd_toStartOf="@+id/people_event"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/peopleImage"
+        app:layout_constraintTop_toTopOf="@+id/imageTicket" />
+
+    <ImageView
+        android:id="@+id/locImage"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageTicket"
+        app:srcCompat="@drawable/location" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/imageView6">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacing="4dp"
+            app:singleLine="true"
+            android:id="@+id/chips_group">
+
+<!--
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRap"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:clickable="false"
+                android:text="@string/music_rap"
+                app:checkedIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRnb"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:clickable="false"
+                android:text="@string/music_rnb" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipHouse"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:clickable="false"
+                android:text="@string/music_house" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTrans"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="@string/music_trans"
+                app:chipBackgroundColor="@color/colorPrimary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTechno"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="@string/music_techno"
+                app:chipBackgroundColor="@color/colorPrimary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipHard"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="@string/music_hard"
+                app:chipBackgroundColor="@color/colorPrimary" />
+
+            <com.google.android.material.chip.Chip
+
+                android:id="@+id/chipPop"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:clickable="false"
+                android:text="@string/music_pop" />-->
+
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/music_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/style_music"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orga_even" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/description"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    <TextView
+        android:id="@+id/description_event"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:scrollbars="vertical"
+        android:text="@string/text_long"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barre2"
-        app:srcCompat="@drawable/profil_icon_app" />
+        app:layout_constraintTop_toBottomOf="@+id/music_section"
+        app:srcCompat="@drawable/caisson" />
 
-    <TextView
-        android:id="@+id/textView12"
+    <Button
+        android:id="@+id/backHome"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/barre2" />
+        android:layout_height="35sp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="Accueil"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
