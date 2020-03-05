@@ -1,6 +1,7 @@
 package fr.isen.iasoni.studentapplication.Controller
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -380,28 +381,29 @@ callback.invoke(etudiant)
     fun createEvent(name : String?, id_user_admin: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?, limit_user: Int?){
 
         val data = database.getReference("Events")
-        val newId = data.push().key.toString()
+
         val date = DateCurrent()
         val userController = UserController()
 
 
-
+        val newId = data.push().key.toString()
         userController.editEventArray(id_user_admin, newId)
         userController.editEventAdminArray(id_user_admin, newId)
 
         var schoolController = SchoolController()
 
         schoolController.getIdSchool(school) {
+            Log.d("NEW IDDDDDDDDDDDDDDDDD",newId)
             var id_school: String? = ""
             id_school = it
-            schoolController.editEventArray(it, newId)
+            schoolController.editEventArray(id_school, newId)
 
 
             var cityController = CityController()
             cityController.getIdCity(city) {
                 var id_city: String? = ""
                 id_city = it
-                cityController.editEventArray(it, newId)
+                cityController.editEventArray(id_city, newId)
 
                 FindMusic(newId,musics){
                     var id_musics : ArrayList<String>? = ArrayList<String>()

@@ -128,9 +128,16 @@ class SchoolController {
         getSchool(id_school) {
             school = it
 
+            Log.d("eeee","sdfyuzdgzjhfzk")
 
-            var events: ArrayList<String>? = school!!.event
-
+            var events: ArrayList<String>? = school.id_school
+            if(events != null) {
+                for (event in events) {
+                    Log.d("eeee",event)
+                }
+            }else{
+                Log.d("TAGGGGG","hfhhehjehjferhjerhjjherfjhr")
+            }
             events!!.add(id_event)
 
             val childUpdates = HashMap<String, Any>()
