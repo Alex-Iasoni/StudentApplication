@@ -40,7 +40,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_red" />
@@ -50,8 +50,7 @@
         style="@style/Widget.MaterialComponents.CompoundButton.Switch"
         android:layout_width="44dp"
         android:layout_height="41dp"
-        android:checked="false
-"
+        android:checked="false"
         android:onClick="onChangeSmoke"
         android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
@@ -146,10 +145,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="valider"
         android:onClick="createUser"
+        android:text="valider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerDrink" />
 

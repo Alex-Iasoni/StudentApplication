@@ -144,6 +144,7 @@ class SchoolController {
         var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 for (value in dataSnapshot.children){
 
                     var SchoolComp = value.getValue(School::class.java)!!
@@ -152,6 +153,7 @@ class SchoolController {
                         exist = false
                     }else{
                         exist = true
+                        break;
                     }
                 }
                 callback.invoke(exist)
@@ -169,7 +171,8 @@ class SchoolController {
         val newId = data.push().key.toString()
         val date = DateCurrent()
         SchoolExist(name){
-            if(!it){
+            if(it == false){
+
                 var school = School(newId,name, adresse,img, date)
 
                 data.child(newId).setValue(school)

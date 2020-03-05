@@ -75,6 +75,7 @@ class MusicController {
         var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 for (value in dataSnapshot.children){
 
                     var MusicComp = value.getValue(Music::class.java)!!
@@ -83,6 +84,7 @@ class MusicController {
                         exist = false
                     }else{
                         exist = true
+                        break;
                     }
                 }
                 callback.invoke(exist)
@@ -102,7 +104,7 @@ class MusicController {
         var exist : Boolean = false
         MusicExist(name){
             exist = it
-            if (!exist){
+            if (exist == false){
                 var music = Music(newId,name, date)
                 data.child(newId).setValue(music)
             }

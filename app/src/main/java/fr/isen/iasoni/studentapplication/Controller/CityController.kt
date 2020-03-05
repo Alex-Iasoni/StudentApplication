@@ -80,6 +80,7 @@ class CityController {
         var exist : Boolean = false
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 for (value in dataSnapshot.children){
 
                     var CityComp = value.getValue(City::class.java)!!
@@ -88,6 +89,7 @@ class CityController {
                         exist = false
                     }else{
                         exist = true
+                        break;
                     }
                 }
                 callback.invoke(exist)
@@ -107,7 +109,7 @@ class CityController {
         var exist : Boolean = false
         CityExist(name){
             exist = it
-            if (!exist){
+            if (exist == false){
                 var city = City(newId,name, date)
                 data.child(newId).setValue(city)
             }
