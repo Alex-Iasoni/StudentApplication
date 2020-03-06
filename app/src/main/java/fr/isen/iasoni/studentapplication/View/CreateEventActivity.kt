@@ -240,7 +240,7 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
             Log.d("School", school)
             Log.d("Ville", ville)
             var eventController = EventController()
-            eventController.createEvent(eventTitle.toString(), user!!.uid,eventPlace.toString(), "", ville, school, arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), false,  100)
+            eventController.createEvent(eventTitle.toString(), user!!.uid,eventPlace.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), false,  100)
 
         }
 
