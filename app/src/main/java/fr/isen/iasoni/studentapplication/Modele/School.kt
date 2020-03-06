@@ -10,7 +10,7 @@ data class School(
     @PropertyName("adresse") var adresse: String?,
     @PropertyName("img") var img: String?,
     @PropertyName("users") var users: ArrayList<String>?,
-    @PropertyName("event") val event: ArrayList<String>?,
+    @PropertyName("events") val events: ArrayList<String>?,
     @PropertyName("date_added") var date_added: String?)
 
 

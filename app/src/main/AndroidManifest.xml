@@ -12,7 +12,7 @@
         <activity android:name=".View.RegisterActivity2"></activity>
         <activity android:name=".View.RegisterActivity1" />
         <activity android:name=".View.PassedEventsActivity" />
-        <activity android:name=".View.CreateEventActivity" />
+        <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.NotifActivity" />
         <activity android:name=".View.EventsActivity" />
         <activity android:name=".View.ProfilActivity" />
@@ -20,12 +20,12 @@
         <activity android:name=".View.SwipeActivity" />
         <activity android:name=".View.FilterActivity" />
         <activity android:name=".View.IntroductionActivity" />
-        <activity android:name=".View.LoginActivity">
+        <activity android:name=".View.CreateEventActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
     </application>
 

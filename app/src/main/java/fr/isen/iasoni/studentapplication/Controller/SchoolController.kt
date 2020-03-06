@@ -129,12 +129,12 @@ class SchoolController {
             school = it
 
 
-            var events: ArrayList<String>? = school!!.event
+            var events: ArrayList<String>? = school!!.events
 
             events!!.add(id_event)
 
             val childUpdates = HashMap<String, Any>()
-            childUpdates.put("event", events)
+            childUpdates.put("events", events)
             data.updateChildren(childUpdates)
         }
     }

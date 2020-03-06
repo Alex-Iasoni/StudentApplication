@@ -22,6 +22,7 @@ import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
@@ -29,8 +30,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
+import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
+import fr.isen.iasoni.studentapplication.Controller.MusicController
+import fr.isen.iasoni.studentapplication.Controller.SchoolController
 import kotlinx.android.synthetic.main.activity_create_event.*
 import java.io.File
 import java.security.AccessController.getContext
@@ -39,43 +44,48 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.jar.Manifest
+import kotlin.collections.ArrayList
 
 open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
     private lateinit var mAuth: FirebaseAuth
-
-
+    lateinit var optionVille : Spinner
+    lateinit var optionSchool : Spinner
     lateinit var optionMusic : Spinner
-    lateinit var resultMusics: TextView
 
-lateinit  var locationManager: LocationManager
+    var ville: String? = ""
+    var music: String? = ""
+    var arrayMusic = ArrayList<String>()
+    var school: String? = ""
+
+    lateinit  var locationManager: LocationManager
     var currentDate = Date()
 
 
     companion object {
-    val pictureRequestCode = 1
-    val contactPermissionRequestCode = 2
-    val gpsPermissionRequestCodde = 3
-}
-
-@SuppressLint("MissingPermission")
-fun startGPS(){
-    locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
-    val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-    location?.let{
-        refreshPositionUI(it)
+        val pictureRequestCode = 1
+        val contactPermissionRequestCode = 2
+        val gpsPermissionRequestCodde = 3
     }
-}
 
-fun refreshPositionUI(location: Location) {
-    locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
-}
-
-override fun onLocationChanged(location: Location?) {
-    location?.let {
-        refreshPositionUI(it)
+    @SuppressLint("MissingPermission")
+    fun startGPS(){
+        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
+        val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        location?.let{
+            refreshPositionUI(it)
+        }
     }
-}
+
+    fun refreshPositionUI(location: Location) {
+        locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
+    }
+
+    override fun onLocationChanged(location: Location?) {
+        location?.let {
+            refreshPositionUI(it)
+        }
+    }
 
 
 
@@ -85,6 +95,7 @@ override fun onLocationChanged(location: Location?) {
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
+        mAuth = FirebaseAuth.getInstance()
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         coverImage.setOnClickListener {
@@ -122,72 +133,125 @@ override fun onLocationChanged(location: Location?) {
 
 
 
-        /*   var COUNTRIES: Array<String> = arrayOf("green", "red", "blue")
+        optionVille = findViewById(R.id.spinnerVille) as Spinner
+
+        var cityController  = CityController()
+        var optionsVilles =  ArrayList<String?>()
 
 
-           ArrayAdapter<String> adapter =
-                               new ArrayAdapter<>(
-                                   getContext(),
-                                   R.layout.dropdown_menu_popup_item,
-                                   COUNTRIES);
+        cityController.getCities{
 
-                       AutoCompleteTextView editTextFilledExposedDropdown =
-                           view.findViewById(R.id.filled_exposed_dropdown);
-                       editTextFilledExposedDropdown.setAdapter(adapter);*/
-       /* requestPermission(android.Manifest.permission.READ_CONTACTS, contactPermissionRequestCode) {
-            readContacts()
-        }*/
+            for(city in it){
+                optionsVilles.add(city.name)
+            }
+            optionVille.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsVilles)
+
+            optionVille.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    ville = optionsVilles.get(position)
+                }
+            }
+        }
+
+
+        optionSchool = findViewById(R.id.spinnerSchool) as Spinner
+
+        var schoolController  = SchoolController()
+        var optionsSchools =  ArrayList<String?>()
+
+
+        schoolController.getSchools{
+
+            for(school in it){
+                optionsSchools.add(school.name)
+            }
+            optionSchool.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsSchools)
+
+            optionSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    school = optionsSchools.get(position)
+                }
+            }
+        }
 
         optionMusic = findViewById(R.id.spinnerMusic) as Spinner
-        resultMusics = findViewById(R.id.resultMusics) as TextView
 
-        val options = arrayOf("Rap", "House", "Trap", "RnB", "Ragae", "Electro","Trans","HardStyle")
+        var musicController  = MusicController()
+        var optionsMusics =  ArrayList<String?>()
 
-        optionMusic.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, options)
-        
-        optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            resultMusics.text = "Selectionnez un genre"
+
+        musicController.getMusics{
+
+            for(music in it){
+                optionsMusics.add(music.name)
             }
+            optionMusic.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsMusics)
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                resultMusics.text = options.get(position)
+            optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    music = optionsMusics.get(position)
+
+                }
             }
+        }
+
+        buttonAdd.setOnClickListener {
+            val inflater = LayoutInflater.from(this@CreateEventActivity)
+            val chip_item = inflater.inflate(R.layout.chip_item, null, false) as Chip
+            chip_item.text = music
+            arrayMusic.add(music.toString())
+            chip_item.setOnCloseIconClickListener{view ->
+                chipGroupMusic.removeView(view)
+            }
+            chipGroupMusic.addView(chip_item)
+        }
+
+
+
+        createButton.setOnClickListener {
+            val user = mAuth?.currentUser
+            Log.d("School", school)
+            Log.d("Ville", ville)
+            var eventController = EventController()
+            eventController.createEvent(eventTitle.toString(), user!!.uid,eventPlace.toString(), "", ville, school, arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), false,  100)
 
         }
 
 
-//        createButton.setOnClickListener {
-//            var eventController = EventController()
-//            eventController.createEvent()
-//        }
-
-
 
     }
 
-
- /*   override fun onCreateDialog(savedInstanceState: Bundle): Dialog {
-        // Use the current time as the default values for the picker
-        val c = Calendar.getInstance()
-        val hour = c.get(Calendar.HOUR_OF_DAY)
-        val minute = c.get(Calendar.MINUTE)
-
-        // Create a new instance of TimePickerDialog and return it
-        return TimePickerDialog(this, this, hour, minute, DateFormat.is24HourFormat(this))
-    }*/
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
         // Do something with the time chosen by the user
     }
- /*   fun showTimePickerDialog(v: View) {
-        Dialog.show(supportFragmentManager, "timePicker")
-    }*/
 
 
     fun onChangePhoto() {
@@ -211,22 +275,6 @@ override fun onLocationChanged(location: Location?) {
         }
     }
 
-
-
- /*   fun readContacts() {
-        val contactList = ArrayList<ContactModel>()
-        val contacts = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
-        while(contacts?.moveToNext() ?: false){
-            val displayName = contacts?.getString(contacts.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-            val contactModel = ContactModel()
-            contactModel.displayName = displayName.toString()
-            contactList.add(contactModel)
-        }
-        contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        contactRecyclerView.adapter = ContactsAdapter(contactList)
-        Log.d("contacts", "${contacts}")
-
-    }*/
 
     fun requestPermission(permissionToRequest: String, requestCode: Int, handler: ()-> Unit) {
         if(ContextCompat.checkSelfPermission(this, permissionToRequest) != PackageManager.PERMISSION_GRANTED) {
