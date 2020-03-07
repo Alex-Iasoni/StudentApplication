@@ -53,10 +53,11 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
     lateinit var optionSchool : Spinner
     lateinit var optionMusic : Spinner
 
-    var ville: String? = ""
+
     var music: String? = ""
     var arrayMusic = ArrayList<String>()
     var school: String? = ""
+    var ville: String? = ""
 
     lateinit  var locationManager: LocationManager
     var currentDate = Date()

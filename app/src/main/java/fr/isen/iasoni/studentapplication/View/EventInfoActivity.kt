@@ -19,22 +19,15 @@ import kotlinx.android.synthetic.main.activity_event_info.*
 
 class EventInfoActivity : AppCompatActivity() {
 
-
     var music_array :  ArrayList<String>? = null
-
-
     var idEvent: String? = ""
-
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_info)
 
-
         idEvent =  intent.getStringExtra("idEvent")
+
         var eventController = EventController()
         eventController.getEvent(idEvent){
 
@@ -45,7 +38,6 @@ class EventInfoActivity : AppCompatActivity() {
             date_event.text = it.date_added
             tickets_event.text = it.limit_user.toString()
 
-
             //chopper la date
             var city : City = City()
             var cityController = CityController()
@@ -53,15 +45,12 @@ class EventInfoActivity : AppCompatActivity() {
                 city_event.text = it.name
             }
 
-
-
             //chopper nom createur event
             var userController = UserController()
             userController.getUser(it.id_user_admin){
                 Log.d("nom createur event ->>>",it.name)
                 orga_even.text = it.name;
             }
-
 
             //pour add les chips musique
             music_array = it.id_music

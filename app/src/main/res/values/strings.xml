@@ -79,6 +79,8 @@
     <string name="music_techno">Techno</string>
     <string name="music_hard">Hard</string>
     <string name="music_rnb">Rnb</string>
+    <string name="create_the_event">Créer l\'event</string>
+    <string name="add">Ajouter</string>
 
 
 </resources>

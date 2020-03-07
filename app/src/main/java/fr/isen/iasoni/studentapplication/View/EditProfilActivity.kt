@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +29,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.widget.ImageView
+import android.view.View
+import android.widget.*
 import com.squareup.picasso.Picasso
 
 
@@ -40,7 +40,11 @@ class EditProfilActivity : AppCompatActivity() {
         val TAG = "RegisterActivity"
     }
     var selectedPhotoUri: Uri? = null
+    lateinit var optionVille : Spinner
+    lateinit var optionSchool : Spinner
 
+    var school: String? = ""
+    var ville: String? = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,20 +63,63 @@ class EditProfilActivity : AppCompatActivity() {
 
 
 
-        already_have_account_text_view.setOnClickListener {
-            Log.d(TAG, "Try to show login activity")
-
-            // launch the login activity somehow
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-
         selectphoto_button_register.setOnClickListener {
             Log.d(TAG, "Try to show photo selector")
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
+        }
+
+
+        optionVille = findViewById(R.id.spinnerVille) as Spinner
+
+        var cityController  = CityController()
+        var optionsVilles =  ArrayList<String?>()
+
+        cityController.getCities{
+
+            for(city in it){
+                optionsVilles.add(city.name)
+            }
+            optionVille.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsVilles)
+
+            optionVille.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    ville = optionsVilles.get(position)
+                }
+            }
+        }
+        optionSchool = findViewById(R.id.spinnerSchool) as Spinner
+        var schoolController  = SchoolController()
+        var optionsSchools =  ArrayList<String?>()
+
+        schoolController.getSchools{
+            for(school in it){
+                optionsSchools.add(school.name)
+            }
+            optionSchool.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsSchools)
+            optionSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    school = optionsSchools.get(position)
+                }
+            }
         }
     }
 
@@ -127,16 +174,38 @@ class EditProfilActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
 
+
         var userController = UserController()
         userController.getUser(uid){
-            it.img_profil = profileImageUrl
-            ref.setValue(it)
-                .addOnSuccessListener {
-                    Log.d(TAG, "Finally we saved the user to Firebase Database")
+
+            var userToSet = it
+            userToSet.img_profil = profileImageUrl
+
+
+            var cityController = CityController()
+            cityController.getIdCity(ville.toString()){
+                userToSet.id_city = it
+
+                var schoolController = SchoolController()
+                schoolController.getIdSchool(school){
+
+                    userToSet.id_school = it
+
+                    ref.setValue(userToSet)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Finally we saved the user to Firebase Database")
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "Failed to set value to database: ${it.message}")
+                        }
+
+
                 }
-                .addOnFailureListener {
-                    Log.d(TAG, "Failed to set value to database: ${it.message}")
-                }
+
+
+
+            }
+
 
         }
 
