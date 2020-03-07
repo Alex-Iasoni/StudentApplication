@@ -94,6 +94,8 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
     override fun onCreate(savedInstanceState: Bundle?) {
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
+        var eventController = EventController()
+        var array : ArrayList<String> = ArrayList<String>()
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -240,7 +242,11 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
             Log.d("School", school)
             Log.d("Ville", ville)
             var eventController = EventController()
-            eventController.createEvent(eventTitle.toString(), user!!.uid,eventPlace.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), false,  100)
+            var a = 100
+
+                eventController.createEvent(eventTitle.toString(),"8JCQe8Ut32XfZ7zf25i4M4njdRG2",eventPlace.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), "false",  a.toString())
+
+
 
         }
 

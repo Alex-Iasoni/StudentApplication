@@ -31,7 +31,7 @@ class SubscribeEventController {
 
 
     fun addUserOnEvent(id_subscribe_event: String?, id_user: String){
-        val data = database.getReference("SubscribeEvent" + id_subscribe_event)
+        val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
 
         var subsevent : SubscribeEvent = SubscribeEvent()
         getSubscribeEvent(id_subscribe_event) {
