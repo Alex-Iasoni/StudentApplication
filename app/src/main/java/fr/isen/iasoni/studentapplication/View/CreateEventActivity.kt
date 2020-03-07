@@ -61,7 +61,6 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
     lateinit  var locationManager: LocationManager
     var currentDate = Date()
 
-
     companion object {
         val pictureRequestCode = 1
         val contactPermissionRequestCode = 2
@@ -87,10 +86,6 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
         }
     }
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
@@ -110,9 +105,9 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
                     DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                         onDateChoose(year, month, dayOfMonth)
                     },
-                    1990,
-                    7,
-                    25)
+                    2020,
+                    3,
+                    7)
                 dialog.show()
             }
         }
@@ -124,22 +119,19 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
                     DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                         onDateChoose2(year, month, dayOfMonth)
                     },
-                    1990,
-                    7,
-                    25)
+                    2020,
+                    3,
+                    7)
                 dialog.show()
             }
         }
 
         privateorPublic.text = "Public"
 
-
-
         optionVille = findViewById(R.id.spinnerVille) as Spinner
 
         var cityController  = CityController()
         var optionsVilles =  ArrayList<String?>()
-
 
         cityController.getCities{
 
@@ -163,26 +155,18 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
                 }
             }
         }
-
-
         optionSchool = findViewById(R.id.spinnerSchool) as Spinner
-
         var schoolController  = SchoolController()
         var optionsSchools =  ArrayList<String?>()
 
-
         schoolController.getSchools{
-
             for(school in it){
                 optionsSchools.add(school.name)
             }
             optionSchool.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsSchools)
-
             optionSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-
                 }
-
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
@@ -195,10 +179,8 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
         }
 
         optionMusic = findViewById(R.id.spinnerMusic) as Spinner
-
         var musicController  = MusicController()
         var optionsMusics =  ArrayList<String?>()
-
 
         musicController.getMusics{
 
@@ -209,9 +191,7 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
 
             optionMusic.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-
                 }
-
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
@@ -219,7 +199,6 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
                     id: Long
                 ) {
                     music = optionsMusics.get(position)
-
                 }
             }
         }
@@ -236,17 +215,11 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
         }
 
 
-
         createButton.setOnClickListener {
-            val user = mAuth?.currentUser
-            Log.d("School", school)
-            Log.d("Ville", ville)
+            val uid = FirebaseAuth.getInstance().uid ?: ""
             var eventController = EventController()
             var a = 100
-
-                eventController.createEvent(eventTitle.toString(),"8JCQe8Ut32XfZ7zf25i4M4njdRG2",eventPlace.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), "false",  a.toString())
-
-
+            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), "false",  a.toString())
 
         }
 
