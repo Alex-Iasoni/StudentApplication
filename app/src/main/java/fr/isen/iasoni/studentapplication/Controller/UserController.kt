@@ -78,27 +78,27 @@ class UserController {
     }
 
     fun editEventArray(id_user: String?, id_event: String) {
-        val data = database.getReference("Users" + id_user)
+        val data = database.getReference("Users/" + id_user)
 
         var user: User = User()
         getUser(id_user) {
             user = it
-            var events: ArrayList<String>? = user!!.events
+            var events: ArrayList<String> = user.events
+            if(events.contains(id_event) == false ) {
+                events.add(id_event)
 
-            events!!.add(id_event)
+                val childUpdates = HashMap<String, Any>()
+                childUpdates.put("events", events)
+                data.updateChildren(childUpdates)
 
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("events", events)
-            data.updateChildren(childUpdates)
-
-
+            }
         }
 
 
     }
 
     fun editBadgeArray(id_user: String?, id_badge: String) {
-        val data = database.getReference("Users" + id_user)
+        val data = database.getReference("Users/" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -116,7 +116,7 @@ class UserController {
     }
 
     fun editSwipeArray(id_user: String?, id_swipe: String) {
-        val data = database.getReference("Users" + id_user)
+        val data = database.getReference("Users/" + id_user)
 
         var user: User = User()
         getUser(id_user) {
@@ -134,20 +134,21 @@ class UserController {
     }
 
     fun editEventAdminArray(id_user: String?, id_event: String) {
-               val data = database.getReference("Users" + id_user)
+               val data = database.getReference("Users/" + id_user)
 
         var user: User = User()
         getUser(id_user) {
             user = it
 
 
-            var events_admin: ArrayList<String>? = user!!.events_admin
+                var events_admin: ArrayList<String> = user.events_admin
+            if(events_admin.contains(id_event) == false ) {
+                events_admin.add(id_event)
 
-            events_admin!!.add(id_event)
-
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("events_admin", events_admin)
-            data.updateChildren(childUpdates)
+                val childUpdates = HashMap<String, Any>()
+                childUpdates.put("events_admin", events_admin)
+                data.updateChildren(childUpdates)
+            }
         }
     }
     fun UsserCertified(id_user: String?, callback: (Boolean) -> Unit){

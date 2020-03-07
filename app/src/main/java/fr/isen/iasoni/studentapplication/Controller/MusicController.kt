@@ -116,20 +116,21 @@ class MusicController {
     }
 
     fun editEventArray(id_music: String?, id_event: String) {
-        val data = database.getReference("Musics" + id_music)
+        val data = database.getReference("Musics/" + id_music)
 
         var music: Music = Music()
         getMusic(id_music) {
             music = it
 
 
-            var events: ArrayList<String>? = music!!.event
+            var events: ArrayList<String> = music.event
+            if(events.contains(id_event) == false ) {
+                events.add(id_event)
 
-            events!!.add(id_event)
-
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("event", events)
-            data.updateChildren(childUpdates)
+                val childUpdates = HashMap<String, Any>()
+                childUpdates.put("event", events)
+                data.updateChildren(childUpdates)
+            }
         }
     }
 

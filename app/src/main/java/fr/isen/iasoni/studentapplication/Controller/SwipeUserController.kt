@@ -50,7 +50,7 @@ class SwipeUserController {
     }
 
     fun EditPosition(id_swipe: String?, position: Int){
-        val data = database.getReference("SwipeUser" + id_swipe)
+        val data = database.getReference("SwipeUser/" + id_swipe)
 
         var swipe: SwipeUser = SwipeUser()
 

@@ -13,6 +13,7 @@
         <activity android:name=".View.RegisterActivity1" />
         <activity android:name=".View.PassedEventsActivity" />
         <activity android:name=".View.LoginActivity" />
+
         <activity android:name=".View.NotifActivity" />
         <activity android:name=".View.EventsActivity" />
         <activity android:name=".View.ProfilActivity" />

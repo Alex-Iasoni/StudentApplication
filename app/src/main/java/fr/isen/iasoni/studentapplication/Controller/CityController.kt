@@ -121,20 +121,21 @@ class CityController {
     }
 
     fun editEventArray(id_city: String?, id_event: String) {
-        val data = database.getReference("Cities" + id_city)
+        val data = database.getReference("Cities/" + id_city)
 
         var city: City = City()
         getCity(id_city) {
             city = it
 
-
-            var events: ArrayList<String>? = city!!.event
-
-            events!!.add(id_event)
+            var events: ArrayList<String> =ArrayList<String>()
+           events = city.event
+        if(events.contains(id_event) == false ) {
+            events.add(id_event)
 
             val childUpdates = HashMap<String, Any>()
             childUpdates.put("event", events)
             data.updateChildren(childUpdates)
+        }
         }
     }
 
@@ -149,7 +150,7 @@ class CityController {
                     if(city.name.equals(name)){
 
                         idCity = city.id_city
-
+break;
                     }
                 }
                 callback.invoke(idCity)

@@ -10,15 +10,15 @@ data class User(
       @PropertyName("birthday") var birthday : String?,
       @PropertyName("id_school") var id_school :  String?,
       @PropertyName("id_city") var id_city :  String?,
-      @PropertyName("swipes") var swipes : ArrayList<String>?, //SwipeUserModel
-      @PropertyName("badges") var badges : ArrayList<String>?, //BadgeModel
+      @PropertyName("swipes") var swipes : ArrayList<String>, //SwipeUserModel
+      @PropertyName("badges") var badges : ArrayList<String>, //BadgeModel
       @PropertyName("certified") var certified :  Boolean?,
       @PropertyName("smoke") var smoke : Boolean?,
       @PropertyName("drink") var drink : ArrayList<String>?,
       @PropertyName("sport") var sport : ArrayList<String>?,
       @PropertyName("level") var level : String?,
-      @PropertyName("events") var events :  ArrayList<String>?, //EventModel
-      @PropertyName("events_admin") var events_admin :  ArrayList<String>?,
+      @PropertyName("events") var events :  ArrayList<String>, //EventModel
+      @PropertyName("events_admin") var events_admin :  ArrayList<String>,
       @PropertyName("img_profil") val img_profil: String?,
       @PropertyName("id_music") var id_music :  ArrayList<String>?, //MusicModel
       @PropertyName("img_cover") var img_cover: String?,
@@ -28,7 +28,8 @@ data class User(
 
 {
 
-        constructor() : this(null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+        constructor() : this(null,null,null,null,null,null, null,arrayListOf(),arrayListOf(),null,null,null,null,null,
+            arrayListOf(),arrayListOf(),null,null,null,null)
         constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?,certified : Boolean?) : this(){ //Inscription
             this.id_user = id
             this.name = name

@@ -16,14 +16,14 @@ data class Event(
     @PropertyName("start_date") var start_date : String?,
     @PropertyName("end_date") var end_date : String?,
     @PropertyName("description") var description : String?,
-    @PropertyName("etudiant") var etudiant : Boolean?,
+    @PropertyName("etudiant") var etudiant : String?,
     @PropertyName("limit_user") var limit_user : Int?,
     @PropertyName("date_added") var date_added: String?)
 
 
 {
     constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, id_city: String?,id_school : String?, id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?, etudiant : Boolean?,limit_user: Int?, date_added: String?) : this(){ //Inscription
+    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, id_city: String?,id_school : String?, id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?, etudiant : String?,limit_user: Int?, date_added: String?) : this(){ //Inscription
         this.id_event = id
         this.name = name
         this.id_user_admin = id_user_admin
