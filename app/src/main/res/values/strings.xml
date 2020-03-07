@@ -55,9 +55,6 @@
     Niko never move neeky, sweatsuit Nike, sweatsuit DG</string>
 
 
-
-
-
     <string name="profile_title">Mon Profil</string>
 
 
@@ -75,7 +72,6 @@
     <string name="birth_date">Date de naissance</string>
 
 
-
     <string name="music_rap">Rap</string>
     <string name="music_pop">Pop</string>
     <string name="music_trans">Trans</string>
@@ -83,7 +79,6 @@
     <string name="music_techno">Techno</string>
     <string name="music_hard">Hard</string>
     <string name="music_rnb">Rnb</string>
-
 
 
 </resources>
