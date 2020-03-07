@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Adapters.BadgeProfilAdapter
 import fr.isen.iasoni.studentapplication.Controller.CityController
@@ -29,6 +31,14 @@ class ProfilActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth?.currentUser
+        val imageView = findViewById<ImageView>(R.id.profilePicture)
+        var userContollerImg = UserController()
+        userContollerImg.getUser(mAuth.uid){
+            if(it.img_profil != "none" && it.img_profil != null) {
+                Glide.with(this).load(it.img_profil).into(imageView)
+            }
+
+        }
 
         var userController = UserController()
         userController.getUser(user!!.uid){

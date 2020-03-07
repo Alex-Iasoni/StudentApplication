@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -25,20 +26,38 @@ import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_edit_profil.*
 import kotlinx.android.synthetic.main.activity_profil.*
 import java.util.*
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
+
 
 class EditProfilActivity : AppCompatActivity() {
 
     companion object {
         val TAG = "RegisterActivity"
     }
+    var selectedPhotoUri: Uri? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profil)
+        val imageView = findViewById<ImageView>(R.id.selectphoto_imageview_register)
 
-        register_button_register.setOnClickListener {
-            performRegister()
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        var userContollerImg = UserController()
+        userContollerImg.getUser(uid){
+            if(it.img_profil != "none" && it.img_profil != null) {
+                Glide.with(this).load(it.img_profil).into(imageView)
+            }
+
         }
+
+
 
         already_have_account_text_view.setOnClickListener {
             Log.d(TAG, "Try to show login activity")
@@ -57,7 +76,6 @@ class EditProfilActivity : AppCompatActivity() {
         }
     }
 
-    var selectedPhotoUri: Uri? = null
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -74,8 +92,6 @@ class EditProfilActivity : AppCompatActivity() {
 
             selectphoto_button_register.alpha = 0f
 
-//      val bitmapDrawable = BitmapDrawable(bitmap)
-//      selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
         }
     }
 
@@ -127,6 +143,8 @@ class EditProfilActivity : AppCompatActivity() {
 
 
     }
+
+
 
 }
 
