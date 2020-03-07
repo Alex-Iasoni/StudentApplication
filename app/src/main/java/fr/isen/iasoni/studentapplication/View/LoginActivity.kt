@@ -20,11 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
 
         super.onCreate(savedInstanceState)
         setContentView(fr.isen.iasoni.studentapplication.R.layout.activity_login)
