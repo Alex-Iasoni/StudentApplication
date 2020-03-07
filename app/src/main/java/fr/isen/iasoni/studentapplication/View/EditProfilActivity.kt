@@ -34,7 +34,7 @@ class EditProfilActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_edit_profil)
 
         register_button_register.setOnClickListener {
             performRegister()
@@ -109,20 +109,23 @@ class EditProfilActivity : AppCompatActivity() {
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
 
         var userController = UserController()
-        userController.
+        userController.getUser(uid){
+            it.img_profil = profileImageUrl
+            ref.setValue(it)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Finally we saved the user to Firebase Database")
+                }
+                .addOnFailureListener {
+                    Log.d(TAG, "Failed to set value to database: ${it.message}")
+                }
 
-        val user = User(uid, username_edittext_register.text.toString(), profileImageUrl)
+        }
 
-        ref.setValue(user)
-            .addOnSuccessListener {
-                Log.d(TAG, "Finally we saved the user to Firebase Database")
-            }
-            .addOnFailureListener {
-                Log.d(TAG, "Failed to set value to database: ${it.message}")
-            }
+
+
     }
 
 }
