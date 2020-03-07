@@ -4,21 +4,57 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Adapters.BadgeProfilAdapter
+import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.MusicController
+import fr.isen.iasoni.studentapplication.Controller.SchoolController
+import fr.isen.iasoni.studentapplication.Controller.UserController
 import fr.isen.iasoni.studentapplication.Modele.Badge
+import fr.isen.iasoni.studentapplication.Modele.City
 import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_profil.*
 
 class ProfilActivity : AppCompatActivity() {
 
+    private lateinit var mAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
+
+        mAuth = FirebaseAuth.getInstance()
+        val user = mAuth?.currentUser
+        val imageView = findViewById<ImageView>(R.id.profilePicture)
+        var userContollerImg = UserController()
+        userContollerImg.getUser(mAuth.uid){
+            if(it.img_profil != "none" && it.img_profil != null) {
+                Glide.with(this).load(it.img_profil).into(imageView)
+            }
+
+        }
+
+        var userController = UserController()
+        userController.getUser(user!!.uid){
+            userSurname.text = it.name +" "+ it.surname
+
+            var schoolController = SchoolController()
+            schoolController.getSchool(it.id_school){
+                schoolName.text = it.name
+            }
+
+            var cityController = CityController()
+            cityController.getCity(it.id_city){
+                nameCity.text = it.name
+            }
+
+        }
 
         navigation_view.setSelectedItemId(R.id.action_profil);
 
@@ -33,13 +69,10 @@ class ProfilActivity : AppCompatActivity() {
                 R.id.action_profil -> activity = "ProfilActivity"
                 R.id.action_events -> activity = "passedEventsActivity"
                 R.id.action_swipe -> activity = "SwipeActivity"
-
-
             }
             Toast.makeText(this@ProfilActivity, "$activity clicked!", Toast.LENGTH_SHORT).show()
 
             if(activity == "ProfilActivity"){
-
                 startActivity(Intent(this, ProfilActivity::class.java))
             }
             if(activity == "SwipeActivity"){

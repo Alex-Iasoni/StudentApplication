@@ -89,7 +89,7 @@ class SchoolController {
                     if(school.name.equals(name)){
 
                         idSchool = school.id_school
-
+break;
                     }
                 }
                 callback.invoke(idSchool)
@@ -104,16 +104,16 @@ class SchoolController {
     }
 
     fun editUserArray(id_school: String?, id_user: String) {
-        val data = database.getReference("Schools" + id_school)
+        val data = database.getReference("Schools/" + id_school)
 
         var school: School = School()
         getSchool(id_school) {
             school = it
 
 
-            var users: ArrayList<String>? = school!!.users
+            var users: ArrayList<String> = school.users
 
-            users!!.add(id_user)
+            users.add(id_user)
 
             val childUpdates = HashMap<String, Any>()
             childUpdates.put("users", users)
@@ -122,20 +122,26 @@ class SchoolController {
     }
 
     fun editEventArray(id_school: String?, id_event: String) {
-        val data = database.getReference("Schools" + id_school)
+        val data = database.getReference("Schools/" + id_school)
 
         var school: School = School()
         getSchool(id_school) {
             school = it
+            var events: ArrayList<String> = ArrayList<String>()
+
+                events = school.events
+            if(events.contains(id_event) == false ) {
 
 
-            var events: ArrayList<String>? = school!!.event
+                events.add(id_event)
 
-            events!!.add(id_event)
 
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("event", events)
-            data.updateChildren(childUpdates)
+                val childUpdates = HashMap<String, Any>()
+
+                childUpdates.put("events", events)
+
+                data.updateChildren(childUpdates)
+            }
         }
     }
 
