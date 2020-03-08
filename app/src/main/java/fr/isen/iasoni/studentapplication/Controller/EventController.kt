@@ -131,6 +131,30 @@ fun  Interest(id_user: String, id_event: String){
         }
     }
 
+    fun  UnInterest(id_user: String, id_event: String){
+        var user : UserController = UserController()
+        user.editEventArray(id_user, id_event)
+        var event : Event = Event()
+        getEvent(id_event){
+            event = it
+            var user : UserController = UserController()
+            user.UserCertified(id_user){
+                if(it.equals("false") && event.etudiant.equals("false")){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.deleteUseronEvent(event.id_subscribe_event, id_user)
+                }
+                else if(it.equals("true") and  event.etudiant.equals("true")){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.deleteUseronEvent(event.id_subscribe_event, id_user)
+                }
+                else if(it.equals("true") and  event.etudiant.equals("false")){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.deleteUseronEvent(event.id_subscribe_event, id_user)
+                }
+            }
+        }
+    }
+
     fun FilterMusicEvent(musics: ArrayList<String?>, callback: (ArrayList<Event?>) -> Unit){
 
         val data = database.getReference("Events")
@@ -476,7 +500,7 @@ fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<St
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
-                    var event: Event  =  value.getValue(Event::class.java)!!
+                    var event : Event  =  value.getValue(Event::class.java)!!
                     if(event.name.equals(name) && event.id_user_admin.equals(id_user_admin)){
 
                         id_event = event.id_event
