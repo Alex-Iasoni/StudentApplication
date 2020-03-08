@@ -47,16 +47,16 @@ class EventController {
 
     }
 
-    fun VerifiedEtudiantSchool(id_event: String?, callback: (Boolean) -> Unit){
-    var etudiant = false
+    fun VerifiedEtudiantSchool(id_event: String?, callback: (String) -> Unit){
+    var etudiant = "false"
         var event : Event = Event()
         getEvent(id_event){
             event = it
-         if(event.etudiant == true){
-             etudiant = true
+         if( event.etudiant.equals("true")){
+             etudiant = "true"
 
             }else{
-             etudiant = false
+             etudiant = "false"
          }
 callback.invoke(etudiant)
         }
@@ -107,37 +107,30 @@ callback.invoke(etudiant)
 
 }
 
-
-
-
-
-    fun  Interest(id_user: String, id_event: String){
+fun  Interest(id_user: String, id_event: String){
         var user : UserController = UserController()
         user.editEventArray(id_user, id_event)
         var event : Event = Event()
         getEvent(id_event){
             event = it
             var user : UserController = UserController()
-            user.UsserCertified(id_user){
-                if(it == false and event.etudiant!! == false){
+            user.UserCertified(id_user){
+                if(it.equals("false") && event.etudiant.equals("false")){
                     var subs : SubscribeEventController = SubscribeEventController()
                     subs.addUserOnEvent(event.id_subscribe_event, id_user)
                 }
-                else if(it == true and event.etudiant!! == true){
+                else if(it.equals("true") and  event.etudiant.equals("true")){
                     var subs : SubscribeEventController = SubscribeEventController()
                     subs.addUserOnEvent(event.id_subscribe_event, id_user)
                 }
-                else if(it == true and event.etudiant!! == false){
+                else if(it.equals("true") and  event.etudiant.equals("false")){
                     var subs : SubscribeEventController = SubscribeEventController()
                     subs.addUserOnEvent(event.id_subscribe_event, id_user)
                 }
-
             }
-
         }
-
-
     }
+
     fun FilterMusicEvent(musics: ArrayList<String?>, callback: (ArrayList<Event?>) -> Unit){
 
         val data = database.getReference("Events")
@@ -382,7 +375,7 @@ callback.invoke(etudiant)
 
 
 
-    fun createEvent(name : String?, id_user_admin: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean, limit_user: String?){
+    fun createEvent(name : String?, id_user_admin: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : String, limit_user: String?){
 
         val data = database.getReference("Events")
         val newId = data.push().key.toString()
@@ -425,12 +418,12 @@ callback.invoke(etudiant)
     }
 fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<String>?) -> Unit){
     var musicController = MusicController()
-    var id_musics: ArrayList<String>? = ArrayList<String>()
+    var id_musics: ArrayList<String> = ArrayList<String>()
     for (music in musics) {
         musicController.getIdMusic(music) {
 
             if (it != null) {
-                id_musics!!.add(it)
+                id_musics.add(it)
             }
             musicController.editEventArray(it, newId)
 
@@ -483,7 +476,7 @@ fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<St
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
-                    var event  =   value.getValue(Event::class.java)!!
+                    var event  =  value.getValue(Event::class.java)!!
                     if(event.name.equals(name) && event.id_user_admin.equals(id_user_admin)){
 
                         id_event = event.id_event
