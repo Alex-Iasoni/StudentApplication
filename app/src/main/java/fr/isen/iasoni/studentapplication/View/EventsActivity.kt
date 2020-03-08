@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Adapters.EventAdapter
 import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
@@ -118,7 +119,25 @@ class EventsActivity : AppCompatActivity() {
                 }
             }
 
+            searchButton.setOnClickListener {
+                val uid = FirebaseAuth.getInstance().uid ?: ""
 
+
+
+                var eventController = EventController()
+                eventController.FilterEventInterestUser(ville, null, arrayListOf(), uid){
+
+                    var interestArray = it
+                    eventController.FilterCityEvent(ville){
+
+                        eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                        eventRecyclerView.adapter = EventAdapter(interestArray,it, this)
+
+                    }
+
+                }
+
+            }
 
 
         }else if (event_filter == "school"){
@@ -138,7 +157,6 @@ class EventsActivity : AppCompatActivity() {
 
 
 
-        eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        eventRecyclerView.adapter = EventAdapter(interrested_list,eventList, this)
+
     }
 }

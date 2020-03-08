@@ -8,11 +8,10 @@
 
     <Spinner
         android:id="@+id/spinnerFilter"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="27dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filter_name" />
 
@@ -68,5 +67,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerFilter"
+        app:layout_constraintStart_toEndOf="@+id/spinnerFilter"
+        app:layout_constraintTop_toTopOf="@+id/spinnerFilter"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

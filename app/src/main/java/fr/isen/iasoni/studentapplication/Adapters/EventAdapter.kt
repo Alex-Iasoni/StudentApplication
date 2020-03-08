@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import fr.isen.iasoni.studentapplication.Controller.EventController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.View.EventInfoActivity
 import kotlinx.android.synthetic.main.recycler_view_event_cell.view.*
 
 
-class EventAdapter (val interrested: ArrayList<Boolean>, val events: ArrayList<Event>, val context: Context): RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
+class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<Event?>, val context: Context): RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -35,15 +37,17 @@ class EventAdapter (val interrested: ArrayList<Boolean>, val events: ArrayList<E
 
 
 
-    class EventViewHolder(val interrested: ArrayList<Boolean>, val view: View, val context: Context): RecyclerView.ViewHolder(view) {
-        fun bind(event: Event, position: Int) {
-            view.eventDisplayTitleView.text = event.name
-            view.eventDisplayContentView.text = event.description
+    class EventViewHolder(val interrested: ArrayList<Boolean?>, val view: View, val context: Context): RecyclerView.ViewHolder(view) {
+        fun bind(event: Event?, position: Int) {
+            view.eventDisplayTitleView.text = event?.name
+            view.eventDisplayContentView.text = event?.description
+            val uid = FirebaseAuth.getInstance().uid ?: ""
+            var eventController = EventController()
 
 
             val star_full = "star_full"
             val star_empty = "star_empty"
-            if(interrested[position]){
+            if(interrested[position]!!){
                 val resID_full = context.getResources().getIdentifier(star_full, "drawable", "fr.isen.iasoni.studentapplication")
                 view.eventDisplayImageView.setImageResource(resID_full)
 
@@ -52,15 +56,18 @@ class EventAdapter (val interrested: ArrayList<Boolean>, val events: ArrayList<E
                 view.eventDisplayImageView.setImageResource(resID_empty)
 
             }
-            var change_interrested: Boolean = interrested[position]
+            var change_interrested: Boolean? = interrested[position]
 
             view.eventDisplayImageView.setOnClickListener {
 
-                change_interrested = !change_interrested
-                if(change_interrested){
+                change_interrested = !change_interrested!!
+                if(change_interrested!!){
                     //etoile appuyé
                     val resID_full = context.getResources().getIdentifier(star_full, "drawable", "fr.isen.iasoni.studentapplication")
                     view.eventDisplayImageView.setImageResource(resID_full)
+                    if (event != null) {
+                        eventController.Interest(uid, event.id_event.toString())
+                    }
 
                 }else{
                     //etoile nonappuyé
@@ -73,8 +80,10 @@ class EventAdapter (val interrested: ArrayList<Boolean>, val events: ArrayList<E
 
             view.eventDisplayInfoView.setOnClickListener{
                 val foo = Intent(context, EventInfoActivity::class.java)
-                foo.putExtra("idEvent", event.id_event)
-                context.startActivity(foo)
+                if (event != null) {
+                    foo.putExtra("idEvent", event.id_event)
+                    context.startActivity(foo)
+                }
 
             }
 
