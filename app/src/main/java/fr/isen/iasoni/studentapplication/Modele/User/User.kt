@@ -12,8 +12,8 @@ data class User(
       @PropertyName("id_city") var id_city :  String?,
       @PropertyName("swipes") var swipes : ArrayList<String>, //SwipeUserModel
       @PropertyName("badges") var badges : ArrayList<String>, //BadgeModel
-      @PropertyName("certified") var certified :  Boolean?,
-      @PropertyName("smoke") var smoke : Boolean?,
+      @PropertyName("certified") var certified :  String?,
+      @PropertyName("smoke") var smoke : String?,
       @PropertyName("drink") var drink : ArrayList<String>?,
       @PropertyName("sport") var sport : ArrayList<String>?,
       @PropertyName("level") var level : String?,
@@ -30,7 +30,7 @@ data class User(
 
         constructor() : this(null,null,null,null,null,null, null,arrayListOf(),arrayListOf(),null,null,null,null,null,
             arrayListOf(),arrayListOf(),null,null,null,null)
-        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?,certified : Boolean?) : this(){ //Inscription
+        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?,certified : String?) : this(){ //Inscription
             this.id_user = id
             this.name = name
             this.surname = surname

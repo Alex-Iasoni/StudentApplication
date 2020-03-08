@@ -88,6 +88,8 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
         var eventController = EventController()

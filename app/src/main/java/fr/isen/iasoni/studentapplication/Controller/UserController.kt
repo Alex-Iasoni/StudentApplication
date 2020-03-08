@@ -48,7 +48,7 @@ class UserController {
             id_city = it
 
         val dataPost = database.getReference("Users")
-        val user = User(id,name, surname, email, birthday, id_school, id_city,false)
+        val user = User(id,name, surname, email, birthday, id_school, id_city,"false")
         dataPost.child(id).setValue(user)
 
         }
@@ -151,15 +151,15 @@ class UserController {
             }
         }
     }
-    fun UsserCertified(id_user: String?, callback: (Boolean) -> Unit){
-        var certified = false
+    fun UserCertified(id_user: String?, callback: (String) -> Unit){
+        var certified = "false"
         var user: User = User()
         getUser(id_user){
             user = it
-            if(user.certified == true){
-                certified = true
+            if(user.certified.equals("true")){
+                certified = "true"
             }else{
-                certified = false
+                certified = "false"
             }
             callback.invoke(certified)
         }
