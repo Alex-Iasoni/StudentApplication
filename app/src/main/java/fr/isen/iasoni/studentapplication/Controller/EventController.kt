@@ -7,6 +7,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import fr.isen.iasoni.studentapplication.Modele.City
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.Modele.Event.SubscribeEvent
 import fr.isen.iasoni.studentapplication.Modele.Music
@@ -46,22 +47,22 @@ class EventController {
 
     }
 
-//    fun VerifiedEtudiantSchool(id_event: String?, callback: (Boolean) -> Unit){
-//    var etudiant = false
-//        var event : Event = Event()
-//        getEvent(id_event){
-//            event = it
-//         if(event.etudiant == true){
-//             etudiant = true
-//
-//            }else{
-//             etudiant = false
-//         }
-//callback.invoke(etudiant)
-//        }
-//
-//
-//    }
+    fun VerifiedEtudiantSchool(id_event: String?, callback: (Boolean) -> Unit){
+    var etudiant = false
+        var event : Event = Event()
+        getEvent(id_event){
+            event = it
+         if(event.etudiant == true){
+             etudiant = true
+
+            }else{
+             etudiant = false
+         }
+callback.invoke(etudiant)
+        }
+
+
+    }
 
     fun FindUsersEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
         val data = database.getReference("Events")
@@ -74,8 +75,8 @@ class EventController {
                     var subscribe : SubscribeEvent = SubscribeEvent()
                     subsCon.getSubscribeEvent(event.id_subscribe_event) {
                         subscribe = it
-                        var users: ArrayList<String>? = subscribe!!.users
-                        for(user in users!!){
+                        var users: ArrayList<String> = subscribe.users
+                        for(user in users){
 
                             if (user == id_user){
                                 userevent.add(event.id_event)
@@ -107,36 +108,36 @@ class EventController {
 }
 
 
-//
-//
-//
-//    fun  Interest(id_user: String, id_event: String){
-//        var user : UserController = UserController()
-//        user.editEventArray(id_user, id_event)
-//        var event : Event = Event()
-//        getEvent(id_event){
-//            event = it
-//            var user : UserController = UserController()
-//            user.UsserCertified(id_user){
-//                if(it == false and event.etudiant!! == false){
-//                    var subs : SubscribeEventController = SubscribeEventController()
-//                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
-//                }
-//                else if(it == true and event.etudiant!! == true){
-//                    var subs : SubscribeEventController = SubscribeEventController()
-//                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
-//                }
-//                else if(it == true and event.etudiant!! == false){
-//                    var subs : SubscribeEventController = SubscribeEventController()
-//                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
-//                }
-//
-//            }
-//
-//        }
-//
-//
-//    }
+
+
+
+    fun  Interest(id_user: String, id_event: String){
+        var user : UserController = UserController()
+        user.editEventArray(id_user, id_event)
+        var event : Event = Event()
+        getEvent(id_event){
+            event = it
+            var user : UserController = UserController()
+            user.UsserCertified(id_user){
+                if(it == false and event.etudiant!! == false){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
+                }
+                else if(it == true and event.etudiant!! == true){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
+                }
+                else if(it == true and event.etudiant!! == false){
+                    var subs : SubscribeEventController = SubscribeEventController()
+                    subs.addUserOnEvent(event.id_subscribe_event, id_user)
+                }
+
+            }
+
+        }
+
+
+    }
     fun FilterMusicEvent(musics: ArrayList<String?>, callback: (ArrayList<Event?>) -> Unit){
 
         val data = database.getReference("Events")
@@ -381,7 +382,7 @@ class EventController {
 
 
 
-    fun createEvent(name : String?, id_user_admin: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : String?, limit_user: String?){
+    fun createEvent(name : String?, id_user_admin: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : Boolean, limit_user: String?){
 
         val data = database.getReference("Events")
         val newId = data.push().key.toString()
@@ -471,6 +472,31 @@ fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<St
 
         }
 
+
+
+    }
+
+    fun FindIdEvent(name: String, id_user_admin: String?, callback: (String?) -> Unit){
+
+        var id_event : String? = ""
+        val myRef = database.getReference("Events")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+                    var event  =   value.getValue(Event::class.java)!!
+                    if(event.name.equals(name) && event.id_user_admin.equals(id_user_admin)){
+
+                        id_event = event.id_event
+                        break;
+                    }
+                }
+                callback.invoke(id_event)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+                //Log.d
+            }
+        })
 
 
     }

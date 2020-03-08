@@ -5,12 +5,12 @@ import com.google.firebase.database.PropertyName
 data class SubscribeEvent (
 
     @PropertyName("id_subscribe_event") val id_subscribe_event: String?,
-    @PropertyName("users") val users: ArrayList<String>?
+    @PropertyName("users") val users: ArrayList<String>
 
 
 )
 
 
 {
-    constructor() : this(null,null)
+    constructor() : this(null, arrayListOf())
 }
