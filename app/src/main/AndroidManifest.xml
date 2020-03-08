@@ -19,8 +19,9 @@
         <activity android:name=".View.ProfilActivity" />
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.SwipeActivity" />
-        <activity android:name=".View.FilterActivity" />
+        <activity android:name=".View.EventInfoActivity" />
         <activity android:name=".View.IntroductionActivity" />
+        <activity android:name=".View.FilterActivity"/>
         <activity android:name=".View.CreateEventActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

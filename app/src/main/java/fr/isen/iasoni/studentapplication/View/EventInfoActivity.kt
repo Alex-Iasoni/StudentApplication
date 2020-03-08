@@ -79,7 +79,7 @@ class EventInfoActivity : AppCompatActivity() {
 
         }
 
-        backHome.setOnClickListener{
+        back_arrow.setOnClickListener{
             startActivity(Intent(this, FilterActivity::class.java))
 
         }
