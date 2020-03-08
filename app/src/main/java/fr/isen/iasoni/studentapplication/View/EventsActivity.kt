@@ -118,7 +118,10 @@ class EventsActivity : AppCompatActivity() {
                 }
             }
 
-
+            searchButton.setOnClickListener {
+                var eventController = EventController()
+                eventController.
+            }
 
 
         }else if (event_filter == "school"){
