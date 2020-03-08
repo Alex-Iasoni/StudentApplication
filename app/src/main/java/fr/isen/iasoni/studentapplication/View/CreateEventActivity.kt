@@ -224,6 +224,10 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
             var a = 100
             eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), false,  a.toString())
 
+
+//            val foo = Intent(this, EventInfoActivity::class.java)
+//            foo.putExtra("idEvent", event.id_event)
+//            this.startActivity(foo)
         }
 
 

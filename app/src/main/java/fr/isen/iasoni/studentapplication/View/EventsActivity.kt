@@ -3,9 +3,15 @@ package fr.isen.iasoni.studentapplication.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.isen.iasoni.studentapplication.Adapters.EventAdapter
+import fr.isen.iasoni.studentapplication.Controller.CityController
+import fr.isen.iasoni.studentapplication.Controller.EventController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_event.*
@@ -13,7 +19,14 @@ import kotlinx.android.synthetic.main.activity_event.*
 class EventsActivity : AppCompatActivity() {
 
     var event_filter: String? = ""
+    lateinit var optionFilter : Spinner
 
+
+
+    var music: String? = ""
+    var arrayMusic = ArrayList<String>()
+    var school: String? = ""
+    var ville: String? = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,49 +89,51 @@ class EventsActivity : AppCompatActivity() {
 
         if(event_filter == "city"){
             filter_name.text = "Par ville"
-            var event_city = Event();
-            event_city.name = "Derhka à Toulon"
-            event_city.description = "Ca va pas etre des lol"
-            eventList.add(event_city)
-            interrested_list.add(false)
 
-            var event_city_2 = Event();
-            event_city_2.name = "Chuppitos nuque instante"
-            event_city_2.description = "Surement Killian Collet présent ça va etre tb"
-            eventList.add(event_city_2)
-            interrested_list.add(true)
+            optionFilter = findViewById(R.id.spinnerFilter) as Spinner
+
+            var cityController  = CityController()
+            var optionsVilles =  ArrayList<String?>()
+
+            cityController.getCities{
+
+                for(city in it){
+                    optionsVilles.add(city.name)
+                }
+                optionFilter.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsVilles)
+
+                optionFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        ville = optionsVilles.get(position)
+                    }
+                }
+            }
+
+
+
 
         }else if (event_filter == "school"){
             filter_name.text = "Par école"
-            var event_school = Event();
-            event_school.name = "ISEN + TOULON C TB"
-            event_school.description = "Que des folass c sur"
-            eventList.add(event_school)
-            interrested_list.add(true)
 
-            var event_school_2 = Event();
-            event_school_2.name = "Soirée annulé 0 drogues"
-            event_school_2.description = "Tu peux vrmt prendre ta demi-patate"
-            eventList.add(event_school_2)
-            interrested_list.add(true)
 
         }else if(event_filter == "music"){
             filter_name.text = "Par style musical"
-            var event_music = Event();
-            event_music.name = "Que de la Trans c choquant"
-            event_music.description = "Rien pour les chiens"
-            eventList.add(event_music)
-            interrested_list.add(false)
+
 
 
 
         }else if(event_filter == "student"){
             filter_name.text = "Par étudiants"
-            var event_student = Event();
-            event_student.name = "Clape-Isen only"
-            event_student.description = "Gogolneim est chaud 1v1 Coronavirus"
-            eventList.add(event_student)
-            interrested_list.add(false)
+
         }
 
 
