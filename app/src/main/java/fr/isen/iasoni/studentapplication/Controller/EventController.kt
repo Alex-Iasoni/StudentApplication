@@ -476,7 +476,7 @@ fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<St
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
-                    var event  =  value.getValue(Event::class.java)!!
+                    var event: Event  =  value.getValue(Event::class.java)!!
                     if(event.name.equals(name) && event.id_user_admin.equals(id_user_admin)){
 
                         id_event = event.id_event
