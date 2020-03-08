@@ -81,6 +81,7 @@
     <string name="music_rnb">Rnb</string>
     <string name="create_the_event">Créer l\'event</string>
     <string name="add">Ajouter</string>
+    <string name="filtre_name">Filtre Name</string>
 
 
 </resources>

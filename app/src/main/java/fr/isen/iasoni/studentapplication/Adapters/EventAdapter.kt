@@ -74,8 +74,6 @@ class EventAdapter (val interrested: ArrayList<Boolean>, val events: ArrayList<E
             view.eventDisplayInfoView.setOnClickListener{
                 val foo = Intent(context, EventInfoActivity::class.java)
                 foo.putExtra("idEvent", event.id_event)
-
-
                 context.startActivity(foo)
 
             }
