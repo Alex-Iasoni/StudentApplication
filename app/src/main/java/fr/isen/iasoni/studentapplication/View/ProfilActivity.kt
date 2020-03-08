@@ -39,6 +39,9 @@ class ProfilActivity : AppCompatActivity() {
             }
 
         }
+        edit_profil.setOnClickListener {
+            startActivity(Intent(this, EditProfilActivity::class.java))
+        }
 
         var userController = UserController()
         userController.getUser(user!!.uid){
