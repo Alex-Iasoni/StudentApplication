@@ -29,7 +29,7 @@ class EventInfoActivity : AppCompatActivity() {
 
         var eventController = EventController()
         eventController.getEvent(idEvent){
-
+            name_event.text = it.name
             adresse_event.text =  it.adresse
             description_event.text = it.description
             start_time_event.text = it.start_date
