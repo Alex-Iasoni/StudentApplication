@@ -47,6 +47,26 @@ class SubscribeEventController {
 
         }
 
+
+    }
+
+    fun deleteUseronEvent(id_subscribe_event: String?, id_user: String){
+        val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
+
+        var subsevent : SubscribeEvent = SubscribeEvent()
+        getSubscribeEvent(id_subscribe_event) {
+            subsevent = it
+            var users: ArrayList<String>? = subsevent!!.users
+
+            users!!.remove(id_user)
+
+            val childUpdates = HashMap<String, Any>()
+            childUpdates.put("users", users)
+            data.updateChildren(childUpdates)
+
+
+        }
+
     }
 
 }
