@@ -46,7 +46,7 @@ import java.util.*
 import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
-open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
+class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
     private lateinit var mAuth: FirebaseAuth
     lateinit var optionVille : Spinner

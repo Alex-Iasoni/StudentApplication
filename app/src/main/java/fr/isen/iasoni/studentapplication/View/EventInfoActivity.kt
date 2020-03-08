@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_event_info.*
 
 class EventInfoActivity : AppCompatActivity() {
 
-    var music_array :  ArrayList<String>? = null
     var idEvent: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,26 +50,28 @@ class EventInfoActivity : AppCompatActivity() {
                 Log.d("nom createur event ->>>",it.name)
                 orga_even.text = it.name;
             }
+//            var music_array :  ArrayList<String>? = null
 
             //pour add les chips musique
-            music_array = it.id_music
+            var music_array = it.id_music
             val inflater = LayoutInflater.from(this@EventInfoActivity)
-            for(musicid in this!!.music_array!!)
-            {
-                var musicController = MusicController()
-                musicController.getMusic(musicid){
+            if (music_array != null) {
+                for(musicid in music_array) {
+                    var musicController = MusicController()
+                    musicController.getMusic(musicid){
 
-                    val chips_music = inflater.inflate(R.layout.chips_music,null, false) as Chip
+                        val chips_music = inflater.inflate(R.layout.chips_music,null, false) as Chip
 
-                    Log.d("liste musique ->>>",it.name)
-                    chips_music.text = it.name
-                    chips_music.setOnCloseIconClickListener{
-                        chips_group.removeView(it)
+                        Log.d("liste musique ->>>",it.name)
+                        chips_music.text = it.name
+                        chips_music.setOnCloseIconClickListener{
+                            chips_group.removeView(it)
+                        }
+                        chips_group.addView(chips_music)
+
                     }
-                    chips_group.addView(chips_music)
 
                 }
-
             }
 
 

@@ -15,6 +15,7 @@
         <activity android:name=".View.PassedEventsActivity" />
         <activity android:name=".View.EditProfilActivity" />
         <activity android:name=".View.NotifActivity" />
+        <activity android:name=".View.EventInfoActivity" />
         <activity android:name=".View.EventsActivity" />
         <activity android:name=".View.ProfilActivity" />
         <activity android:name=".View.RegisterActivity" />
