@@ -222,7 +222,8 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
             val uid = FirebaseAuth.getInstance().uid ?: ""
             var eventController = EventController()
             var a = 100
-            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), "false",  a.toString())
+            var etudiant = "false"
+            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  a.toString())
 
             eventController.FindIdEvent(eventTitle.text.toString(), uid){
                 val foo = Intent(this, EventInfoActivity::class.java)
