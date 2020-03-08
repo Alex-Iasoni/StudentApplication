@@ -36,6 +36,7 @@ import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
 import fr.isen.iasoni.studentapplication.Controller.MusicController
 import fr.isen.iasoni.studentapplication.Controller.SchoolController
+import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import kotlinx.android.synthetic.main.activity_create_event.*
 import java.io.File
 import java.security.AccessController.getContext
@@ -46,7 +47,7 @@ import java.util.*
 import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
-open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
+class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
     private lateinit var mAuth: FirebaseAuth
     lateinit var optionVille : Spinner
@@ -90,8 +91,16 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+var eventC : EventController = EventController()
 
+             eventC.FilterCityEvent("Toulon"){
+                 var test: ArrayList<Event?> =  ArrayList<Event?>()
+                 test = it
+                for (tes in test){
+                    Log.d("de",tes!!.name)
+                }
 
+            }
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
         var eventController = EventController()
@@ -225,6 +234,7 @@ open class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSet
             var eventController = EventController()
             var a = 100
             var etudiant = "false"
+
             eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  a.toString())
 
             eventController.FindIdEvent(eventTitle.text.toString(), uid){

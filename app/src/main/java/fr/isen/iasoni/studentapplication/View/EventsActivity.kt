@@ -3,6 +3,7 @@ package fr.isen.iasoni.studentapplication.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Adapters.EventAdapter
+import fr.isen.iasoni.studentapplication.Controller.BadgeController
 import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
@@ -33,6 +35,8 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
+
+   
 
 
         navigation_view_event.setSelectedItemId(R.id.action_home);
@@ -120,16 +124,30 @@ class EventsActivity : AppCompatActivity() {
             }
 
             searchButton.setOnClickListener {
+//
+//                var temporayArray = ArrayList<Event?>()
+//                var temporayBool = ArrayList<Boolean?>()
+//
+//                var event = Event()
+//                event.description = "Ceci est un test"
+//                event.name = "Nom de l'event"
+//                temporayArray.add(event)
+//                temporayBool.add(true)
+
+
                 val uid = FirebaseAuth.getInstance().uid ?: ""
-
-
-
-                var eventController = EventController()
+                Log.d("UID", uid)
+                Log.d("TAGGGGG","TAGGGGG")
+                var eventController : EventController = EventController()
                 eventController.FilterEventInterestUser(ville, null, arrayListOf(), uid){
 
                     var interestArray = it
-                    eventController.FilterCityEvent(ville){
 
+                    eventController.FilterCityEvent("Toulon"){
+                        Log.d("TAGGDEOUFF",it.size.toString())
+                        for(test in it){
+                            Log.d("Woula","Test")
+                        }
                         eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                         eventRecyclerView.adapter = EventAdapter(interestArray,it, this)
 

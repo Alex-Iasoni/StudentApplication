@@ -73,7 +73,9 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                     //etoile nonappuyé
                     val resID_empty = context.getResources().getIdentifier(star_empty, "drawable", "fr.isen.iasoni.studentapplication")
                     view.eventDisplayImageView.setImageResource(resID_empty)
-
+                    if (event != null) {
+                        eventController.UnInterest(uid, event.id_event.toString())
+                    }
                 }
 
             }

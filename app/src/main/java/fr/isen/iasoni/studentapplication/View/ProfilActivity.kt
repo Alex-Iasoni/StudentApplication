@@ -39,6 +39,9 @@ class ProfilActivity : AppCompatActivity() {
             }
 
         }
+        edit_profil.setOnClickListener {
+            startActivity(Intent(this, EditProfilActivity::class.java))
+        }
 
         var userController = UserController()
         userController.getUser(user!!.uid){
@@ -93,22 +96,22 @@ class ProfilActivity : AppCompatActivity() {
         var badgeList = ArrayList<Badge>()
 
         var badge_buveur = Badge();
-        badge_buveur.img = "buveur"
+        badge_buveur.img = "badge_sleep"
         badge_buveur.name= "Buveur"
         badgeList.add(badge_buveur)
 
         var badge_gaul = Badge();
-        badge_gaul.img = "bien_gaule"
+        badge_gaul.img = "badge_disquette"
         badge_gaul.name= "Gaulé"
         badgeList.add(badge_gaul)
 
         var badge_fetard = Badge();
-        badge_fetard.img = "fetard"
+        badge_fetard.img = "badge_charo"
         badge_fetard.name= "Fetard"
         badgeList.add(badge_fetard)
 
         var badge_again = Badge();
-        badge_again.img = "again"
+        badge_again.img = "badge_alcolo"
         badge_again.name= "A refaire"
         badgeList.add(badge_again)
 
