@@ -1,6 +1,7 @@
 package fr.isen.iasoni.studentapplication.Controller
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.database.*
 import fr.isen.iasoni.studentapplication.Modele.Badge
@@ -17,6 +18,7 @@ class BadgeController {
     val database = FirebaseDatabase.getInstance()
 
     fun getBadges (callback: (ArrayList<Badge?>) -> Unit ) {
+        Log.d("GETBADGESSSSSSSSSSSSSSS","BADGEEEEE")
         var badge : ArrayList<Badge?> =  ArrayList<Badge?>()
         val myRef = database.getReference("Badges")
         myRef.addValueEventListener(object : ValueEventListener {
@@ -90,7 +92,7 @@ class BadgeController {
 
        BadgeExist(name) {
            if(!it){
-               val badge = Badge(newId,img, name)
+               val badge = Badge(newId,name, img)
                data.child(newId).setValue(badge)
            }
 

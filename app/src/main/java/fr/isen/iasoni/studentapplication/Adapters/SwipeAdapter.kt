@@ -1,6 +1,7 @@
 package fr.isen.iasoni.studentapplication.Adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import de.hdodenhof.circleimageview.CircleImageView
 import fr.isen.iasoni.studentapplication.Controller.BadgeController
+import fr.isen.iasoni.studentapplication.Modele.Badge
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_profil.*
 
@@ -31,16 +33,45 @@ class SwipeAdapter (var context: Context, private var images: IntArray, val pseu
         val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         val itemView = inflater.inflate(R.layout.pager_item, container, false)
+        var badgeRecyclerView: RecyclerView
+        badgeRecyclerView = itemView.findViewById<View>(R.id.badgeRecyclerView) as RecyclerView
 
-//        var badgeController = BadgeController()
-//        badgeController.getBadges {
+        var badgeList = ArrayList<Badge?>()
+
+
+        badgeRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        var badgeController = BadgeController()
+        badgeController.getBadges {
+            badgeRecyclerView.adapter = BadgeProfilAdapter(it, context)
+        }
 //
-//        }
+//        var badge_buveur = Badge();
+//        badge_buveur.img = "badge_sleep"
+//        badge_buveur.name= "Buveur"
+//        badgeList.add(badge_buveur)
 //
-//        val badgeRecyclerView: RecyclerView
-//        badgeRecyclerView = itemView.findViewById<View>(R.id.swipeProfile) as RecyclerView
-        //badgeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        //badgeRecyclerView.adapter = BadgeProfilAdapter(badgeList, this)
+//        var badge_gaul = Badge();
+//        badge_gaul.img = "badge_disquette"
+//        badge_gaul.name= "Gaulé"
+//        badgeList.add(badge_gaul)
+//
+//        var badge_fetard = Badge();
+//        badge_fetard.img = "badge_charo"
+//        badge_fetard.name= "Fetard"
+//        badgeList.add(badge_fetard)
+//
+//        var badge_again = Badge();
+//        badge_again.img = "badge_alcolo"
+//        badge_again.name= "A refaire"
+//        badgeList.add(badge_again)
+//
+//
+//
+//
+//        badgeRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+//        badgeRecyclerView.adapter = BadgeProfilAdapter(badgeList, context)
+
+
 
         val image: CircleImageView
         val pseudo: TextView
