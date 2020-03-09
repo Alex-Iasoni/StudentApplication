@@ -79,7 +79,9 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     }
 
     fun refreshPositionUI(location: Location) {
+/*
         locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
+*/
     }
 
     override fun onLocationChanged(location: Location?) {
