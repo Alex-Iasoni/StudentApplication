@@ -15,6 +15,28 @@ class BadgeController {
 
 
     val database = FirebaseDatabase.getInstance()
+
+    fun getBadges (callback: (ArrayList<Badge?>) -> Unit ) {
+        var badge : ArrayList<Badge?> =  ArrayList<Badge?>()
+        val myRef = database.getReference("Badges")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (value in dataSnapshot.children){
+
+                    badge.add(value.getValue(Badge::class.java))!!
+
+
+                }
+                callback.invoke(badge)
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+                //Log.d
+            }
+        })
+
+    }
     fun getBadge (id_badge: String?,callback: (Badge) -> Unit ) {
         var badge : Badge = Badge()
         val myRef = database.getReference("Badges")

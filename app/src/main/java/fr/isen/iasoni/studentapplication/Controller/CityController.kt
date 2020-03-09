@@ -53,10 +53,11 @@ class CityController {
 
     }
     fun getCity (id_city: String?,callback: (City) -> Unit ) {
-        var city : City= City()
+
         val myRef = database.getReference("Cities")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var city : City= City()
                 for (value in dataSnapshot.children){
 
                     if(value.key.equals(id_city)){
@@ -141,10 +142,11 @@ class CityController {
 
     fun getIdCity(name : String?,  callback: (String?) -> Unit){
 
-        var idCity : String? = ""
+
         val myRef = database.getReference("Cities")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var idCity : String? = ""
                 for (value in dataSnapshot.children){
                     var city  =   value.getValue(City::class.java)!!
                     if(city.name.equals(name)){

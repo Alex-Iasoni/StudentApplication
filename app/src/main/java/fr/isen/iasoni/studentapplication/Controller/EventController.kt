@@ -23,6 +23,29 @@ class EventController {
     val database = FirebaseDatabase.getInstance()
 
 
+    fun getEvents(callback: (ArrayList<Event?>) -> Unit ) {
+
+        val myRef = database.getReference("Events")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var event : ArrayList<Event?> = ArrayList<Event?>()
+                for (value in dataSnapshot.children){
+
+
+
+                        event.add(value.getValue(Event::class.java))
+
+                }
+                callback.invoke(event)
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+                //Log.d
+            }
+        })
+
+    }
     fun getEvent(id_event: String?,callback: (Event) -> Unit ) {
         var event : Event = Event()
         val myRef = database.getReference("Events")
@@ -33,7 +56,7 @@ class EventController {
                     if(value.key.equals(id_event)){
 
                         event  = value.getValue(Event::class.java)!!
-
+                        break;
                     }
                 }
                 callback.invoke(event)
@@ -268,53 +291,44 @@ fun  Interest(id_user: String, id_event: String){
             }
 
     fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
-
-        val data = database.getReference("Events")
         var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
-        data.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (value in dataSnapshot.children){
-                    var event = value.getValue(Event::class.java)!!
-                    var eventmod: Event = Event()
-                    getEvent(event.id_event){
+                  getEvents(){
+                      var events :  ArrayList<Event?> = ArrayList<Event?>()
+                      events = it
 
-                        eventmod = it
+                      for(event in events){
 
-                        var cityController = CityController()
-                        cityController.getIdCity(city) {
-                            cityController.getCity(it) {
+                          var cityController = CityController()
+                          cityController.getIdCity(city) {
+                                var city_id : String? = it
+                              cityController.getCity(city_id) {
 
-                                var cityte: String? = it.id_city
-                                var event_cityid: String? = eventmod.id_city
-                                if (event_cityid != null) {
+                                  var cityte: String? = it.id_city
 
-                                    if (event_cityid == cityte) {
-                                        eventfilter.add(eventmod)
-                                    }
+                                  var event_cityid: String? = event!!.id_city
+                                  if (event_cityid == cityte) {
+                                          eventfilter.add(event)
+                                      }
+                              }
 
 
-                                }
+                      }
+                      }
+                      for(eventfilte in eventfilter){
+                          Log.d("dedede",eventfilte!!.name)
+                      }
 
+                      callback.invoke(eventfilter)
 
-                            }
-
-                        }
-
-
-
-                    }
+                  }
+        //SortbyStartDateEvent(eventfilter)
 
                 }
-              SortbyStartDateEvent(eventfilter)
-                callback.invoke(eventfilter)
-            }
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
 
 
-    }
+
+
+
 
     fun FilterEventInterestUser(city: String?, school : String?, musics: ArrayList<String?>,id_user : String,callback: (ArrayList<Boolean?>) -> Unit) {
 
