@@ -6,67 +6,195 @@
     android:layout_height="match_parent"
     tools:context=".View.FilterActivity">
 
-    <com.yinglan.shadowimageview.ShadowImageView
-        android:id="@+id/shadow_city"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:layout_marginEnd="160dp"
-        app:layout_constraintBottom_toBottomOf="@+id/shadow_student"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shadow_student"
-        app:shadowColor="@color/black"
-        app:shadowRound="20dp"
-        app:shadowSrc="@drawable/ville_arrondie" />
-
-    <com.yinglan.shadowimageview.ShadowImageView
-        android:id="@+id/shadow_student"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="160dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/asso-card"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="150dp"
+        android:layout_height="155dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="100dp"
+        android:minHeight="200dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shadowColor="@color/black"
-        app:shadowRound="20dp"
-        app:shadowSrc="@drawable/universite_arrondie" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.yinglan.shadowimageview.ShadowImageView
-        android:id="@+id/shadow_school"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:layout_marginEnd="160dp"
-        app:layout_constraintBottom_toBottomOf="@+id/shadow_music"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_assos"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/assoc_carre">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:clickable="false"
+            android:text="@string/filter_assos"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/music-card"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="150dp"
+        android:layout_height="155dp"
+        android:layout_marginEnd="28dp"
+        android:minHeight="200dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/asso-card"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shadow_music"
-        app:shadowColor="@color/black"
-        app:shadowRound="20dp"
-        app:shadowSrc="@drawable/remember_school_arrondie" />
+        app:layout_constraintTop_toTopOf="@+id/asso-card">
 
-    <com.yinglan.shadowimageview.ShadowImageView
-        android:id="@+id/shadow_music"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="175dp"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_music"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/music_carre">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:clickable="false"
+            android:text="@string/filter_music"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/city-card"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="150dp"
+        android:layout_height="155dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:minHeight="200dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shadow_student"
-        app:shadowColor="@color/black"
-        app:shadowRound="20dp"
-        app:shadowSrc="@drawable/musique_arrondie" />
+        app:layout_constraintTop_toBottomOf="@+id/school-card">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_city"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ville_carre">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:clickable="false"
+            android:text="@string/filter_city"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </com.google.android.material.card.MaterialCardView>
 
 
-    <com.yinglan.shadowimageview.ShadowImageView
-        android:id="@+id/shadow_assoc"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="160dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/school-card"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="150dp"
+        android:layout_height="155dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:minHeight="200dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asso-card">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_school"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/school_carre">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:clickable="false"
+            android:text="@string/filter_school"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/student-card"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="150dp"
+        android:layout_height="155dp"
+        android:layout_marginEnd="28dp"
+        android:minHeight="200dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/school-card"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shadow_school"
-        app:shadowColor="@color/black"
-        app:shadowRound="20dp"
-        app:shadowSrc="@drawable/assoc_arrondie" />
+        app:layout_constraintTop_toTopOf="@+id/school-card">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_student"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/etudiant_carre">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:clickable="false"
+            android:text="@string/filter_etudiants"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_view"

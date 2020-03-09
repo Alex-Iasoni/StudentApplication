@@ -65,11 +65,12 @@
     <string name="frag_change">Changer de fragment</string>
     <string name="passed_events">Vos événements passés</string>
     <string name="notifications">Notifications</string>
-    <string name="pseudo">Pseudo</string>
+    <string name="pseudo">Choisissez un pseudo</string>
     <string name="surname_name">Prénom Nom</string>
     <string name="my_school">Mon école</string>
     <string name="my_city">Ma pur Ville</string>
     <string name="birth_date">Date de naissance</string>
+    <string name="places">Places</string>
 
 
     <string name="music_rap">Rap</string>
@@ -82,6 +83,19 @@
     <string name="create_the_event">Créer l\'event</string>
     <string name="add">Ajouter</string>
     <string name="filtre_name">Filtre Name</string>
+    <string name="city_event">Ville de l\'event</string>
+    <string name="school_event">Ecole(s)</string>
+    <string name="event_ticket">Nb places</string>
+    <string name="edit_school">Choisissez un école</string>
+    <string name="edit_city">Choisissez une ville</string>
+
+    <string name="filter_assos">Associations</string>
+    <string name="filter_city">Ville</string>
+    <string name="filter_school">Ecole</string>
+    <string name="filter_music">Musique</string>
+    <string name="filter_etudiants">Etudiants</string>
+
+
 
 
 </resources>

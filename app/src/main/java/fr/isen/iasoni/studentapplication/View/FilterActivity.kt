@@ -4,8 +4,11 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
+import com.google.android.material.card.MaterialCardView
 import fr.isen.iasoni.studentapplication.Controller.MusicController
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_filter.*
@@ -49,25 +52,32 @@ class FilterActivity : AppCompatActivity() {
         }
         //---------------------------------------------------------------------------------
 
-        shadow_city.setOnClickListener {
+        city_card.setOnClickListener {
             val foo = Intent(this, EventsActivity::class.java)
             foo.putExtra("event_filter", "city")
             this.startActivity(foo)
         }
-        shadow_student.setOnClickListener {
+        student_card.setOnClickListener {
             val foo = Intent(this, EventsActivity::class.java)
             foo.putExtra("event_filter", "student")
             this.startActivity(foo)
         }
-        shadow_music.setOnClickListener {
+        music_card.setOnClickListener {
             val foo = Intent(this, EventsActivity::class.java)
             foo.putExtra("event_filter", "music")
             this.startActivity(foo)
         }
-        shadow_school.setOnClickListener {
+        school_card.setOnClickListener {
             val foo = Intent(this, EventsActivity::class.java)
             foo.putExtra("event_filter", "school")
             this.startActivity(foo)
         }
+
+
+
     }
+
+
 }
+
+

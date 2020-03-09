@@ -4,10 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import fr.isen.iasoni.studentapplication.Controller.MusicController
-import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_register.*
 import java.text.SimpleDateFormat
@@ -47,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
             val foo = Intent(this, RegisterActivity1::class.java)
             foo.putExtra("surname", surnameEdit.text.toString())
             foo.putExtra("birthDate", date_input.text.toString())
-            foo.putExtra("mail", mailEdit.text.toString())
+            foo.putExtra("mail", nbPlacesEdit.text.toString())
             foo.putExtra("name", nameEdit.text.toString())
             this.startActivity(foo)
         }

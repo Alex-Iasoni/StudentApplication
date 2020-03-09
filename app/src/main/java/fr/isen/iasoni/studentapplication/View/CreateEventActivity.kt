@@ -79,7 +79,9 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     }
 
     fun refreshPositionUI(location: Location) {
+/*
         locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
+*/
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -89,21 +91,22 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-var eventC : EventController = EventController()
 
-             eventC.FilterCityEvent("Toulon"){
-                 var test: ArrayList<Event?> =  ArrayList<Event?>()
-                 test = it
-                for (tes in test){
-                    Log.d("de",tes!!.name)
-                }
-
-            }
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
         var eventController = EventController()
         var array : ArrayList<String> = ArrayList<String>()
+        var eventC : EventController = EventController()
 
+        eventC.FilterCityEvent("Toulon"){
+            var test: ArrayList<Event?> =  ArrayList<Event?>()
+            test = it
+
+            for (tes in test){
+                Log.d("de",tes!!.name)
+            }
+
+        }
         mAuth = FirebaseAuth.getInstance()
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
