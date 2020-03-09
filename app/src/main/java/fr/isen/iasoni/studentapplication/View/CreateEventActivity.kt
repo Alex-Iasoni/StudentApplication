@@ -94,19 +94,9 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
 
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
-        var eventController = EventController()
+
         var array : ArrayList<String> = ArrayList<String>()
-        var eventC : EventController = EventController()
 
-        eventC.FilterCityEvent("Toulon"){
-            var test: ArrayList<Event?> =  ArrayList<Event?>()
-            test = it
-
-            for (tes in test){
-                Log.d("de",tes!!.name)
-            }
-
-        }
         mAuth = FirebaseAuth.getInstance()
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
