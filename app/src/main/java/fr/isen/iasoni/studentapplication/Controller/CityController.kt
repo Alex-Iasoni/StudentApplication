@@ -152,7 +152,7 @@ class CityController {
                     if(city.name.equals(name)){
 
                         idCity = city.id_city
-break;
+
                     }
                 }
                 callback.invoke(idCity)

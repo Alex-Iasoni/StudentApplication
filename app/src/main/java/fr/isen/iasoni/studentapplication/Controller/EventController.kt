@@ -24,22 +24,22 @@ class EventController {
 
 
     fun getEvents(callback: (ArrayList<Event?>) -> Unit ) {
+
         val myRef = database.getReference("Events")
         myRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var event : ArrayList<Event?> = ArrayList<Event?>()
+                var events : ArrayList<Event?> = ArrayList<Event?>()
 
                 for (value in dataSnapshot.children){
-                    Log.d("Into getevent", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                var event : Event? = Event()
+                    event = value.getValue(Event::class.java)
 
-
-
-                        event.add(value.getValue(Event::class.java))
+                        events.add(event)
 
                 }
-                callback.invoke(event)
 
+                callback.invoke(events)
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -58,7 +58,7 @@ class EventController {
                     if(value.key.equals(id_event)){
 
                         event  = value.getValue(Event::class.java)!!
-                        break;
+
                     }
                 }
                 callback.invoke(event)
@@ -292,44 +292,54 @@ fun  Interest(id_user: String, id_event: String){
         })
             }
 
+
+
     fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
-        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
-                  getEvents(){
-                      var events :  ArrayList<Event?> = ArrayList<Event?>()
-                      events = it
+        val data = database.getReference("Events")
+        data.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                      for(event in events){
-                          Log.d("FILTRRREEE",event!!.name)
 
-                          var cityController = CityController()
+        var cityController = CityController()
                           cityController.getIdCity(city) {
+                              var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
                                 var city_id : String? = it
                               cityController.getCity(city_id) {
-
                                   var cityte: String? = it.id_city
 
-                                  var event_cityid: String? = event!!.id_city
-                                  if (event_cityid == cityte) {
-                                          eventfilter.add(event)
-                                      }
+                                  var events :  ArrayList<String> = ArrayList<String>()
+                                  events.addAll(it.event)
+
+                                  var eventC : EventController = EventController()
+
+                                  for(event in events) {
+                                      if(event != null){
+
+                                  eventC.getEvent(event){
+                                  var event_cityid: String? = it!!.id_city
+                                     // Log.d("dede",it.toString())
+                                      var ee : Event = it
+                                  if (cityte.equals(event_cityid)) {
+                                      Log.d("dede","deeee")
+                                          eventfilter.add(ee)
+                                  }
+
+                      } }
                               }
+                                    for(eventsf in eventfilter){
+                                        Log.d("dede",eventsf.toString())
+                                    }
 
+                          }
+                          }
+                //SortbyStartDateEvent(eventfilter)
 
-                      }
-                      }
-                      for(eventfilte in eventfilter){
-                          Log.d("dedede",eventfilte!!.name)
-                      }
+            }
+            override fun onCancelled(error: DatabaseError) {
 
-                      callback.invoke(eventfilter)
-
-                  }
-        //SortbyStartDateEvent(eventfilter)
-
+            }
+        })
                 }
-
-
-
 
 
 
