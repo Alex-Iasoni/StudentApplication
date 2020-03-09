@@ -68,8 +68,7 @@ class SwipeActivity : AppCompatActivity() {
         //get a reference to the ViewPager in the layout
         val viewPager: ViewPager = findViewById<View>(R.id.pager) as ViewPager
         //Initialize our adapter
-        val adapter: PagerAdapter=
-            SwipeAdapter(this, images, pseudoList)
+        val adapter: PagerAdapter= SwipeAdapter(this, images, pseudoList)
 
         // Binds the adapter to the viewPager
         viewPager.adapter = adapter
