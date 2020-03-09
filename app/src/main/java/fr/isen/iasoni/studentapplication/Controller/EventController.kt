@@ -316,20 +316,25 @@ fun  Interest(id_user: String, id_event: String){
                                       if(event != null){
 
                                   eventC.getEvent(event){
-                                  var event_cityid: String? = it!!.id_city
-                                     // Log.d("dede",it.toString())
-                                      var ee : Event = it
-                                  if (cityte.equals(event_cityid)) {
-                                      Log.d("dede","deeee")
-                                          eventfilter.add(ee)
-                                  }
+if(it.id_city !=null){
+
+    var event_cityid: String? = it.id_city
+    //Log.d("dede",it.toString())
+    Log.d("DDDDDDDDDDDD",cityte)
+    Log.d("AAAAAAAAAAAAA",event_cityid)
+    var ee : Event = it
+
+
+        eventfilter.add(ee)
+
+}
 
                       } }
                               }
                                     for(eventsf in eventfilter){
                                         Log.d("dede",eventsf.toString())
                                     }
-
+                                  callback.invoke(eventfilter)
                           }
                           }
                 //SortbyStartDateEvent(eventfilter)
