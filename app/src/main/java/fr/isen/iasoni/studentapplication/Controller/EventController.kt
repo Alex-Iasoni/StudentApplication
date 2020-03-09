@@ -24,18 +24,22 @@ class EventController {
 
 
     fun getEvents(callback: (ArrayList<Event?>) -> Unit ) {
-        var events : ArrayList<Event?> = ArrayList<Event?>()
         val myRef = database.getReference("Events")
         myRef.addValueEventListener(object : ValueEventListener {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var event : ArrayList<Event?> = ArrayList<Event?>()
 
                 for (value in dataSnapshot.children){
-                        var event : Event ? = Event()
-                    event = value.getValue(Event::class.java)
-                        events.add(event)
-                }
+                    Log.d("Into getevent", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
-                callback.invoke(events)
+
+
+                        event.add(value.getValue(Event::class.java))
+
+                }
+                callback.invoke(event)
+
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -43,9 +47,7 @@ class EventController {
             }
         })
 
-
     }
-
     fun getEvent(id_event: String?,callback: (Event) -> Unit ) {
         var event : Event = Event()
         val myRef = database.getReference("Events")
@@ -291,27 +293,27 @@ fun  Interest(id_user: String, id_event: String){
             }
 
     fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
-
+        var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
                   getEvents(){
-                      var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
                       var events :  ArrayList<Event?> = ArrayList<Event?>()
                       events = it
 
-
                       for(event in events){
-                    Log.d("",event!!.name)
+                          Log.d("FILTRRREEE",event!!.name)
+
                           var cityController = CityController()
                           cityController.getIdCity(city) {
                                 var city_id : String? = it
                               cityController.getCity(city_id) {
 
                                   var cityte: String? = it.id_city
-                                  Log.d("",city_id)
+
                                   var event_cityid: String? = event!!.id_city
                                   if (event_cityid == cityte) {
                                           eventfilter.add(event)
                                       }
                               }
+
 
                       }
                       }
