@@ -136,8 +136,7 @@ class EventsActivity : AppCompatActivity() {
 
 
                 val uid = FirebaseAuth.getInstance().uid ?: ""
-                Log.d("UID", uid)
-                Log.d("TAGGGGG","TAGGGGG")
+                Log.d("UIDDDD", uid)
                 var eventController : EventController = EventController()
                 eventController.FilterEventInterestUser(ville, null, arrayListOf(), uid){
 

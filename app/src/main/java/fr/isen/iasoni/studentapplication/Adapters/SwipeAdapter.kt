@@ -32,13 +32,15 @@ class SwipeAdapter (var context: Context, private var images: IntArray, val pseu
 
         val itemView = inflater.inflate(R.layout.pager_item, container, false)
 
-        var badgeController = BadgeController()
-        badgeController
-
-        val badgeRecyclerView: RecyclerView
-        badgeRecyclerView = itemView.findViewById<View>(R.id.swipeProfile) as RecyclerView
-        badgeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        badgeRecyclerView.adapter = BadgeProfilAdapter(badgeList, this)
+//        var badgeController = BadgeController()
+//        badgeController.getBadges {
+//
+//        }
+//
+//        val badgeRecyclerView: RecyclerView
+//        badgeRecyclerView = itemView.findViewById<View>(R.id.swipeProfile) as RecyclerView
+        //badgeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        //badgeRecyclerView.adapter = BadgeProfilAdapter(badgeList, this)
 
         val image: CircleImageView
         val pseudo: TextView

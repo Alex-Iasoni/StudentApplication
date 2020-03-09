@@ -24,12 +24,14 @@ class EventController {
 
 
     fun getEvents(callback: (ArrayList<Event?>) -> Unit ) {
-
         val myRef = database.getReference("Events")
         myRef.addValueEventListener(object : ValueEventListener {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var event : ArrayList<Event?> = ArrayList<Event?>()
+
                 for (value in dataSnapshot.children){
+                    Log.d("Into getevent", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
 
 
@@ -297,6 +299,7 @@ fun  Interest(id_user: String, id_event: String){
                       events = it
 
                       for(event in events){
+                          Log.d("FILTRRREEE",event!!.name)
 
                           var cityController = CityController()
                           cityController.getIdCity(city) {

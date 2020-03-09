@@ -20,7 +20,8 @@
         <activity android:name=".View.ProfilActivity" />
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.SwipeActivity" />
-        <activity android:name=".View.CreateEventActivity">
+        <activity android:name=".View.CreateEventActivity" />
+        <activity android:name=".View.FilterActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +29,6 @@
         </intent-filter>
     </activity>
         <activity android:name=".View.IntroductionActivity" />
-        <activity android:name=".View.FilterActivity"/>
 
     </application>
 
