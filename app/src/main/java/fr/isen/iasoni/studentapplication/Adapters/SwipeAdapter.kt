@@ -42,7 +42,7 @@ class SwipeAdapter (var context: Context, private var images: IntArray, val pseu
         badgeRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         var badgeController = BadgeController()
         badgeController.getBadges {
-            badgeRecyclerView.adapter = BadgeProfilAdapter(it, context)
+            badgeRecyclerView.adapter = BadgeSwipeAdapter(it, context)
         }
 //
 //        var badge_buveur = Badge();
