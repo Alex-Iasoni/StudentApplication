@@ -295,51 +295,37 @@ fun  Interest(id_user: String, id_event: String){
 
 
     fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
+        var eventsToReturn = ArrayList<Event?>()
         val data = database.getReference("Events")
         data.addValueEventListener(object : ValueEventListener {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+                var cityController = CityController()
+                cityController.getIdCity(city) {
 
-        var cityController = CityController()
-                          cityController.getIdCity(city) {
-                              var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
-                                var city_id : String? = it
-                              cityController.getCity(city_id) {
-                                  var cityte: String? = it.id_city
+                    var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
+                    var current_id_city = it;
+                    var eventC = EventController()
+                    eventC.getEvents {
 
-                                  var events :  ArrayList<String> = ArrayList<String>()
-                                  events.addAll(it.event)
+                        for(event in it){
+                            if (event != null) {
+                                if(event.id_city.toString() == current_id_city.toString()) {
+                                    eventsToReturn.add(event)
+                                }
+                            }
+                        }
+                        callback.invoke(eventsToReturn)
 
-                                  var eventC : EventController = EventController()
-
-                                  for(event in events) {
-                                      if(event != null){
-
-                                  eventC.getEvent(event){
-                                  var event_cityid: String? = it!!.id_city
-                                     // Log.d("dede",it.toString())
-                                      var ee : Event = it
-                                  if (cityte.equals(event_cityid)) {
-                                      Log.d("dede","deeee")
-                                          eventfilter.add(ee)
-                                  }
-
-                      } }
-                              }
-                                    for(eventsf in eventfilter){
-                                        Log.d("dede",eventsf.toString())
-                                    }
-
-                          }
-                          }
-                //SortbyStartDateEvent(eventfilter)
-
+                    }
+                }
             }
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-                }
+    }
 
 
 

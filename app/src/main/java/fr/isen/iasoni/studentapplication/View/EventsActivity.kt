@@ -35,14 +35,7 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-        var eventController: EventController = EventController()
-        eventController.FilterCityEvent("Toulon") {
 
-            Log.d("TAGGDEOUFF", it.size.toString())
-            for (test in it) {
-                Log.d("Woula", "Test")
-            }
-        }
 
 
 
@@ -152,10 +145,15 @@ class EventsActivity : AppCompatActivity() {
 
                     var interestArray = it
 
+                    eventController.FilterCityEvent("Toulon") {
 
-                    eventRecyclerView.layoutManager =
-                        LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                    // eventRecyclerView.adapter = EventAdapter(interestArray,it, this)
+                        Log.d("SIZE EVENTS", it.size.toString())
+                        Log.d("SIZE INTERREST", interestArray.size.toString())
+
+                        eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                        eventRecyclerView.adapter = EventAdapter(interestArray,it, this)
+                    }
+
 
                 }
 
