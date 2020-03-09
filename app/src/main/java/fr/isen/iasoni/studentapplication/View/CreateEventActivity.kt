@@ -94,7 +94,7 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
 
        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
-        var eventController = EventController()
+
         var array : ArrayList<String> = ArrayList<String>()
         var eventC : EventController = EventController()
 
