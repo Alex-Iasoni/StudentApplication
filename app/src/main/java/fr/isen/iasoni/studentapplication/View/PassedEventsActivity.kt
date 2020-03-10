@@ -5,13 +5,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Adapters.EventAdapter
+import fr.isen.iasoni.studentapplication.Adapters.PassedEventsAdapter
 import fr.isen.iasoni.studentapplication.Controller.EventController
+import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_passed_events.*
 import kotlinx.android.synthetic.main.activity_profil.*
 import kotlinx.android.synthetic.main.activity_profil.navigation_view
+import io.grpc.Deadline.after
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class PassedEventsActivity : AppCompatActivity() {
 
@@ -49,9 +60,23 @@ class PassedEventsActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
         //---------------------------------------------------------------------------------
+        val uid = FirebaseAuth.getInstance().uid ?: ""
 
         var eventController = EventController()
-        notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-       // notifRecyclerView.adapter = EventAdapter(it, this)
+        eventController.GetUserEvent(uid){
+            var eventPassed = ArrayList<Event>();
+            for (current_event in it){
+                val sdf = SimpleDateFormat("dd/MM/yyyy")
+                val event_date = sdf.parse(current_event.end_date)
+                if (Date().after(event_date)) {
+                    eventPassed.add(current_event)
+                }
+            }
+            notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            notifRecyclerView.adapter = PassedEventsAdapter(eventPassed, this)
+
+
+        }
+
     }
 }

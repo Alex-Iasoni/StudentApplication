@@ -123,16 +123,6 @@ class EventsActivity : AppCompatActivity() {
             }
 
             searchButton.setOnClickListener {
-                //
-//                var temporayArray = ArrayList<Event?>()
-//                var temporayBool = ArrayList<Boolean?>()
-//
-//                var event = Event()
-//                event.description = "Ceci est un test"
-//                event.name = "Nom de l'event"
-//                temporayArray.add(event)
-//                temporayBool.add(true)
-
 
                 val uid = FirebaseAuth.getInstance().uid ?: ""
                 var eventController: EventController = EventController()

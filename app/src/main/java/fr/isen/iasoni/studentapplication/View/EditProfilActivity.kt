@@ -52,6 +52,10 @@ class EditProfilActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_profil)
         val imageView = findViewById<ImageView>(R.id.selectphoto_imageview_register)
 
+        register_button_register.setOnClickListener {
+            performRegister()
+        }
+
         val uid = FirebaseAuth.getInstance().uid ?: ""
         var userContollerImg = UserController()
         userContollerImg.getUser(uid){
