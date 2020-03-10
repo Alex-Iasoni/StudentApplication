@@ -103,15 +103,31 @@ class UserController {
         var user: User = User()
         getUser(id_user) {
             user = it
+            var exist = true
+            if(user.badges != null){
 
 
-            var badges: ArrayList<String>? = user!!.badges
+            for(id in user.badges){
+                if(id_badge != id){
+                    exist = true
+                }
+                else{
+                    exist = false
+                    break;
+                }
+            }
+            }
+            if(exist == true){
+                Log.d("dee","DDDDD")
+                var badges: ArrayList<String>? = ArrayList<String>()
+                badges!!.addAll(user.badges)
+                badges!!.add(id_badge)
 
-            badges!!.add(id_badge)
+                val childUpdates = HashMap<String, Any>()
+                childUpdates.put("badges", badges)
+                data.updateChildren(childUpdates)
+            }
 
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("badges", badges)
-            data.updateChildren(childUpdates)
         }
     }
 
@@ -121,15 +137,30 @@ class UserController {
         var user: User = User()
         getUser(id_user) {
             user = it
+            var exist = true
+            if(user.swipes != null){
 
 
-            var swipes: ArrayList<String>? = user!!.swipes
+                for(id in user.swipes){
+                    if(id_swipe != id){
+                        exist = true
+                    }
+                    else{
+                        exist = false
+                        break;
+                    }
+                }
+            }
+            if(exist == true) {
 
-            swipes!!.add(id_swipe)
+                var swipes: ArrayList<String>? =ArrayList<String>()
+                swipes!!.addAll(user.swipes)
+                swipes!!.add(id_swipe)
 
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("swipes", swipes)
-            data.updateChildren(childUpdates)
+                val childUpdates = HashMap<String, Any>()
+                childUpdates.put("swipes", swipes)
+                data.updateChildren(childUpdates)
+            }
         }
     }
 

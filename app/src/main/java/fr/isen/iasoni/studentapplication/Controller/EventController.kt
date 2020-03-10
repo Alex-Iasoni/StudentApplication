@@ -103,7 +103,7 @@ callback.invoke(etudiant)
 
     }
 
-    fun FindUsersEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
+    fun GetUserEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
         val data = database.getReference("Events")
         var userevent : ArrayList<String?> = ArrayList<String?>()
         data.addValueEventListener(object : ValueEventListener {
@@ -132,6 +132,7 @@ callback.invoke(etudiant)
         })
 
     }
+
 
 
     fun DateCurrent() : String{
@@ -320,12 +321,13 @@ fun  Interest(id_user: String, id_event: String){
                 events = it
 
                 for (event in events) {
+
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
 
                     subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
                         subs = it
-                        Log.d("ddeee",subs.toString())
+                        Log.d("ddeee",it.toString())
                         var subsusers: ArrayList<String?> = ArrayList<String?>()
                         for (subsuser in subsusers) {
                             if (subsuser.equals(id_user)) {
@@ -372,7 +374,7 @@ fun  Interest(id_user: String, id_event: String){
                 callback.invoke(interest)
             }
 
-        }else if (musics != null){
+        }else if (musics.size != 0){
             FilterMusicEvent(musics) {
                 events = it
                 for (event in events) {

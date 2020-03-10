@@ -15,6 +15,7 @@ import fr.isen.iasoni.studentapplication.Adapters.EventAdapter
 import fr.isen.iasoni.studentapplication.Controller.BadgeController
 import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
+import fr.isen.iasoni.studentapplication.Controller.UserController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_event.*
@@ -35,9 +36,10 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-
-
-
+        var event : EventController = EventController()
+        event.FilterEventInterestUser("Toulon",null, arrayListOf(),"8JCQe8Ut32XfZ7zf25i4M4njdRG2"){
+            Log.d("DDDDDDDd",it.toString())
+        }
 
         navigation_view_event.setSelectedItemId(R.id.action_home);
 
