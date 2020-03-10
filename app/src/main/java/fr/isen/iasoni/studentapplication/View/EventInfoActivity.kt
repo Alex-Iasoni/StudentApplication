@@ -62,7 +62,6 @@ class EventInfoActivity : AppCompatActivity() {
 
                         val chips_music = inflater.inflate(R.layout.chips_music,null, false) as Chip
 
-                        Log.d("liste musique ->>>",it.name)
                         chips_music.text = it.name
                         chips_music.setOnCloseIconClickListener{
                             chips_group.removeView(it)
