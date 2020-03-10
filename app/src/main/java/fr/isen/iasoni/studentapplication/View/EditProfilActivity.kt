@@ -60,7 +60,13 @@ class EditProfilActivity : AppCompatActivity() {
             }
 
         }
+        register_button_register.setOnClickListener{
+            Toast.makeText(baseContext, "Profile updated!",
+                Toast.LENGTH_SHORT).show()
+          //  saveUserToFirebaseDatabase(...)
 
+
+        }
 
 
         selectphoto_button_register.setOnClickListener {
@@ -170,50 +176,49 @@ class EditProfilActivity : AppCompatActivity() {
             }
     }
 
-    private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
-        val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+
+        private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
+            val uid = FirebaseAuth.getInstance().uid ?: ""
+            val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
 
 
-        var userController = UserController()
-        userController.getUser(uid){
+            var userController = UserController()
+            userController.getUser(uid) {
 
-            var userToSet = it
-            userToSet.img_profil = profileImageUrl
+                var userToSet = it
+                userToSet.img_profil = profileImageUrl
 
 
-            var cityController = CityController()
-            cityController.getIdCity(ville.toString()){
-                userToSet.id_city = it
+                var cityController = CityController()
+                cityController.getIdCity(ville.toString()) {
+                    userToSet.id_city = it
 
-                var schoolController = SchoolController()
-                schoolController.getIdSchool(school){
+                    var schoolController = SchoolController()
+                    schoolController.getIdSchool(school) {
 
-                    userToSet.id_school = it
+                        userToSet.id_school = it
 
-                    ref.setValue(userToSet)
-                        .addOnSuccessListener {
-                            Log.d(TAG, "Finally we saved the user to Firebase Database")
-                        }
-                        .addOnFailureListener {
-                            Log.d(TAG, "Failed to set value to database: ${it.message}")
-                        }
+                        ref.setValue(userToSet)
+                            .addOnSuccessListener {
+                                Log.d(TAG, "Finally we saved the user to Firebase Database")
+                            }
+                            .addOnFailureListener {
+                                Log.d(TAG, "Failed to set value to database: ${it.message}")
+                            }
+
+
+                    }
 
 
                 }
 
 
-
             }
 
-
-        }
 
 
 
     }
-
-
 
 }
 
