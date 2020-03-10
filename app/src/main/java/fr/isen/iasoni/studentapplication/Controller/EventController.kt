@@ -324,25 +324,42 @@ fun  Interest(id_user: String, id_event: String){
 
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
+                    subsCon.IdSubscribeExist(event!!.id_subscribe_event){
 
-                    subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
-                        subs = it
-                        Log.d("ddeee",it.toString())
-                        var subsusers: ArrayList<String?> = ArrayList<String?>()
-                        for (subsuser in subsusers) {
-                            if (subsuser.equals(id_user)) {
-                                interest.add(true)
-                            } else {
-                                interest.add(false)
-                            }
+               if(it){
+                   subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
 
-                        }
+                       subs = it
+                       Log.d("ddeee", it.toString())
+
+                       var subsusers: ArrayList<String> = ArrayList<String>()
+
+                       subsusers = subs!!.users
+                       var findUser = false
+                       for (subsuser in subsusers) {
+                           if (subsuser.equals(id_user)) {
+                               findUser = true
+
+                           } else {
+                               findUser = false
+                           }
+
+                       }
+                       if(findUser == true){
+                           interest.add(true)
+                       }
+                       else{
+                           interest.add(false)
+                       }
 
 
+                   }
+               }
 
 
                 }
             }
+
                 callback.invoke(interest)
         }
 

@@ -89,6 +89,7 @@ class SubscribeEventController {
                         exist = false
                     }else{
                         exist = true
+                        break;
                     }
                 }
                 callback.invoke(exist)
