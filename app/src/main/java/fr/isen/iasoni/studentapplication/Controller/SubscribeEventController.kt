@@ -1,5 +1,6 @@
 package fr.isen.iasoni.studentapplication.Controller
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,6 +23,8 @@ class SubscribeEventController {
 
                     }
                 }
+                Log.d("AVANT CALLBACK SUSCRIBE","Call back suscrube")
+
                 callback.invoke(subsevent)
             }
 

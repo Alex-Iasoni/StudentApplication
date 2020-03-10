@@ -5,6 +5,7 @@ import fr.isen.iasoni.studentapplication.R
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +75,7 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                     if (event != null) {
                         change_interrested = !change_interrested!!
                         eventController.Interest(uid, event.id_event.toString())
-                       
+                       Log.d("Etoile appyé", "etoile appyUUUYEEE")
 
                     }
 
@@ -86,6 +87,8 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                     if (event != null) {
                         change_interrested = !change_interrested!!
                         eventController.UnInterest(uid, event.id_event.toString())
+                        Log.d("Etoile pas Apppuyé", "etoile pas appyUUUYEEE")
+
                     }
                 }
 
