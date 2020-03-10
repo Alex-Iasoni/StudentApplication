@@ -66,7 +66,7 @@ class UserController {
                     if(value.key.equals(id_user)){
 
                         user  = value.getValue(User::class.java)!!
-
+                        break;
                     }
                 }
                 callback.invoke(user)
