@@ -13,7 +13,7 @@ import fr.isen.iasoni.studentapplication.R
 import fr.isen.iasoni.studentapplication.View.EventInfoActivity
 import kotlinx.android.synthetic.main.recycler_view_event_cell.view.*
 
-class PassedEventsAdapter (val events: ArrayList<Event?>, val context: Context): RecyclerView.Adapter<PassedEventsAdapter.EventViewHolder>() {
+class PassedEventsAdapter (val events: ArrayList<Event>, val context: Context): RecyclerView.Adapter<PassedEventsAdapter.EventViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {

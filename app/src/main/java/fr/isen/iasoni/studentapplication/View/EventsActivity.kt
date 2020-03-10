@@ -36,10 +36,6 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-        var event : EventController = EventController()
-        event.FilterEventInterestUser("Toulon",null, arrayListOf(),"8JCQe8Ut32XfZ7zf25i4M4njdRG2"){
-            Log.d("DDDDDDDd",it.toString())
-        }
 
         navigation_view_event.setSelectedItemId(R.id.action_home);
 
@@ -127,16 +123,6 @@ class EventsActivity : AppCompatActivity() {
             }
 
             searchButton.setOnClickListener {
-                //
-//                var temporayArray = ArrayList<Event?>()
-//                var temporayBool = ArrayList<Boolean?>()
-//
-//                var event = Event()
-//                event.description = "Ceci est un test"
-//                event.name = "Nom de l'event"
-//                temporayArray.add(event)
-//                temporayBool.add(true)
-
 
                 val uid = FirebaseAuth.getInstance().uid ?: ""
                 var eventController: EventController = EventController()
