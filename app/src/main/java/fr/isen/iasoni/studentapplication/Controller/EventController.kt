@@ -149,18 +149,16 @@ callback.invoke(etudiant)
 
 }
 
-fun  Interest(id_user: String, id_event: String, callback: (Boolean) -> Unit){
+fun  Interest(id_user: String, id_event: String){
         var user : UserController = UserController()
         user.editEventArray(id_user, id_event)
         var event : Event = Event()
         getEvent(id_event){
-            var interest = false
             event = it
             var user : UserController = UserController()
             LimitUser(it.id_event,it.id_subscribe_event){
 
            if(!it){
-               interest = true
                user.UserCertified(id_user) {
                    if (it.equals("false") && event.etudiant.equals("false")) {
                        var subs: SubscribeEventController = SubscribeEventController()
@@ -176,8 +174,6 @@ fun  Interest(id_user: String, id_event: String, callback: (Boolean) -> Unit){
                }
            }
 
-                Log.d("dede",interest.toString())
-                callback.invoke(interest)
             }
 
         }
@@ -384,11 +380,10 @@ subs.NumberSubscribeUser(id_subscribe_event){
                             if(user_find == false){
                                 interest.add(false)
                             }
+                            callback.invoke(interest)
 
                         }
                     }
-                    Log.d("ddeeeee",interest.toString())
-                    callback.invoke(interest)
 
                 }
 
