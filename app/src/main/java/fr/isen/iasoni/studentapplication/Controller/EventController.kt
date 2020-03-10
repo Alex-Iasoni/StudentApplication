@@ -103,7 +103,7 @@ callback.invoke(etudiant)
 
     }
 
-    fun FindUsersEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
+    fun GetUserEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
         val data = database.getReference("Events")
         var userevent : ArrayList<String?> = ArrayList<String?>()
         data.addValueEventListener(object : ValueEventListener {
@@ -132,6 +132,7 @@ callback.invoke(etudiant)
         })
 
     }
+
 
 
     fun DateCurrent() : String{
