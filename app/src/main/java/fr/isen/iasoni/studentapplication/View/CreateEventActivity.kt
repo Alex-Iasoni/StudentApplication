@@ -15,6 +15,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -32,10 +33,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
-import fr.isen.iasoni.studentapplication.Controller.CityController
-import fr.isen.iasoni.studentapplication.Controller.EventController
-import fr.isen.iasoni.studentapplication.Controller.MusicController
-import fr.isen.iasoni.studentapplication.Controller.SchoolController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import kotlinx.android.synthetic.main.activity_create_event.*
 import java.io.File
@@ -46,6 +43,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.jar.Manifest
 import kotlin.collections.ArrayList
+import android.widget.NumberPicker;
+import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import fr.isen.iasoni.studentapplication.Controller.*
+import kotlinx.android.synthetic.main.activity_edit_profil.*
 
 class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
@@ -54,7 +57,7 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     lateinit var optionSchool : Spinner
     lateinit var optionMusic : Spinner
 
-
+    var selectedPhotoUri: Uri? = null
     var music: String? = ""
     var arrayMusic = ArrayList<String>()
     var school: String? = ""
@@ -67,6 +70,8 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         val pictureRequestCode = 1
         val contactPermissionRequestCode = 2
         val gpsPermissionRequestCodde = 3
+        val TAG = "CreateEventActivity"
+
     }
 
     @SuppressLint("MissingPermission")
@@ -84,6 +89,7 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
 */
     }
 
+
     override fun onLocationChanged(location: Location?) {
         location?.let {
             refreshPositionUI(it)
@@ -98,6 +104,32 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         var array : ArrayList<String> = ArrayList<String>()
 
         mAuth = FirebaseAuth.getInstance()
+
+        val imageView = findViewById<ImageView>(R.id.selectphoto_imageview_register)
+
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+
+        var eventControllerImage = EventController()
+        eventControllerImage.getEvent(uid){
+            if(it.img != "none" && it.img != null) {
+                Glide.with(this).load(it.img).into(imageView)
+            }
+
+        }
+
+        createButton.setOnClickListener {
+            performRegister()
+        }
+
+        addCover.setOnClickListener {
+            Log.d(TAG, "Try to show photo selector")
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+        }
+
+
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         coverImage.setOnClickListener {
@@ -223,10 +255,10 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         createButton.setOnClickListener {
             val uid = FirebaseAuth.getInstance().uid ?: ""
             var eventController = EventController()
-            var a = 100
+
             var etudiant = "false"
 
-            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  a.toString())
+            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  nbPlacesEdit.toString())
 
             eventController.FindIdEvent(eventTitle.text.toString(), uid){
                 val foo = Intent(this, EventInfoActivity::class.java)
@@ -236,6 +268,33 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
 
         }
 
+
+/*
+        //Get the widgets reference from XML layout
+        //
+        var tv = TextView(findViewById(R.id.tv))
+        var np = NumberPicker(findViewById(R.id.np))
+
+        //Set TextView text color
+        tv.setTextColor(Color.parseColor("#ffd32b3b"));
+
+        //Populate NumberPicker values from minimum and maximum value range
+        //Set the minimum value of NumberPicker
+        np.setMinValue(0);
+        //Specify the maximum value/number of NumberPicker
+        np.setMaxValue(10);
+
+        //Gets whether the selector wheel wraps when reaching the min/max value.
+        np.setWrapSelectorWheel(true);
+
+        //Set a value change listener for NumberPicker
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+                //Display the newly selected number from picker
+                tv.setText("Selected Number : " + newVal);
+            }
+        });*/
 
 
     }
@@ -335,6 +394,78 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
                 }
             }
         }
+    }
+
+
+    private fun performRegister() {
+
+        uploadImageToFirebaseStorage()
+
+
+    }
+
+    private fun uploadImageToFirebaseStorage() {
+        if (selectedPhotoUri == null) return
+
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
+
+                ref.downloadUrl.addOnSuccessListener {
+                    Log.d(TAG, "File Location: $it")
+
+                    saveEventToFirebaseDatabase(it.toString())
+                }
+            }
+            .addOnFailureListener {
+                Log.d(EditProfilActivity.TAG, "Failed to upload image to storage: ${it.message}")
+            }
+    }
+
+    private fun saveEventToFirebaseDatabase(eventImageUrl: String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+
+
+        var eventController = EventController()
+        eventController.getEvent(uid) {
+
+            var eventToSet = it
+            eventToSet.img = eventImageUrl
+
+
+            var cityController = CityController()
+            cityController.getIdCity(ville.toString()) {
+                eventToSet.id_city = it
+
+                var schoolController = SchoolController()
+                schoolController.getIdSchool(school) {
+
+                    eventToSet.id_school = it
+
+                    ref.setValue(eventToSet)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Finally we saved the event to Firebase Database")
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "Failed to set value to database: ${it.message}")
+                        }
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+
+
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
