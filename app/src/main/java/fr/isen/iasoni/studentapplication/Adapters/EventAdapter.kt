@@ -61,27 +61,30 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
 
             view.eventDisplayImageView.setOnClickListener {
 
-                change_interrested = !change_interrested!!
+
                 if(change_interrested!!){
                     //etoile appuyé
+                    val resID_full = context.getResources().getIdentifier(
+                        star_full,
+                        "drawable",
+                        "fr.isen.iasoni.studentapplication"
+                    )
+                    view.eventDisplayImageView.setImageResource(resID_full)
 
                     if (event != null) {
-                        eventController.Interest(uid, event.id_event.toString()){
-                          if(it){
-                              val resID_full = context.getResources().getIdentifier(star_full, "drawable", "fr.isen.iasoni.studentapplication")
-                              view.eventDisplayImageView.setImageResource(resID_full)
-                          }else{
-                              Toast.makeText(context, "Evénement complet.",
-                                  Toast.LENGTH_SHORT).show()
-                          }
-                        }
+                        change_interrested = !change_interrested!!
+                        eventController.Interest(uid, event.id_event.toString())
+                       
+
                     }
+
 
                 }else{
                     //etoile nonappuyé
                     val resID_empty = context.getResources().getIdentifier(star_empty, "drawable", "fr.isen.iasoni.studentapplication")
                     view.eventDisplayImageView.setImageResource(resID_empty)
                     if (event != null) {
+                        change_interrested = !change_interrested!!
                         eventController.UnInterest(uid, event.id_event.toString())
                     }
                 }

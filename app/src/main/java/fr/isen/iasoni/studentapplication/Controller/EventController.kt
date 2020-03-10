@@ -149,7 +149,7 @@ callback.invoke(etudiant)
 
 }
 
-fun  Interest(id_user: String, id_event: String, callback: (Boolean) -> Unit){
+fun  Interest(id_user: String, id_event: String){
         var user : UserController = UserController()
         user.editEventArray(id_user, id_event)
         var event : Event = Event()
@@ -176,8 +176,6 @@ fun  Interest(id_user: String, id_event: String, callback: (Boolean) -> Unit){
                }
            }
 
-                Log.d("dede",interest.toString())
-                callback.invoke(interest)
             }
 
         }
@@ -233,10 +231,8 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
     fun FilterMusicEvent(musics: ArrayList<String?>, callback: (ArrayList<Event?>) -> Unit){
         var eventsToReturn = ArrayList<Event?>()
-        val data = database.getReference("Musics")
-        data.addValueEventListener(object : ValueEventListener {
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
 
                 var musicController = MusicController()
                 for(music in musics) {
@@ -269,24 +265,19 @@ subs.NumberSubscribeUser(id_subscribe_event){
                     }
                 }
 
-            }
-            override fun onCancelled(error: DatabaseError) {
 
-            }
-        })
 
 
     }
 
     fun FilterSchoolEvent(school: String?, callback: (ArrayList<Event?>) -> Unit){
-        var eventsToReturn = ArrayList<Event?>()
-        val data = database.getReference("Schools")
-        data.addValueEventListener(object : ValueEventListener {
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+
 
                 var shoolcontroller = SchoolController()
                 shoolcontroller.getIdSchool(school) {
+                    var eventsToReturn = ArrayList<Event?>()
 
                     var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
                     var current_id_school = it;
@@ -308,24 +299,17 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
 
             }
-            override fun onCancelled(error: DatabaseError) {
 
-            }
-        })
-            }
+
 
 
 
     fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
-        var eventsToReturn = ArrayList<Event?>()
-        val data = database.getReference("Events")
-        data.addValueEventListener(object : ValueEventListener {
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 var cityController = CityController()
                 cityController.getIdCity(city) {
-
+                    var eventsToReturn = ArrayList<Event?>()
                     var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
                     var current_id_city = it;
                     var eventC = EventController()
@@ -346,11 +330,7 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
 
 
-            }
-            override fun onCancelled(error: DatabaseError) {
 
-            }
-        })
     }
 
 
@@ -384,13 +364,14 @@ subs.NumberSubscribeUser(id_subscribe_event){
                             if(user_find == false){
                                 interest.add(false)
                             }
-
+                            Log.d("ddeeeee",interest.toString())
+                            callback.invoke(interest)
                         }
                     }
-                    Log.d("ddeeeee",interest.toString())
-                    callback.invoke(interest)
+
 
                 }
+
 
             }
 
