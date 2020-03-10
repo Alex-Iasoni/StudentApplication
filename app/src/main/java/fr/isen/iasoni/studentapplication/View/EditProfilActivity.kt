@@ -65,8 +65,6 @@ class EditProfilActivity : AppCompatActivity() {
 
         }
 
-
-
         selectphoto_button_register.setOnClickListener {
             Log.d(TAG, "Try to show photo selector")
 

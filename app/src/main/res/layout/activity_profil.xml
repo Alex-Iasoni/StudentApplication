@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation_menu" />
 
-    
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_profil"
