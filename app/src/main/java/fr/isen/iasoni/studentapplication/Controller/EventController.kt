@@ -325,22 +325,22 @@ fun  Interest(id_user: String, id_event: String){
 
                     if (event != null) {
                         subsCon.getSubscribeEvent(event.id_subscribe_event) {
+                            Log.d("Test", "Get suscriber")
                             for (subsuser in it.users) {
                                 if (subsuser.equals(id_user)) {
                                     interest.add(true)
                                 } else {
                                     interest.add(false)
                                 }
-
                             }
-                            callback.invoke(interest)
-
 
 
                         }
                     }
+                }
+                callback.invoke(interest)
+
             }
-        }
 
         }
         else if(school != null){
