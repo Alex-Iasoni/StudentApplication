@@ -14,6 +14,7 @@ class NotifActivity : AppCompatActivity() {
         setContentView(R.layout.activity_notif)
 
 
+
         //-------------Navigation menu----------------------------
         navigation_view.setSelectedItemId(R.id.action_notification);
         navigation_view.setOnNavigationItemSelectedListener {item ->
@@ -48,4 +49,6 @@ class NotifActivity : AppCompatActivity() {
 
 
     }
+
+
 }

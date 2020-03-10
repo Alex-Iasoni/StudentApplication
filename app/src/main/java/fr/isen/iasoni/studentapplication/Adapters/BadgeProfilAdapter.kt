@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-class BadgeProfilAdapter (val badges: ArrayList<Badge>, val context: Context): RecyclerView.Adapter<BadgeProfilAdapter.BadgeViewHolder>() {
+class BadgeProfilAdapter (val badges: ArrayList<Badge?>, val context: Context): RecyclerView.Adapter<BadgeProfilAdapter.BadgeViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BadgeViewHolder {
@@ -36,8 +36,8 @@ class BadgeProfilAdapter (val badges: ArrayList<Badge>, val context: Context): R
 
 
     class BadgeViewHolder(val view: View, val context: Context): RecyclerView.ViewHolder(view) {
-        fun bind(badge: Badge) {
-            val mDrawableName = badge.img
+        fun bind(badge: Badge?) {
+            val mDrawableName = badge?.img
             val resID = context.getResources().getIdentifier(mDrawableName, "drawable", "fr.isen.iasoni.studentapplication")
 
             view.badgeDisplayImageView.setImageResource(resID)

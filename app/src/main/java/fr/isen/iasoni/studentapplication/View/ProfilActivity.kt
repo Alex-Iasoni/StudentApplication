@@ -93,7 +93,7 @@ class ProfilActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
 
-        var badgeList = ArrayList<Badge>()
+        var badgeList = ArrayList<Badge?>()
 
         var badge_buveur = Badge();
         badge_buveur.img = "badge_sleep"

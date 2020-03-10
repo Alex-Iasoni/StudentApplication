@@ -15,6 +15,7 @@ import fr.isen.iasoni.studentapplication.Adapters.EventAdapter
 import fr.isen.iasoni.studentapplication.Controller.BadgeController
 import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
+import fr.isen.iasoni.studentapplication.Controller.UserController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_event.*
@@ -35,18 +36,19 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-
-   
-
+        var event : EventController = EventController()
+        event.FilterEventInterestUser("Toulon",null, arrayListOf(),"8JCQe8Ut32XfZ7zf25i4M4njdRG2"){
+            Log.d("DDDDDDDd",it.toString())
+        }
 
         navigation_view_event.setSelectedItemId(R.id.action_home);
 
 
-        navigation_view_event.setOnNavigationItemSelectedListener {item ->
+        navigation_view_event.setOnNavigationItemSelectedListener { item ->
 
             var activity = ""
 
-            when(item.itemId){
+            when (item.itemId) {
                 R.id.action_home -> activity = "Home"
                 R.id.action_notification -> activity = "Notification"
                 R.id.action_profil -> activity = "ProfilActivity"
@@ -57,20 +59,20 @@ class EventsActivity : AppCompatActivity() {
             }
             Toast.makeText(this@EventsActivity, "$activity clicked!", Toast.LENGTH_SHORT).show()
 
-            if(activity == "ProfilActivity"){
+            if (activity == "ProfilActivity") {
 
                 startActivity(Intent(this, ProfilActivity::class.java))
             }
-            if(activity == "SwipeActivity"){
+            if (activity == "SwipeActivity") {
                 startActivity(Intent(this, SwipeActivity::class.java))
             }
-            if(activity == "Home"){
+            if (activity == "Home") {
                 startActivity(Intent(this, FilterActivity::class.java))
             }
-            if(activity == "Notification"){
+            if (activity == "Notification") {
                 startActivity(Intent(this, NotifActivity::class.java))
             }
-            if(activity == "passedEventsActivity"){
+            if (activity == "passedEventsActivity") {
                 startActivity(Intent(this, PassedEventsActivity::class.java))
             }
             return@setOnNavigationItemSelectedListener true
@@ -89,25 +91,26 @@ class EventsActivity : AppCompatActivity() {
         var eventList = ArrayList<Event>()
         var interrested_list = ArrayList<Boolean>()
 
-        event_filter =  intent.getStringExtra("event_filter") //filtre de l'event
+        event_filter = intent.getStringExtra("event_filter") //filtre de l'event
 
 
-        if(event_filter == "city"){
+        if (event_filter == "city") {
             filter_name.text = "Par ville"
 
             optionFilter = findViewById(R.id.spinnerFilter) as Spinner
 
-            var cityController  = CityController()
-            var optionsVilles =  ArrayList<String?>()
+            var cityController = CityController()
+            var optionsVilles = ArrayList<String?>()
 
-            cityController.getCities{
+            cityController.getCities {
 
-                for(city in it){
+                for (city in it) {
                     optionsVilles.add(city.name)
                 }
-                optionFilter.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, optionsVilles)
+                optionFilter.adapter =
+                    ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, optionsVilles)
 
-                optionFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                optionFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {
 
                     }
@@ -124,7 +127,7 @@ class EventsActivity : AppCompatActivity() {
             }
 
             searchButton.setOnClickListener {
-//
+                //
 //                var temporayArray = ArrayList<Event?>()
 //                var temporayBool = ArrayList<Boolean?>()
 //
@@ -136,29 +139,32 @@ class EventsActivity : AppCompatActivity() {
 
 
                 val uid = FirebaseAuth.getInstance().uid ?: ""
-                Log.d("UID", uid)
-                Log.d("TAGGGGG","TAGGGGG")
-                var eventController : EventController = EventController()
-                eventController.FilterEventInterestUser(ville, null, arrayListOf(), uid){
+                var eventController: EventController = EventController()
+
+                Log.d("UIDDDD", uid)
+
+                eventController.FilterEventInterestUser(ville, null, arrayListOf(), uid) {
 
                     var interestArray = it
 
-                    eventController.FilterCityEvent("Toulon"){
-                        Log.d("TAGGDEOUFF",it.size.toString())
-                        for(test in it){
-                            Log.d("Woula","Test")
-                        }
+                    eventController.FilterCityEvent("Toulon") {
+
+                        Log.d("SIZE EVENTS", it.size.toString())
+                        Log.d("SIZE INTERREST", interestArray.size.toString())
+
                         eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                         eventRecyclerView.adapter = EventAdapter(interestArray,it, this)
-
                     }
+
 
                 }
 
             }
 
 
-        }else if (event_filter == "school"){
+    }
+
+        else if (event_filter == "school"){
             filter_name.text = "Par école"
 
 

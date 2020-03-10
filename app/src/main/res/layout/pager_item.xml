@@ -8,13 +8,14 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/swipeProfile"
-        android:layout_width="401dp"
+        android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_marginTop="72dp"
         android:src="@drawable/profil_icon_app"
         app:civ_border_color="@color/white"
         app:civ_border_width="3dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,12 +23,14 @@
 
     <TextView
         android:id="@+id/pseudo"
-        android:layout_width="409dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/pseudo"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swipeProfile" />
@@ -36,9 +39,105 @@
         android:id="@+id/badgeRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="70dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pseudo" />
+
+    <ImageView
+        android:id="@+id/swpieleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipetext1"
+        app:layout_constraintEnd_toEndOf="@+id/swipetext1"
+        app:layout_constraintStart_toStartOf="@+id/swipetext1"
+        app:srcCompat="@drawable/swipe_left" />
+
+    <ImageView
+        android:id="@+id/swpieleft2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipetext1"
+        app:layout_constraintStart_toEndOf="@+id/swpieleft"
+        app:srcCompat="@drawable/swipe_left" />
+
+    <ImageView
+        android:id="@+id/swpieleft3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipetext1"
+        app:layout_constraintStart_toEndOf="@+id/swpieleft2"
+        app:srcCompat="@drawable/swipe_left" />
+
+    <ImageView
+        android:id="@+id/swiperight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipetext2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/swipetext2"
+        app:srcCompat="@drawable/swipe_right" />
+
+    <ImageView
+        android:id="@+id/swiperight2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipetext2"
+        app:layout_constraintEnd_toStartOf="@+id/swiperight"
+        app:srcCompat="@drawable/swipe_right" />
+
+    <ImageView
+        android:id="@+id/swiperight3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipetext2"
+        app:layout_constraintEnd_toStartOf="@+id/swiperight2"
+        app:srcCompat="@drawable/swipe_right" />
+
+    <TextView
+        android:id="@+id/swipetext1"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="@string/swipe"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/swipetext2"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="@string/swipe"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/choose_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chose_badge"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/badgeRecyclerView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/nameforbadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="userName"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/choose_badge"
+        app:layout_constraintStart_toEndOf="@+id/choose_badge" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ data class Event(
     @PropertyName("name") var name: String?,
     @PropertyName("img") var img: String?,
     @PropertyName("id_user_admin") var id_user_admin: String?,
-    @PropertyName("id_subscribe_event") var id_subscribe_event: String?,//SubscribeEventModel
+    @PropertyName("id_subscribe_event") var id_subscribe_event: String,//SubscribeEventModel
     @PropertyName("adresse") var adresse: String?,
     @PropertyName("zip") var zip :  String?,
     @PropertyName("id_city") var id_city :  String?,
@@ -22,8 +22,8 @@ data class Event(
 
 
 {
-    constructor() : this(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String?, adresse: String?, zip: String?, id_city: String?,id_school : String?, id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?, etudiant : String?,limit_user: Int?, date_added: String?) : this(){ //Inscription
+    constructor() : this(null,null,null,null,"",null,null,null,null,null,null,null,null,null,null,null)
+    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String, adresse: String?, zip: String?, id_city: String?,id_school : String?, id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?, etudiant : String?,limit_user: Int?, date_added: String?) : this(){ //Inscription
         this.id_event = id
         this.name = name
         this.id_user_admin = id_user_admin
