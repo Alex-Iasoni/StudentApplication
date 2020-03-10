@@ -380,12 +380,12 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 interest.add(false)
                             }
 
-                            callback.invoke(interest)
+
                         }
                     }
                 }
 
-
+                callback.invoke(interest)
             }
 
         }
@@ -410,11 +410,11 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 interest.add(false)
                             }
 
-                            callback.invoke(interest)
+
                         }
                     }
                 }
-
+                callback.invoke(interest)
 
             }
 
@@ -439,12 +439,12 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 interest.add(false)
                             }
 
-                            callback.invoke(interest)
+
                         }
                     }
                 }
 
-
+                callback.invoke(interest)
             }
 
         }

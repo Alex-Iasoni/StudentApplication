@@ -64,13 +64,7 @@ class EditProfilActivity : AppCompatActivity() {
             }
 
         }
-        register_button_register.setOnClickListener{
-            Toast.makeText(baseContext, "Profile updated!",
-                Toast.LENGTH_SHORT).show()
-          //  saveUserToFirebaseDatabase(...)
 
-
-        }
 
 
         selectphoto_button_register.setOnClickListener {

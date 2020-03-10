@@ -64,6 +64,9 @@ class PassedEventsActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
 
         var eventController = EventController()
+
+        Log.d("TEST CHEUM", "TEST CHEUM")
+
         eventController.GetUserEvent(uid){
             Log.d("SIZE EVENTS", it.size.toString())
 
