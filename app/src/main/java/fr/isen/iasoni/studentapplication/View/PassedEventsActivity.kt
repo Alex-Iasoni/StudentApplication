@@ -19,6 +19,7 @@ import io.grpc.Deadline.after
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -64,6 +65,8 @@ class PassedEventsActivity : AppCompatActivity() {
 
         var eventController = EventController()
         eventController.GetUserEvent(uid){
+            Log.d("SIZE EVENTS", it.size.toString())
+
             var eventPassed = ArrayList<Event>();
             for (current_event in it){
                 val sdf = SimpleDateFormat("dd/MM/yyyy")
