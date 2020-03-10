@@ -130,13 +130,14 @@ class EventsActivity : AppCompatActivity() {
                 Log.d("UIDDDD", uid)
 
                 eventController.FilterEventInterestUser(ville, null, arrayListOf(), uid) {
+                    var interestArray : ArrayList<Boolean?> = ArrayList<Boolean?>()
+                    interestArray = it
 
-                    var interestArray = it
 
                     eventController.FilterCityEvent("Toulon") {
 
                         Log.d("SIZE EVENTS", it.size.toString())
-                        Log.d("SIZE INTERREST", interestArray.size.toString())
+
 
                         eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                         eventRecyclerView.adapter = EventAdapter(interestArray,it, this)

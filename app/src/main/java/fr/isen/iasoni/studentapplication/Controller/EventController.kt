@@ -15,8 +15,9 @@ import fr.isen.iasoni.studentapplication.Modele.Music
 import fr.isen.iasoni.studentapplication.Modele.User.User
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
+import java.time.format.DateTimeFormatter
+
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -174,13 +175,15 @@ fun  Interest(id_user: String, id_event: String, callback: (Boolean) -> Unit){
                    }
                }
            }
+
+                Log.d("dede",interest.toString())
                 callback.invoke(interest)
             }
 
         }
     }
 
-    fun  UnInterest(id_user: String, id_event: String){
+    fun  UnInterest(id_user: String, id_event: String  ){
         var user : UserController = UserController()
         user.editEventArray(id_user, id_event)
         var event : Event = Event()
@@ -357,10 +360,11 @@ subs.NumberSubscribeUser(id_subscribe_event){
         val data = database.getReference("Events")
 
         var events: ArrayList<Event?> = ArrayList<Event?>()
-        var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
+
         if (city != null) {
 
             FilterCityEvent(city) {
+                var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
                 for (event in it) {
 
                     var subs: SubscribeEvent? = SubscribeEvent()
@@ -376,22 +380,25 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 }
 
                             }
+
                             if(user_find == false){
                                 interest.add(false)
                             }
 
-
                         }
                     }
+                    Log.d("ddeeeee",interest.toString())
+                    callback.invoke(interest)
+
                 }
 
-                callback.invoke(interest)
             }
 
         }
         else if(school != null){
             FilterSchoolEvent(school) {
                 events = it
+                var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
                 for (event in events) {
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
@@ -409,18 +416,19 @@ subs.NumberSubscribeUser(id_subscribe_event){
                             if(user_find == false){
                                 interest.add(false)
                             }
-
+                            callback.invoke(interest)
 
                         }
                     }
                 }
-                callback.invoke(interest)
+
 
             }
 
         }else if (musics.size != 0){
             FilterMusicEvent(musics) {
                 events = it
+                var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
                 for (event in events) {
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
@@ -437,13 +445,14 @@ subs.NumberSubscribeUser(id_subscribe_event){
                             }
                             if(user_find == false){
                                 interest.add(false)
+
                             }
 
                             callback.invoke(interest)
-
                         }
                     }
                 }
+
 
             }
 
@@ -461,7 +470,7 @@ subs.NumberSubscribeUser(id_subscribe_event){
         val newId = data.push().key.toString()
         val date = DateCurrent()
         val userController = UserController()
-        Log.d("vfvf",id_user_admin)
+
         userController.editEventArray(id_user_admin, newId)
         userController.editEventAdminArray(id_user_admin, newId)
 
