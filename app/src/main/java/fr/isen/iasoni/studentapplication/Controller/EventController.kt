@@ -479,8 +479,8 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
                     val newId2 = data.push().key.toString()
 
-        val event = Event(newId,name, id_user_admin, newId2, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user!!.toInt(), date,"false")
-        data.child(newId).setValue(event)
+                    val event = Event(newId,name, id_user_admin, newId2, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user!!.toInt(), date,"false")
+                    data.child(newId).setValue(event)
                     }
                 }
                 }
