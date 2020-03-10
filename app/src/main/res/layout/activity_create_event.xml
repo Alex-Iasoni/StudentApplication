@@ -11,15 +11,16 @@
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="110dp"
-        android:layout_height="40dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/places"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerSchool"
-        app:layout_constraintStart_toEndOf="@+id/spinnerSchool">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textInputDescription">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nbPlacesEdit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,10 +93,10 @@
         android:layout_width="289dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/event_place"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
         app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2">
+        app:layout_constraintTop_toBottomOf="@+id/eventTitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/eventPlace"
@@ -111,10 +112,10 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/event_start_date"
-        app:layout_constraintBottom_toBottomOf="@+id/calendar"
         app:layout_constraintStart_toEndOf="@+id/calendar"
-        app:layout_constraintTop_toTopOf="@+id/calendar">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/date_event_input"
@@ -182,10 +183,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventTitle"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout2"
         app:srcCompat="@drawable/location" />
 
 
@@ -194,15 +195,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout5"
         app:srcCompat="@drawable/calendar" />
+
+
 
     <Spinner
         android:id="@+id/spinnerSchool"
-        android:layout_width="120dp"
+        android:layout_width="135dp"
         android:layout_height="35dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerVille"
         app:layout_constraintStart_toEndOf="@+id/spinnerVille"
         app:layout_constraintTop_toTopOf="@+id/spinnerVille"
@@ -210,7 +214,7 @@
 
     <Spinner
         android:id="@+id/spinnerVille"
-        android:layout_width="120dp"
+        android:layout_width="140dp"
         android:layout_height="35dp"
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="@+id/textInputDescription"
@@ -228,8 +232,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputDescription"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:hint="Description"
         app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
@@ -238,7 +242,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/eventDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:singleLine="true"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -290,16 +294,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendar"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
         app:srcCompat="@drawable/caisson" />
 
     <TextView
         android:id="@+id/ville_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="16dp"
         android:text="@string/city_event"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/spinnerVille"
@@ -311,16 +315,7 @@
         android:layout_height="wrap_content"
         android:text="@string/school_event"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/places_event"
+        app:layout_constraintBottom_toBottomOf="@+id/ville_event"
         app:layout_constraintStart_toStartOf="@+id/spinnerSchool" />
-
-    <TextView
-        android:id="@+id/places_event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/event_ticket"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

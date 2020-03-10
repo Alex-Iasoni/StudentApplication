@@ -15,6 +15,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -46,6 +47,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.jar.Manifest
 import kotlin.collections.ArrayList
+import android.widget.NumberPicker;
 
 class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, LocationListener {
 
@@ -53,7 +55,6 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     lateinit var optionVille : Spinner
     lateinit var optionSchool : Spinner
     lateinit var optionMusic : Spinner
-
 
     var music: String? = ""
     var arrayMusic = ArrayList<String>()
@@ -83,6 +84,7 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
 */
     }
+
 
     override fun onLocationChanged(location: Location?) {
         location?.let {
@@ -223,10 +225,10 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         createButton.setOnClickListener {
             val uid = FirebaseAuth.getInstance().uid ?: ""
             var eventController = EventController()
-            var a = 100
+
             var etudiant = "false"
 
-            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  a.toString())
+            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  nbPlacesEdit.toString())
 
             eventController.FindIdEvent(eventTitle.text.toString(), uid){
                 val foo = Intent(this, EventInfoActivity::class.java)
@@ -236,6 +238,33 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
 
         }
 
+
+/*
+        //Get the widgets reference from XML layout
+        //
+        var tv = TextView(findViewById(R.id.tv))
+        var np = NumberPicker(findViewById(R.id.np))
+
+        //Set TextView text color
+        tv.setTextColor(Color.parseColor("#ffd32b3b"));
+
+        //Populate NumberPicker values from minimum and maximum value range
+        //Set the minimum value of NumberPicker
+        np.setMinValue(0);
+        //Specify the maximum value/number of NumberPicker
+        np.setMaxValue(10);
+
+        //Gets whether the selector wheel wraps when reaching the min/max value.
+        np.setWrapSelectorWheel(true);
+
+        //Set a value change listener for NumberPicker
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+                //Display the newly selected number from picker
+                tv.setText("Selected Number : " + newVal);
+            }
+        });*/
 
 
     }
@@ -336,6 +365,8 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
             }
         }
     }
+
+
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
 
