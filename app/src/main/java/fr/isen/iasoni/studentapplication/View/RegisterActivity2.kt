@@ -1,5 +1,6 @@
 package fr.isen.iasoni.studentapplication.View
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -133,6 +134,8 @@ class RegisterActivity2 : AppCompatActivity() {
                 val user = mAuth?.currentUser
                 var userController  = UserController()
                 userController.register(user!!.uid, name, surname, mail, birthDate, school, city)
+                startActivity(Intent(this, LoginActivity::class.java))
+
 
             } else {
                 // If sign in fails, display a message to the user.

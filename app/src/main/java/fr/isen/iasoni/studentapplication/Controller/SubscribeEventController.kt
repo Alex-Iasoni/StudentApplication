@@ -19,6 +19,7 @@ class SubscribeEventController {
                 for (value in dataSnapshot.children){
                     if(value.key.equals(id_subscribe_event)){
                         subsevent  = value.getValue(SubscribeEvent::class.java)!!
+
                     }
                 }
                 callback.invoke(subsevent)

@@ -318,50 +318,32 @@ fun  Interest(id_user: String, id_event: String){
         if (city != null) {
 
             FilterCityEvent(city) {
-                events = it
-
-                for (event in events) {
+                for (event in it) {
 
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
-                    subsCon.IdSubscribeExist(event!!.id_subscribe_event){
 
-               if(it){
-                   subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
+                    if (event != null) {
+                        subsCon.getSubscribeEvent(event.id_subscribe_event) {
+                            var user_find: Boolean = false
+                            for (subsuser in it.users) {
+                                if (subsuser.equals(id_user)) {
+                                    interest.add(true)
+                                    user_find = true
+                                }
 
-                       subs = it
-                       Log.d("ddeee", it.toString())
-
-                       var subsusers: ArrayList<String> = ArrayList<String>()
-
-                       subsusers = subs!!.users
-                       var findUser = false
-                       for (subsuser in subsusers) {
-                           if (subsuser.equals(id_user)) {
-                               findUser = true
-
-                           } else {
-                               findUser = false
-                           }
-
-                       }
-                       if(findUser == true){
-                           interest.add(true)
-                       }
-                       else{
-                           interest.add(false)
-                       }
+                            }
+                            if(user_find == false){
+                                interest.add(false)
+                            }
 
 
-                   }
-               }
-
-
+                        }
+                    }
                 }
-            }
-
                 callback.invoke(interest)
-        }
+
+            }
 
         }
         else if(school != null){
