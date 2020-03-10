@@ -6,195 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".View.FilterActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/asso-card"
-        style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="150dp"
-        android:layout_height="155dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="50dp"
-        android:minHeight="200dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_assos"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/assoc_carre">
-
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:clickable="false"
-            android:text="@string/filter_assos"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp"
-            android:textStyle="bold">
-
-        </com.google.android.material.textview.MaterialTextView>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/music-card"
-        style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="150dp"
-        android:layout_height="155dp"
-        android:layout_marginEnd="28dp"
-        android:minHeight="200dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/asso-card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/asso-card">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_music"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/music_carre">
-
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:clickable="false"
-            android:text="@string/filter_music"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp"
-            android:textStyle="bold">
-
-        </com.google.android.material.textview.MaterialTextView>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/city-card"
-        style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="150dp"
-        android:layout_height="155dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
-        android:minHeight="200dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/school-card">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_city"
-            android:layout_width="wrap_content"
-            android:layout_height="132dp"
-            app:srcCompat="@drawable/ville_carre">
-
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:clickable="false"
-            android:text="@string/filter_city"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp"
-            android:textStyle="bold">
-
-        </com.google.android.material.textview.MaterialTextView>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/school-card"
-        style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="150dp"
-        android:layout_height="155dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
-        android:minHeight="200dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asso-card">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_school"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/school_carre">
-
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:clickable="false"
-            android:text="@string/filter_school"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp"
-            android:textStyle="bold">
-
-        </com.google.android.material.textview.MaterialTextView>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/student-card"
-        style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="150dp"
-        android:layout_height="155dp"
-        android:layout_marginEnd="28dp"
-        android:minHeight="200dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/school-card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/school-card">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_student"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/etudiant_carre">
-
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:clickable="false"
-            android:text="@string/filter_etudiants"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp"
-            android:textStyle="bold">
-
-        </com.google.android.material.textview.MaterialTextView>
-
-    </com.google.android.material.card.MaterialCardView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_view"
@@ -205,6 +16,216 @@
         app:itemTextColor="@drawable/nav_item_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation_menu" />
+
+    <ScrollView
+        android:id="@+id/filter-scroll"
+        android:layout_width="411dp"
+        android:layout_height="627dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="610dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/asso-card"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="150dp"
+                android:layout_height="155dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="28dp"
+                android:minHeight="200dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/school-card">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_assos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/assoc_carre">
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:clickable="false"
+                    android:text="@string/filter_assos"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/music-card"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="150dp"
+                android:layout_height="155dp"
+                android:layout_marginEnd="28dp"
+                android:minHeight="200dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/city-card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/city-card">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_music"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/music_carre">
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:clickable="false"
+                    android:text="@string/filter_music"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/city-card"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="150dp"
+                android:layout_height="155dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="16dp"
+                android:minHeight="200dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/ville_carre">
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:clickable="false"
+                    android:text="@string/filter_city"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/school-card"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="150dp"
+                android:layout_height="155dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="28dp"
+                android:minHeight="200dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city-card">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_school"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/school_carre">
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:clickable="false"
+                    android:text="@string/filter_school"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/student-card"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="150dp"
+                android:layout_height="155dp"
+                android:layout_marginEnd="28dp"
+                android:minHeight="200dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/school-card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/school-card">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_student"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/etudiant_carre">
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:clickable="false"
+                    android:text="@string/filter_etudiants"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

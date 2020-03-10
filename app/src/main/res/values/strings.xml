@@ -71,7 +71,8 @@
     <string name="my_city">Ma pur Ville</string>
     <string name="birth_date">Date de naissance</string>
     <string name="places">Places</string>
-
+    <string name="swipe">Swipe</string>
+    <string name="chose_badge">Choisissez un badge pour </string>
 
     <string name="music_rap">Rap</string>
     <string name="music_pop">Pop</string>
