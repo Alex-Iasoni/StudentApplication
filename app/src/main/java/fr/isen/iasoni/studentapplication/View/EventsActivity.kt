@@ -152,8 +152,8 @@ class EventsActivity : AppCompatActivity() {
                         Log.d("SIZE EVENTS", it.size.toString())
                         Log.d("SIZE INTERREST", interestArray.size.toString())
 
-                        eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                        eventRecyclerView.adapter = EventAdapter(interestArray,it, this)
+//                        eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//                        eventRecyclerView.adapter = EventAdapter(interestArray,it, this)
                     }
 
 

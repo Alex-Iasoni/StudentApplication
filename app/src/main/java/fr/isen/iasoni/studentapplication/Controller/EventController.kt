@@ -318,32 +318,28 @@ fun  Interest(id_user: String, id_event: String){
         if (city != null) {
 
             FilterCityEvent(city) {
-                events = it
-
-                for (event in events) {
+                for (event in it) {
 
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
 
-                    subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
-                        subs = it
-                        Log.d("ddeee",it.toString())
-                        var subsusers: ArrayList<String?> = ArrayList<String?>()
-                        for (subsuser in subsusers) {
-                            if (subsuser.equals(id_user)) {
-                                interest.add(true)
-                            } else {
-                                interest.add(false)
+                    if (event != null) {
+                        subsCon.getSubscribeEvent(event.id_subscribe_event) {
+                            for (subsuser in it.users) {
+                                if (subsuser.equals(id_user)) {
+                                    interest.add(true)
+                                } else {
+                                    interest.add(false)
+                                }
+
                             }
+                            callback.invoke(interest)
+
+
 
                         }
-
-
-
-
-                }
+                    }
             }
-                callback.invoke(interest)
         }
 
         }
