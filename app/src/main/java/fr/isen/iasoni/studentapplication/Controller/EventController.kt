@@ -122,10 +122,10 @@ callback.invoke(etudiant)
                                 userevent.add(event)
                             }
                         }
-                        callback.invoke(userevent)
+
                     }
                 }
-
+                callback.invoke(userevent)
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -260,11 +260,12 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
 
                         }
+                        SortbyStartDateEvent(eventsToReturn)
+
+                        callback.invoke(eventsToReturn)
                     }
                 }
-                SortbyStartDateEvent(eventsToReturn)
 
-                callback.invoke(eventsToReturn)
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -296,12 +297,13 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 }
                             }
                         }
-
-
+                        SortbyStartDateEvent(eventsToReturn)
+                        callback.invoke(eventsToReturn)
                     }
                 }
-                SortbyStartDateEvent(eventsToReturn)
-                callback.invoke(eventsToReturn)
+
+
+
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -333,12 +335,14 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 }
                             }
                         }
-
+                        SortbyStartDateEvent(eventsToReturn)
+                        callback.invoke(eventsToReturn)
 
                     }
                 }
-                SortbyStartDateEvent(eventsToReturn)
-                callback.invoke(eventsToReturn)
+
+
+
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -376,11 +380,11 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 interest.add(false)
                             }
 
-
+                            callback.invoke(interest)
                         }
                     }
                 }
-                callback.invoke(interest)
+
 
             }
 
@@ -406,12 +410,12 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 interest.add(false)
                             }
 
-
+                            callback.invoke(interest)
                         }
                     }
                 }
 
-                callback.invoke(interest)
+
             }
 
         }else if (musics.size != 0){
@@ -435,12 +439,12 @@ subs.NumberSubscribeUser(id_subscribe_event){
                                 interest.add(false)
                             }
 
-
+                            callback.invoke(interest)
                         }
                     }
                 }
 
-                callback.invoke(interest)
+
             }
 
         }
