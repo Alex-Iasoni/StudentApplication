@@ -11,19 +11,20 @@ import fr.isen.iasoni.studentapplication.Modele.User.User
 class SubscribeEventController {
 
     val database = FirebaseDatabase.getInstance()
-    fun getSubscribeEvent(id_subscribe_event: String?,callback: (SubscribeEvent) -> Unit ) {
-        var subsevent : SubscribeEvent = SubscribeEvent()
+    fun getSubscribeEvent(id_subscribe_event: String?, callback: (SubscribeEvent) -> Unit) {
+        var subsevent: SubscribeEvent = SubscribeEvent()
         val myRef = database.getReference("SubscribeEvent")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (value in dataSnapshot.children){
-                    if(value.key.equals(id_subscribe_event)){
-                        subsevent  = value.getValue(SubscribeEvent::class.java)!!
+                for (value in dataSnapshot.children) {
+                    if (value.key.equals(id_subscribe_event)) {
+                        subsevent = value.getValue(SubscribeEvent::class.java)!!
 
                     }
                 }
                 callback.invoke(subsevent)
             }
+
             override fun onCancelled(error: DatabaseError) {
                 //Log.d
             }
@@ -31,34 +32,31 @@ class SubscribeEventController {
     }
 
 
-
-    fun addUserOnEvent(id_subscribe_event: String, id_user: String){
-        IdSubscribeExist(id_subscribe_event){
-            if(!it){
+    fun addUserOnEvent(id_subscribe_event: String, id_user: String) {
+        IdSubscribeExist(id_subscribe_event) {
+            if (!it) {
                 val dataPost = database.getReference("SubscribeEvent")
-                var newusers : ArrayList<String> = ArrayList<String>()
+                var newusers: ArrayList<String> = ArrayList<String>()
                 newusers.add(id_user)
-                val sub = SubscribeEvent(id_subscribe_event,newusers)
+                val sub = SubscribeEvent(id_subscribe_event, newusers)
                 dataPost.child(id_subscribe_event).setValue(sub)
-            }
-            else {
+            } else {
                 val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
-                var subsevent : SubscribeEvent = SubscribeEvent()
+                var subsevent: SubscribeEvent = SubscribeEvent()
                 getSubscribeEvent(id_subscribe_event) {
                     subsevent = it
                     var users: ArrayList<String>? = ArrayList<String>()
-                        users = subsevent!!.users
+                    users = subsevent!!.users
                     var exist = true
-                    for(sub in users){
-                        if(sub != id_user){
+                    for (sub in users) {
+                        if (sub != id_user) {
                             exist = true
-                        }
-                        else{
+                        } else {
                             exist = false
                             break;
                         }
                     }
-                    if(exist == true){
+                    if (exist == true) {
                         users!!.add(id_user)
 
                         val childUpdates = HashMap<String, Any>()
@@ -72,29 +70,26 @@ class SubscribeEventController {
             }
         }
 
-
-
-
-
     }
 
-    fun IdSubscribeExist(id_subscribe_event : String?,callback: (Boolean) -> Unit ){
+    fun IdSubscribeExist(id_subscribe_event: String?, callback: (Boolean) -> Unit) {
         val data = database.getReference("SubscribeEvent")
-        var exist : Boolean = false
+        var exist: Boolean = false
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (value in dataSnapshot.children){
+                for (value in dataSnapshot.children) {
 
-                    if(value.key != id_subscribe_event){
+                    if (value.key != id_subscribe_event) {
 
                         exist = false
-                    }else{
+                    } else {
                         exist = true
                         break;
                     }
                 }
                 callback.invoke(exist)
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -102,25 +97,24 @@ class SubscribeEventController {
 
     }
 
-    fun deleteUseronEvent(id_subscribe_event: String?, id_user: String){
+    fun deleteUseronEvent(id_subscribe_event: String?, id_user: String) {
         val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
 
-        var subsevent : SubscribeEvent = SubscribeEvent()
+        var subsevent: SubscribeEvent = SubscribeEvent()
         getSubscribeEvent(id_subscribe_event) {
             subsevent = it
             var users: ArrayList<String>? = ArrayList<String>()
-               users = subsevent!!.users
+            users = subsevent!!.users
             var exist = true
-            for(sub in users){
-                if(sub == id_user){
+            for (sub in users) {
+                if (sub == id_user) {
                     exist = true
-                }
-                else{
+                } else {
                     exist = false
                     break;
                 }
             }
-            if(exist == true) {
+            if (exist == true) {
                 users!!.remove(id_user)
 
                 val childUpdates = HashMap<String, Any>()
@@ -128,6 +122,22 @@ class SubscribeEventController {
                 data.updateChildren(childUpdates)
             }
 
+        }
+
+    }
+
+    fun NumberSubscribeUser(id_subscribe_event: String, callback: (Int) -> Unit) {
+        IdSubscribeExist(id_subscribe_event) {
+            var Number: Int = 0
+            if (it) {
+                val data = database.getReference("SubscribeEvent")
+
+               getSubscribeEvent(id_subscribe_event){
+                   Number = it.users.size
+               }
+
+            }
+            callback.invoke(Number)
         }
 
     }

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Controller.EventController
@@ -63,10 +64,17 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                 change_interrested = !change_interrested!!
                 if(change_interrested!!){
                     //etoile appuyé
-                    val resID_full = context.getResources().getIdentifier(star_full, "drawable", "fr.isen.iasoni.studentapplication")
-                    view.eventDisplayImageView.setImageResource(resID_full)
+
                     if (event != null) {
-                        eventController.Interest(uid, event.id_event.toString())
+                        eventController.Interest(uid, event.id_event.toString()){
+                          if(it){
+                              val resID_full = context.getResources().getIdentifier(star_full, "drawable", "fr.isen.iasoni.studentapplication")
+                              view.eventDisplayImageView.setImageResource(resID_full)
+                          }else{
+                              Toast.makeText(context, "Evénement complet.",
+                                  Toast.LENGTH_SHORT).show()
+                          }
+                        }
                     }
 
                 }else{
