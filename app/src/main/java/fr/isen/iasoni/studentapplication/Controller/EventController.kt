@@ -122,9 +122,10 @@ callback.invoke(etudiant)
                                 userevent.add(event)
                             }
                         }
-                        callback.invoke(userevent)
                     }
                 }
+                callback.invoke(userevent)
+
 
             }
             override fun onCancelled(error: DatabaseError) {
@@ -337,7 +338,7 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
                     }
                 }
-                SortbyStartDateEvent(eventsToReturn)
+                //SortbyStartDateEvent(eventsToReturn)
                 callback.invoke(eventsToReturn)
             }
             override fun onCancelled(error: DatabaseError) {
