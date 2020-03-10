@@ -77,6 +77,9 @@ class FilterActivity : AppCompatActivity() {
 
     }
 
+    fun isLoged(){
+        
+    }
 
 }
 

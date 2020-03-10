@@ -12,12 +12,12 @@
         android:layout_width="150dp"
         android:layout_height="155dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="28dp"
         android:minHeight="200dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/school-card">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_assos"
@@ -53,9 +53,9 @@
         android:minHeight="200dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/asso-card"
+        app:layout_constraintBottom_toBottomOf="@+id/city-card"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/asso-card">
+        app:layout_constraintTop_toTopOf="@+id/city-card">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_music"
@@ -88,12 +88,12 @@
         android:layout_width="150dp"
         android:layout_height="155dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="100dp"
         android:minHeight="200dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/school-card">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_city"
@@ -131,7 +131,7 @@
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asso-card">
+        app:layout_constraintTop_toBottomOf="@+id/city-card">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_school"

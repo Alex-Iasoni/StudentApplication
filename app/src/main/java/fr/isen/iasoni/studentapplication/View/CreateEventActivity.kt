@@ -32,12 +32,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
 import fr.isen.iasoni.studentapplication.Controller.MusicController
 import fr.isen.iasoni.studentapplication.Controller.SchoolController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import kotlinx.android.synthetic.main.activity_create_event.*
+import kotlinx.android.synthetic.main.activity_edit_profil.*
 import java.io.File
 import java.security.AccessController.getContext
 import java.security.acl.Permission
@@ -91,7 +93,7 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-var eventC : EventController = EventController()
+            var eventC : EventController = EventController()
 
              eventC.FilterCityEvent("Toulon"){
                  var test: ArrayList<Event?> =  ArrayList<Event?>()
@@ -109,9 +111,9 @@ var eventC : EventController = EventController()
         mAuth = FirebaseAuth.getInstance()
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        coverImage.setOnClickListener {
-            onChangePhoto()
-        }
+
+
+
         date_event_input.setOnFocusChangeListener { view, hasFocus ->
             if(hasFocus) {
                 date_event_input.clearFocus()
@@ -139,6 +141,24 @@ var eventC : EventController = EventController()
                 dialog.show()
             }
         }
+
+        coverImage.setOnClickListener {
+            Log.d(EditProfilActivity.TAG, "Try to show photo selector")
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+            val intentChooser = Intent.createChooser(intent, "Choose your picture library")
+            intentChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
+            startActivityForResult(intentChooser, CreateEventActivity.pictureRequestCode)
+
+
+
+        }
+
 
         privateorPublic.text = "Public"
 
@@ -255,16 +275,8 @@ var eventC : EventController = EventController()
     }
 
 
-    fun onChangePhoto() {
-        val galleryIntent = Intent(Intent.ACTION_PICK)
-        galleryIntent.type = "image/*"
 
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        val intentChooser = Intent.createChooser(galleryIntent, "Choose your picture library")
-        intentChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
-        startActivityForResult(intentChooser, CreateEventActivity.pictureRequestCode)
-    }
 
     fun onChangePrivatePublic(view: View){
 
