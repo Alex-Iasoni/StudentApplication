@@ -36,10 +36,6 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-        var event : EventController = EventController()
-        event.FilterEventInterestUser("Toulon",null, arrayListOf(),"8JCQe8Ut32XfZ7zf25i4M4njdRG2"){
-            Log.d("DDDDDDDd",it.toString())
-        }
 
         navigation_view_event.setSelectedItemId(R.id.action_home);
 
