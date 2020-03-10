@@ -36,9 +36,10 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-        var user : UserController = UserController()
-        user.editBadgeArray("b8REKIZxh9Q7CmapPFGz5V3A8hJ3","-M1ui4lbIhdxdH7qm2hy")
-
+        var event : EventController = EventController()
+        event.FilterEventInterestUser("Toulon",null, arrayListOf(),"8JCQe8Ut32XfZ7zf25i4M4njdRG2"){
+            Log.d("DDDDDDDd",it.toString())
+        }
 
         navigation_view_event.setSelectedItemId(R.id.action_home);
 
