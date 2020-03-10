@@ -103,9 +103,9 @@ callback.invoke(etudiant)
 
     }
 
-    fun GetUserEvent(id_user : String?,callback: (ArrayList<String?>) -> Unit ){
+    fun GetUserEvent(id_user : String?,callback: (ArrayList<Event>) -> Unit ){
         val data = database.getReference("Events")
-        var userevent : ArrayList<String?> = ArrayList<String?>()
+        var userevent : ArrayList<Event> = ArrayList<Event>()
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (value in dataSnapshot.children){
@@ -118,7 +118,7 @@ callback.invoke(etudiant)
                         for(user in users){
 
                             if (user == id_user){
-                                userevent.add(event.id_event)
+                                userevent.add(event)
                             }
                         }
                         callback.invoke(userevent)
@@ -136,7 +136,7 @@ callback.invoke(etudiant)
 
 
     fun DateCurrent() : String{
-    var currentDate = Date()
+        var currentDate = Date()
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         val dateString = formatter.format(currentDate)
         return dateString
