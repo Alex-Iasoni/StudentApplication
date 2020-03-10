@@ -9,16 +9,19 @@ import fr.isen.iasoni.studentapplication.Modele.Notification
 import fr.isen.iasoni.studentapplication.Modele.User.SwipeUser
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class NotificationController {
 
     val database = FirebaseDatabase.getInstance()
 
     fun getNotification(id_notification: String?,callback: (Notification) -> Unit ) {
-        var notif : Notification = Notification()
+
         val myRef = database.getReference("SwipeUser")
         myRef.addValueEventListener(object : ValueEventListener {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var notif : Notification = Notification()
                 for (value in dataSnapshot.children){
 
                     if(value.key.equals(id_notification)){
@@ -53,5 +56,31 @@ class NotificationController {
         data.child(newId).setValue(notif)
 
     }
+
+//    fun FindNotifUser(id_user: String?,callback: (ArrayList<Notification>) -> Unit){
+//
+//        val myRef = database.getReference("SwipeUser")
+//        myRef.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                var notif : Notification = Notification()
+//                for (value in dataSnapshot.children){
+//
+//                    if(value.key.equals(id_notification)){
+//
+//                        notif  = value.getValue(Notification::class.java)!!
+//
+//                    }
+//                }
+//                callback.invoke(notif)
+//
+//            }
+//            override fun onCancelled(error: DatabaseError) {
+//
+//                //Log.d
+//            }
+//        })
+//
+//
+//    }
 
 }
