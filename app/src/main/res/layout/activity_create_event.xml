@@ -10,11 +10,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="4dp"
         android:hint="@string/places"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textInputDescription"
         app:layout_constraintTop_toTopOf="@+id/textInputDescription">
 
         <com.google.android.material.textfield.TextInputEditText
