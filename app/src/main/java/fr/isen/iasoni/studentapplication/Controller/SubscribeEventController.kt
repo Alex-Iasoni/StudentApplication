@@ -106,14 +106,25 @@ class SubscribeEventController {
         var subsevent : SubscribeEvent = SubscribeEvent()
         getSubscribeEvent(id_subscribe_event) {
             subsevent = it
-            var users: ArrayList<String>? = subsevent!!.users
+            var users: ArrayList<String>? = ArrayList<String>()
+               users = subsevent!!.users
+            var exist = true
+            for(sub in users){
+                if(sub == id_user){
+                    exist = true
+                }
+                else{
+                    exist = false
+                    break;
+                }
+            }
+            if(exist == true) {
+                users!!.remove(id_user)
 
-            users!!.remove(id_user)
-
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("users", users)
-            data.updateChildren(childUpdates)
-
+                val childUpdates = HashMap<String, Any>()
+                childUpdates.put("users", users)
+                data.updateChildren(childUpdates)
+            }
 
         }
 
