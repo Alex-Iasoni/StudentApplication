@@ -149,94 +149,57 @@ callback.invoke(etudiant)
 
 }
 
-fun  Interest(id_user: String, id_event: String, callback: (Boolean) -> Unit){
-        var user : UserController = UserController()
+    fun  Interest(id_user: String, id_event: String){
+        var user = UserController()
         user.editEventArray(id_user, id_event)
-        var event : Event = Event()
         getEvent(id_event){
-            var interest = false
-            event = it
-            var user : UserController = UserController()
-            LimitUser(it.id_event,it.id_subscribe_event){
+            Log.d("FONCTION INTEREST","Dans la fonction interesst")
 
-           if(!it){
-               interest = true
-               user.UserCertified(id_user) {
-                   if (it.equals("false") && event.etudiant.equals("false")) {
-                       var subs: SubscribeEventController = SubscribeEventController()
-                       subs.addUserOnEvent(event.id_subscribe_event, id_user)
-
-                   } else if (it.equals("true") and event.etudiant.equals("true")) {
-                       var subs: SubscribeEventController = SubscribeEventController()
-                       subs.addUserOnEvent(event.id_subscribe_event, id_user)
-                   } else if (it.equals("true") and event.etudiant.equals("false")) {
-                       var subs: SubscribeEventController = SubscribeEventController()
-                       subs.addUserOnEvent(event.id_subscribe_event, id_user)
-                   }
-               }
-           }
-
-                Log.d("dede",interest.toString())
-                callback.invoke(interest)
-            }
-
+            var subs = SubscribeEventController()
+            subs.addUserOnEvent(it.id_subscribe_event, id_user)
         }
     }
 
+
+
     fun  UnInterest(id_user: String, id_event: String  ){
-        var user : UserController = UserController()
-        user.editEventArray(id_user, id_event)
-        var event : Event = Event()
-        getEvent(id_event){
-            event = it
-            var user : UserController = UserController()
-            user.UserCertified(id_user){
-                if(it.equals("false") && event.etudiant.equals("false")){
-                    var subs : SubscribeEventController = SubscribeEventController()
-                    subs.deleteUseronEvent(event.id_subscribe_event, id_user)
-                }
-                else if(it.equals("true") and  event.etudiant.equals("true")){
-                    var subs : SubscribeEventController = SubscribeEventController()
-                    subs.deleteUseronEvent(event.id_subscribe_event, id_user)
-                }
-                else if(it.equals("true") and  event.etudiant.equals("false")){
-                    var subs : SubscribeEventController = SubscribeEventController()
-                    subs.deleteUseronEvent(event.id_subscribe_event, id_user)
-                }
-            }
+        getEvent(id_event) {
+            Log.d("FONCTION UNINTEREST","Dans la fonction uninteresst")
+
+            var subs = SubscribeEventController()
+            subs.deleteUseronEvent(it.id_subscribe_event, id_user)
+
         }
     }
 
     fun LimitUser(id_event: String?, id_subscribe_event: String, callback: (Boolean) -> Unit){
 
        var subs : SubscribeEventController = SubscribeEventController()
-subs.NumberSubscribeUser(id_subscribe_event){
-    var number : Int = it
-    var limit = true
-    getEvent(id_event){
-        if(it.limit_user!!.toInt() >= number){
-            limit  = false
-        }else{
+        subs.NumberSubscribeUser(id_subscribe_event){
+            var number : Int = it
+            var limit = true
+            getEvent(id_event){
+                if(it.limit_user!!.toInt() >= number){
+                    limit  = false
+                }else{
 
-            limit = true
-            val data = database.getReference("Events/" + id_event)
-            val childUpdates = HashMap<String, Any>()
-            childUpdates.put("complete", limit)
-            data.updateChildren(childUpdates)
+                    limit = true
+                    val data = database.getReference("Events/" + id_event)
+                    val childUpdates = HashMap<String, Any>()
+                    childUpdates.put("complete", limit)
+                    data.updateChildren(childUpdates)
 
+                }
+            callback.invoke(limit)
+            }
         }
-        callback.invoke(limit)
-    }
-}
 
     }
 
     fun FilterMusicEvent(musics: ArrayList<String?>, callback: (ArrayList<Event?>) -> Unit){
         var eventsToReturn = ArrayList<Event?>()
-        val data = database.getReference("Musics")
-        data.addValueEventListener(object : ValueEventListener {
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
 
                 var musicController = MusicController()
                 for(music in musics) {
@@ -269,24 +232,19 @@ subs.NumberSubscribeUser(id_subscribe_event){
                     }
                 }
 
-            }
-            override fun onCancelled(error: DatabaseError) {
 
-            }
-        })
 
 
     }
 
     fun FilterSchoolEvent(school: String?, callback: (ArrayList<Event?>) -> Unit){
-        var eventsToReturn = ArrayList<Event?>()
-        val data = database.getReference("Schools")
-        data.addValueEventListener(object : ValueEventListener {
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+
 
                 var shoolcontroller = SchoolController()
                 shoolcontroller.getIdSchool(school) {
+                    var eventsToReturn = ArrayList<Event?>()
 
                     var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
                     var current_id_school = it;
@@ -308,24 +266,17 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
 
             }
-            override fun onCancelled(error: DatabaseError) {
 
-            }
-        })
-            }
+
 
 
 
     fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
-        var eventsToReturn = ArrayList<Event?>()
-        val data = database.getReference("Events")
-        data.addValueEventListener(object : ValueEventListener {
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 var cityController = CityController()
                 cityController.getIdCity(city) {
-
+                    var eventsToReturn = ArrayList<Event?>()
                     var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
                     var current_id_city = it;
                     var eventC = EventController()
@@ -346,11 +297,7 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
 
 
-            }
-            override fun onCancelled(error: DatabaseError) {
 
-            }
-        })
     }
 
 
@@ -364,7 +311,9 @@ subs.NumberSubscribeUser(id_subscribe_event){
         if (city != null) {
 
             FilterCityEvent(city) {
-                var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
+                var interest = ArrayList<Boolean?>()
+                var count: Int = 0
+                var size_tab_event = it.size
                 for (event in it) {
 
                     var subs: SubscribeEvent? = SubscribeEvent()
@@ -374,21 +323,26 @@ subs.NumberSubscribeUser(id_subscribe_event){
                         subsCon.getSubscribeEvent(event.id_subscribe_event) {
                             var user_find: Boolean = false
                             for (subsuser in it.users) {
-                                if (subsuser.equals(id_user)) {
+                                if (subsuser.equals(id_user) && user_find == false) {
                                     interest.add(true)
                                     user_find = true
+                                    count++
                                 }
 
                             }
 
                             if(user_find == false){
                                 interest.add(false)
+                                count++
+                            }
+                            if(count == size_tab_event){
+                                callback.invoke(interest)
+
                             }
 
                         }
                     }
-                    Log.d("ddeeeee",interest.toString())
-                    callback.invoke(interest)
+
 
                 }
 
@@ -498,29 +452,29 @@ subs.NumberSubscribeUser(id_subscribe_event){
 
                     val newId2 = data.push().key.toString()
 
-        val event = Event(newId,name, id_user_admin, newId2, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user!!.toInt(), date,"false")
-        data.child(newId).setValue(event)
+                    val event = Event(newId,name, id_user_admin, newId2, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user!!.toInt(), date,"false")
+                    data.child(newId).setValue(event)
                     }
                 }
                 }
 
     }
-fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<String>?) -> Unit){
-    var musicController = MusicController()
-    var id_musics: ArrayList<String> = ArrayList<String>()
-    for (music in musics) {
-        musicController.getIdMusic(music) {
+    fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<String>?) -> Unit){
+        var musicController = MusicController()
+        var id_musics: ArrayList<String> = ArrayList<String>()
+        for (music in musics) {
+            musicController.getIdMusic(music) {
 
-            if (it != null) {
-                id_musics.add(it)
+                if (it != null) {
+                    id_musics.add(it)
+                }
+                musicController.editEventArray(it, newId)
+
             }
-            musicController.editEventArray(it, newId)
 
         }
-
+        callback.invoke(id_musics)
     }
-    callback.invoke(id_musics)
-}
 
     fun editEvent(id_event : String?, name : String, adresse: String, zip: String, start_date: String, end_date: String, description: String, limit_user: Int){
 

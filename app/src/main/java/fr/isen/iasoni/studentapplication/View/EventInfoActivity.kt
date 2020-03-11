@@ -34,8 +34,10 @@ class EventInfoActivity : AppCompatActivity() {
             description_event.text = it.description
             start_time_event.text = it.start_date
             end_time_event.text = it.end_date
+/*
             date_event.text = it.date_added
-            tickets_event.text = it.limit_user.toString()
+*/
+            num_tickets_event.text = it.limit_user.toString()
 
             //chopper la date
             var city : City = City()
@@ -62,7 +64,6 @@ class EventInfoActivity : AppCompatActivity() {
 
                         val chips_music = inflater.inflate(R.layout.chips_music,null, false) as Chip
 
-                        Log.d("liste musique ->>>",it.name)
                         chips_music.text = it.name
                         chips_music.setOnCloseIconClickListener{
                             chips_group.removeView(it)

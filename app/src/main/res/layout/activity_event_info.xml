@@ -7,15 +7,7 @@
     tools:context=".View.EventInfoActivity">
 
 
-    <ImageView
-        android:id="@+id/back_arrow"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+
 
     <ImageView
         android:id="@+id/coverImage"
@@ -37,30 +29,6 @@
         app:layout_constraintTop_toBottomOf="@+id/coverImage"></View>
 
     <TextView
-        android:id="@+id/date_event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Date event"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country_list" />
-
-    <TextView
-        android:id="@+id/zerId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="|"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/date_event"
-        app:layout_constraintStart_toEndOf="@+id/date_event"
-        app:layout_constraintTop_toTopOf="@+id/date_event" />
-
-    <TextView
         android:id="@+id/zerId3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,23 +36,21 @@
         android:text="-"
         android:textColor="@color/colorPrimary"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/date_event"
+        app:layout_constraintBottom_toBottomOf="@+id/start_time_event"
         app:layout_constraintStart_toEndOf="@+id/start_time_event"
-        app:layout_constraintTop_toTopOf="@+id/date_event"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/start_time_event" />
 
     <TextView
         android:id="@+id/start_time_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:text="start time"
         android:textColor="@color/colorPrimary"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/date_event"
-        app:layout_constraintStart_toEndOf="@+id/zerId"
-        app:layout_constraintTop_toTopOf="@+id/date_event"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/country_list" />
 
     <TextView
         android:id="@+id/end_time_event"
@@ -94,10 +60,9 @@
         android:text="end time"
         android:textColor="@color/colorPrimary"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/date_event"
+        app:layout_constraintBottom_toBottomOf="@+id/start_time_event"
         app:layout_constraintStart_toEndOf="@+id/zerId3"
-        app:layout_constraintTop_toTopOf="@+id/date_event"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/start_time_event" />
 
     <TextView
         android:id="@+id/name_event"
@@ -110,7 +75,7 @@
         android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_event" />
+        app:layout_constraintTop_toBottomOf="@+id/end_time_event" />
 
     <ImageView
         android:id="@+id/eventDisplayImageView"
@@ -119,7 +84,6 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/orga_even"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/date_event"
         app:srcCompat="@drawable/star_empty" />
 
     <TextView
@@ -338,6 +302,18 @@
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
+
+
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back"
+        android:background="@color/white"/>
 
     <TextView
         android:id="@+id/music_section"
