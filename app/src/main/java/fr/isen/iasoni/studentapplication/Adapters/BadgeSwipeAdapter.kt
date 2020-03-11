@@ -11,6 +11,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Controller.BadgeController
@@ -44,14 +45,15 @@ class BadgeSwipeAdapter (val badges: ArrayList<Badge?>, val context: Context): R
             val mDrawableName = badge?.img
             val resID = context.getResources()
                 .getIdentifier(mDrawableName, "drawable", "fr.isen.iasoni.studentapplication")
-            val uid = FirebaseAuth.getInstance().uid ?: ""
 
             view.badgeDisplayImageView.setImageResource(resID)
 
             view.badgeDisplayImageView.setOnClickListener {
-                var userController = UserController()
                 if (badge != null) {
-                    userController.editBadgeArray(uid, badge.id_badge.toString())
+                    if (badge != null) {
+                        Toast.makeText(context, badge.name + "  attribué", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
 
             }

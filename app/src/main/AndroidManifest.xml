@@ -9,10 +9,10 @@
         android:roundIcon="@drawable/logo_red"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.LoginActivity"></activity>
+        <activity android:name=".View.PassedEventsActivity"></activity>
         <activity android:name=".View.RegisterActivity2" />
         <activity android:name=".View.RegisterActivity1" />
-        <activity android:name=".View.PassedEventsActivity">
+        <activity android:name=".View.LoginActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

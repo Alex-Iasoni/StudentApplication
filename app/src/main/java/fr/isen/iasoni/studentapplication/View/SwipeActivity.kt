@@ -3,6 +3,7 @@ package fr.isen.iasoni.studentapplication.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.viewpager.widget.PagerAdapter
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_profil.*
 
 class SwipeActivity : AppCompatActivity() {
 
-    var swipe_event: String = ""
+    var swipe_event: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +41,9 @@ class SwipeActivity : AppCompatActivity() {
                 startActivity(Intent(this, ProfilActivity::class.java))
             }
             if(activity == "SwipeActivity"){
-                startActivity(Intent(this, SwipeActivity::class.java))
-            }
+                val foo = Intent(this, SwipeActivity::class.java)
+                foo.putExtra("idEvent", "none")
+                this.startActivity(foo)            }
             if(activity == "Home"){
                 startActivity(Intent(this, FilterActivity::class.java))
             }
@@ -57,35 +59,40 @@ class SwipeActivity : AppCompatActivity() {
         //--------------------------------------------------------------------------
 
         swipe_event = intent.getStringExtra("idEvent") //filtre de l'event
-        var user_array = ArrayList<User>()
-        var eventController = EventController()
-        eventController.getEvent(swipe_event){
 
-            var subscribeEventController = SubscribeEventController()
-            subscribeEventController.getSubscribeEvent(it.id_subscribe_event){
-                var userController = UserController()
-                var count = 0
-                var count_size = it.users.size
-                for(user_id in it.users) {
-                    userController.getUser(user_id) {
-                        user_array.add(it)
-                        count++
-                        if(count == count_size){
-                            //get a reference to the ViewPager in the layout
-                            val viewPager: ViewPager = findViewById<View>(R.id.pager) as ViewPager
-                            //Initialize our adapter
-                            val adapter: PagerAdapter= SwipeEventAdapter(this, user_array)
+        if(swipe_event != "none") {
+            Log.d("SWIPE EVENT", swipe_event)
+            var user_array = ArrayList<User>()
+            var eventController = EventController()
+            eventController.getEvent(swipe_event) {
 
-                            // Binds the adapter to the viewPager
-                            viewPager.adapter = adapter
+                var subscribeEventController = SubscribeEventController()
+                subscribeEventController.getSubscribeEvent(it.id_subscribe_event) {
+                    var userController = UserController()
+                    var count = 0
+                    var count_size = it.users.size
+                    for (user_id in it.users) {
+                        userController.getUser(user_id) {
+                            user_array.add(it)
+                            count++
+                            if (count == count_size) {
+                                //get a reference to the ViewPager in the layout
+                                val viewPager: ViewPager =
+                                    findViewById<View>(R.id.pager) as ViewPager
+                                //Initialize our adapter
+                                val adapter: PagerAdapter = SwipeEventAdapter(this, user_array)
+
+                                // Binds the adapter to the viewPager
+                                viewPager.adapter = adapter
+                            }
                         }
                     }
                 }
-            }
 
+            }
         }
         //grab all the imagrs and stuff them in our array
-        if(swipe_event == ""){
+        if(swipe_event == "none"){
             val images: IntArray = intArrayOf(
                 R.drawable.louism,
                 R.drawable.iasoni,

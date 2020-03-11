@@ -45,8 +45,9 @@ class NotifActivity : AppCompatActivity() {
                 startActivity(Intent(this, ProfilActivity::class.java))
             }
             if(activity == "SwipeActivity"){
-                startActivity(Intent(this, SwipeActivity::class.java))
-            }
+                val foo = Intent(this, SwipeActivity::class.java)
+                foo.putExtra("idEvent", "none")
+                this.startActivity(foo)            }
             if(activity == "Home"){
                 startActivity(Intent(this, FilterActivity::class.java))
             }

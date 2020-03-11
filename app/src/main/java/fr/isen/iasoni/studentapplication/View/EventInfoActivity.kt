@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +19,7 @@ import fr.isen.iasoni.studentapplication.Controller.MusicController
 import fr.isen.iasoni.studentapplication.Controller.UserController
 import fr.isen.iasoni.studentapplication.Modele.City
 import kotlinx.android.synthetic.main.activity_event_info.*
+import kotlinx.android.synthetic.main.activity_profil.*
 
 
 class EventInfoActivity : AppCompatActivity() {
@@ -27,6 +29,39 @@ class EventInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_info)
+
+        //---------------Navigation Menu-------------------------------------------
+        navigation_view.setSelectedItemId(R.id.action_home);
+        navigation_view.setOnNavigationItemSelectedListener {item ->
+            var activity = ""
+            when(item.itemId){
+                R.id.action_home -> activity = "Home"
+                R.id.action_notification -> activity = "Notification"
+                R.id.action_profil -> activity = "ProfilActivity"
+                R.id.action_events -> activity = "passedEventsActivity"
+                R.id.action_swipe -> activity = "SwipeActivity"
+            }
+            Toast.makeText(this@EventInfoActivity, "$activity clicked!", Toast.LENGTH_SHORT).show()
+            if(activity == "ProfilActivity"){
+                startActivity(Intent(this, ProfilActivity::class.java))
+            }
+            if(activity == "SwipeActivity"){
+                val foo = Intent(this, SwipeActivity::class.java)
+                foo.putExtra("idEvent", "none")
+                this.startActivity(foo)            }
+            if(activity == "Home"){
+                startActivity(Intent(this, FilterActivity::class.java))
+            }
+            if(activity == "Notification"){
+                startActivity(Intent(this, NotifActivity::class.java))
+            }
+            if(activity == "passedEventsActivity"){
+                startActivity(Intent(this, PassedEventsActivity::class.java))
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
+        //---------------------------------------------------------------------------------
+
 
         idEvent =  intent.getStringExtra("idEvent")
 

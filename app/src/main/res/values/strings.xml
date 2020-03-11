@@ -8,7 +8,7 @@
 
 
     <string name="login_title">Page de connexion</string>
-    <string name="login_identifier">Numéros / Email</string>
+    <string name="login_identifier">Email</string>
     <string name="login_password">Mot de passe</string>
     <string name="login_validate">Connexion</string>
     <string name="login_register">S\'inscrire</string>
