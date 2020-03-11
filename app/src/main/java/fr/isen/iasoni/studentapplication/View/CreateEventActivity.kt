@@ -117,24 +117,22 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
 
         }
 
-        createButton.setOnClickListener {
-            performRegister()
-        }
-
-        addCover.setOnClickListener {
-            Log.d(TAG, "Try to show photo selector")
-
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, 0)
-        }
+//        createButton.setOnClickListener {
+//            performRegister()
+//        }
+//
+//        addCover.setOnClickListener {
+//            Log.d(TAG, "Try to show photo selector")
+//
+//            val intent = Intent(Intent.ACTION_PICK)
+//            intent.type = "image/*"
+//            startActivityForResult(intent, 0)
+//        }
 
 
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        coverImage.setOnClickListener {
-            onChangePhoto()
-        }
+
         date_event_input.setOnFocusChangeListener { view, hasFocus ->
             if(hasFocus) {
                 date_event_input.clearFocus()
@@ -421,13 +419,13 @@ class CreateEventActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
                 }
             }
             .addOnFailureListener {
-                Log.d(EditProfilActivity.TAG, "Failed to upload image to storage: ${it.message}")
+                Log.d(TAG, "Failed to upload image to storage: ${it.message}")
             }
     }
 
     private fun saveEventToFirebaseDatabase(eventImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/Event/$uid")
 
 
         var eventController = EventController()
