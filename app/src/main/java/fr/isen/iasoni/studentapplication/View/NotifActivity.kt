@@ -65,17 +65,17 @@ class NotifActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
   var user : UserController = UserController()
         var  no: NotificationController = NotificationController()
-        subs.FindSubsbyUser(uid){
-            no.addNotif("Notification de votre event","Event",uid)
-        }
 
+        subs.FindSubsbyUser(uid){
         no.FindNotifUser(uid){
 
+                no.addNotif("Notification de votre event","Event",uid)
 
             Log.d("it",it.toString())
             notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             notifRecyclerView.adapter = NotifAdapter(it, this)
 
+        }
 
         }
 

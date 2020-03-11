@@ -78,18 +78,17 @@ class SchoolController {
 
     fun getIdSchool(name : String?,callback: (String?) -> Unit ) {
 
-    var idSchool : String? = ""
+
         val myRef = database.getReference("Schools")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var idSchool : String? = ""
                 for (value in dataSnapshot.children){
-
-
                     var school  =   value.getValue(School::class.java)!!
                     if(school.name.equals(name)){
 
                         idSchool = school.id_school
-break;
+
                     }
                 }
                 callback.invoke(idSchool)
