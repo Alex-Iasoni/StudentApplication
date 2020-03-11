@@ -4,8 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import fr.isen.iasoni.studentapplication.Adapters.NotifAdapter
+import fr.isen.iasoni.studentapplication.Adapters.PassedEventsAdapter
+import fr.isen.iasoni.studentapplication.Modele.Notification
 import fr.isen.iasoni.studentapplication.R
+import kotlinx.android.synthetic.main.activity_passed_events.*
 import kotlinx.android.synthetic.main.activity_profil.*
+import kotlinx.android.synthetic.main.activity_profil.navigation_view
 
 class NotifActivity : AppCompatActivity() {
 
@@ -45,8 +51,10 @@ class NotifActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
         //--------------------------------------------------------------
-
-
+        
+        var notifList = ArrayList<Notification>()
+        notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        notifRecyclerView.adapter = NotifAdapter(notifList, this)
 
     }
 
