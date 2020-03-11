@@ -8,7 +8,10 @@ import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
+import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Controller.CityController
 import fr.isen.iasoni.studentapplication.Controller.EventController
 import fr.isen.iasoni.studentapplication.Controller.MusicController
@@ -27,6 +30,9 @@ class EventInfoActivity : AppCompatActivity() {
 
         idEvent =  intent.getStringExtra("idEvent")
 
+        val imageView = findViewById<ImageView>(R.id.coverImage)
+
+
         var eventController = EventController()
         eventController.getEvent(idEvent){
             name_event.text = it.name
@@ -34,8 +40,16 @@ class EventInfoActivity : AppCompatActivity() {
             description_event.text = it.description
             start_time_event.text = it.start_date
             end_time_event.text = it.end_date
+/*
             date_event.text = it.date_added
-            tickets_event.text = it.limit_user.toString()
+*/
+            num_tickets_event.text = it.limit_user.toString()
+
+
+            if(it.img != "none" && it.img != null) {
+                Glide.with(this).load(it.img).into(imageView)
+            }
+
 
             //chopper la date
             var city : City = City()

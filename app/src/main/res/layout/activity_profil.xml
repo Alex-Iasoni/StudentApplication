@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.ProfilActivity">
+    tools:context=".View.ProfilActivity"
+    tools:ignore="ExtraText">
 
 
     <View
@@ -56,17 +57,16 @@
         app:menu="@menu/navigation_menu" />
 
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_profil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="126dp"
+        android:layout_height="43dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/helveticaneuethin"
-        android:text="modifier"
-        android:textColor="#000000"
-        android:textSize="25sp"
+        android:text="modify"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -116,6 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userSurname" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/badgeRecyclerView"
         android:layout_width="match_parent"
@@ -128,7 +129,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line" />
 
-
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="44dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:onClick="switchPageDisconnect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logout_icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,7 +50,7 @@ import com.google.firebase.storage.FirebaseStorage
 import fr.isen.iasoni.studentapplication.Controller.*
 import kotlinx.android.synthetic.main.activity_edit_profil.*
 
-class CreateEventActivity : AppCompatActivity() {
+class CreateEventActivity : AppCompatActivity(){
 
 
     private lateinit var mAuth: FirebaseAuth
@@ -60,13 +60,16 @@ class CreateEventActivity : AppCompatActivity() {
 
     var selectedPhotoUri: Uri? = null
     var music: String? = ""
+    var img: String? = "none"
     var arrayMusic = ArrayList<String>()
     var school: String? = ""
     var ville: String? = ""
 
     var currentDate = Date()
 
-
+    companion object {
+        val TAG = "RegisterActivity"
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,9 +86,13 @@ class CreateEventActivity : AppCompatActivity() {
 
 
 
+        addCover.setOnClickListener {
+            Log.d(EditProfilActivity.TAG, "Try to show photo selector")
 
-
-
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+        }
 
         date_event_input.setOnFocusChangeListener { view, hasFocus ->
             if(hasFocus) {
@@ -205,19 +212,8 @@ class CreateEventActivity : AppCompatActivity() {
 
 
         createButton.setOnClickListener {
-            val uid = FirebaseAuth.getInstance().uid ?: ""
-            var eventController = EventController()
 
-            var etudiant = "false"
-
-            eventController.createEvent(eventTitle.text.toString(),uid,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  nbPlacesEdit.text.toString())
-
-            eventController.FindIdEvent(eventTitle.text.toString(), uid){
-                val foo = Intent(this, EventInfoActivity::class.java)
-                foo.putExtra("idEvent", it)
-                this.startActivity(foo)
-            }
-
+            performRegister()
         }
 
 
@@ -278,5 +274,75 @@ class CreateEventActivity : AppCompatActivity() {
     }
 
 
+    private fun performRegister() {
+
+        uploadImageToFirebaseStorage()
+
+
+    }
+
+    private fun uploadImageToFirebaseStorage() {
+        if (selectedPhotoUri == null) return
+
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Log.d(CreateEventActivity.TAG, "Successfully uploaded image: ${it.metadata?.path}")
+
+                ref.downloadUrl.addOnSuccessListener {
+                    Log.d(EditProfilActivity.TAG, "File Location: $it")
+
+                    saveEventToFirebaseDatabase(it.toString())
+                }
+            }
+            .addOnFailureListener {
+                Log.d(CreateEventActivity.TAG, "Failed to upload image to storage: ${it.message}")
+            }
+    }
+
+
+    private fun saveEventToFirebaseDatabase(profileImageUrl: String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+
+        if (profileImageUrl != ""){
+            img=profileImageUrl
+        }
+
+
+        var eventController = EventController()
+
+        var etudiant = "false"
+
+        eventController.createEvent(eventTitle.text.toString(),uid,img ,eventPlace.text.toString(), "", ville.toString(), school.toString(), arrayMusic, date_event_input.text.toString(), date_event_input_2.text.toString(), eventDescription.text.toString(), etudiant.toString(),  nbPlacesEdit.text.toString())
+
+        eventController.FindIdEvent(eventTitle.text.toString(), uid){
+            val foo = Intent(this, EventInfoActivity::class.java)
+            foo.putExtra("idEvent", it)
+            this.startActivity(foo)
+        }
+
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
+            // proceed and check what the selected image was....
+            Log.d(CreateEventActivity.TAG, "Photo was selected")
+
+            selectedPhotoUri = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+
+            coverImage.setImageBitmap(bitmap)
+
+            addCover.alpha = 0f
+
+        }
+    }
 
 }
