@@ -121,11 +121,13 @@ callback.invoke(etudiant)
 
                             if (user == id_user){
                                 userevent.add(event)
+
                             }
                         }
 
                     }
                 }
+
                 callback.invoke(userevent)
             }
             override fun onCancelled(error: DatabaseError) {

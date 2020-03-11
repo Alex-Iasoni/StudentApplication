@@ -65,11 +65,8 @@ class PassedEventsActivity : AppCompatActivity() {
 
         var eventController = EventController()
 
-        Log.d("TEST CHEUM", "TEST CHEUM")
-
         eventController.GetUserEvent(uid){
             Log.d("SIZE EVENTS", it.size.toString())
-
             var eventPassed = ArrayList<Event>();
             for (current_event in it){
                 val sdf = SimpleDateFormat("dd/MM/yyyy")
@@ -80,8 +77,6 @@ class PassedEventsActivity : AppCompatActivity() {
             }
             notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             notifRecyclerView.adapter = PassedEventsAdapter(eventPassed, this)
-
-
         }
 
     }
