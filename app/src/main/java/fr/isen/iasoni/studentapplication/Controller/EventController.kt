@@ -149,25 +149,34 @@ callback.invoke(etudiant)
 
 }
 
-    fun  Interest(id_user: String, id_event: String){
-        var user = UserController()
-        user.editEventArray(id_user, id_event)
+    fun  Interest(users: ArrayList<String>,id_user: String, id_event: String){
+
+
         getEvent(id_event){
             Log.d("FONCTION INTEREST","Dans la fonction interesst")
-
+            var user = UserController()
+            user.editEventArray("add",id_user, id_event)
             var subs = SubscribeEventController()
-            subs.addUserOnEvent(it.id_subscribe_event, id_user)
+            subs.addUserOnEvent(users,it.id_subscribe_event, id_user)
+
+
+
+
         }
     }
 
 
 
-    fun  UnInterest(id_user: String, id_event: String  ){
+    fun  UnInterest(users: ArrayList<String>,id_user: String, id_event: String  ){
         getEvent(id_event) {
             Log.d("FONCTION UNINTEREST","Dans la fonction uninteresst")
+            var user = UserController()
+            user.editEventArray("remove",id_user, id_event)
 
             var subs = SubscribeEventController()
-            subs.deleteUseronEvent(it.id_subscribe_event, id_user)
+            subs.deleteUseronEvent(users,it.id_subscribe_event, id_user)
+
+
 
         }
     }
@@ -425,7 +434,7 @@ callback.invoke(etudiant)
         val date = DateCurrent()
         val userController = UserController()
 
-        userController.editEventArray(id_user_admin, newId)
+        userController.editEventArray("add",id_user_admin, newId)
         userController.editEventAdminArray(id_user_admin, newId)
 
 

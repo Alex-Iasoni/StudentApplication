@@ -35,9 +35,10 @@ class SubscribeEventController {
     }
 
 
-    fun addUserOnEvent(id_subscribe_event: String, id_user: String) {
+    fun addUserOnEvent(users: ArrayList<String>,id_subscribe_event: String, id_user: String) {
         IdSubscribeExist(id_subscribe_event) {
             Log.d("IdSuscribeExiste",it.toString())
+
             if (!it) {
                 val dataPost = database.getReference("SubscribeEvent")
                 var newusers = ArrayList<String>()
@@ -46,33 +47,37 @@ class SubscribeEventController {
                 dataPost.child(id_subscribe_event).setValue(sub)
             } else {
                 val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
-                getSubscribeEvent(id_subscribe_event) {
-                    Log.d("SUSCRIBE EVENT SIZE", it.users.size.toString())
-                    var users = ArrayList<String>()
-                    users = it.users
-                    var exist = false
-                    for (sub in it.users) {
-                        if (sub == id_user) {
-                            exist = true
-                            break;
+
+
+                    var users_change : ArrayList<String> = ArrayList<String>()
+                users_change = users
+
+                        var exist = false
+                        for (sub in users) {
+                            if (sub == id_user) {
+                                exist = true
+                                break;
+                            }
                         }
+                        if (exist == false) {
+                            if (users != null) {
+                                users_change.add(id_user)
+                                val childUpdates = HashMap<String, Any>()
+                                Log.d("ADD DE USER",users_change.toString())
+
+                                childUpdates.put("users", users_change)
+                                data.updateChildren(childUpdates)
+
+                            }
+
                     }
-                    if (exist == false) {
-                        if (users != null) {
-                            users.add(id_user)
-                            val childUpdates = HashMap<String, Any>()
-                            Log.d("ADD DE USER",users.toString())
-
-                            childUpdates.put("users", users)
-                            data.updateChildren(childUpdates)
-
-                        }
-
-                    }
 
 
-                }
+
+
+
             }
+
         }
 
     }
@@ -89,12 +94,13 @@ class SubscribeEventController {
                         exist = false
                     } else {
                         exist = true
-                        Log.d("ID SUSCRIBE TRUE","EXIST")
-                        callback.invoke(exist)
+
 
                         break;
                     }
                 }
+                callback.invoke(exist)
+
 
             }
 
@@ -105,29 +111,27 @@ class SubscribeEventController {
 
     }
 
-    fun deleteUseronEvent(id_subscribe_event: String?, id_user: String) {
+    fun deleteUseronEvent(users: ArrayList<String>,id_subscribe_event: String?, id_user: String) {
         val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
-        Log.d("DELETE1","DELETE USER ON EVENT")
 
-        getSubscribeEvent(id_subscribe_event) {
-            Log.d("SUSCRIBE EVENT SIZE", it.users.size.toString())
-            var users = ArrayList<String>()
-            users = it.users
+            var users_change = ArrayList<String>()
+        users_change = users
             var exist = false
-            for (sub in it.users) {
+            for (sub in users) {
                 if (sub == id_user) {
                     exist = true
-                    users.remove(id_user)
+                    users_change.remove(id_user)
                 }
             }
             if (exist == true) {
                 val childUpdates = HashMap<String, Any>()
-                Log.d("DELETE DE USER",users.toString())
-                childUpdates.put("users", users)
+                Log.d("DELETE DE USER",users_change.toString())
+                childUpdates.put("users", users_change)
                 data.updateChildren(childUpdates)
             }
 
-        }
+
+
 
     }
 

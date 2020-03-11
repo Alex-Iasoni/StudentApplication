@@ -77,7 +77,7 @@ class UserController {
         })
     }
 
-    fun editEventArray(id_user: String?, id_event: String) {
+    fun editEventArray(type : String?, id_user: String?, id_event: String) {
         val data = database.getReference("Users/" + id_user)
 
         var user: User = User()
@@ -85,8 +85,12 @@ class UserController {
             user = it
             var events: ArrayList<String> = user.events
             if(events.contains(id_event) == false ) {
-                events.add(id_event)
-
+                if(type == "add"){
+                    events.add(id_event)
+                }
+                else{
+                    events.remove(id_event)
+                }
                 val childUpdates = HashMap<String, Any>()
                 childUpdates.put("events", events)
                 data.updateChildren(childUpdates)
