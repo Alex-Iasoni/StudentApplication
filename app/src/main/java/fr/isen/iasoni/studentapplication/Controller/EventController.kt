@@ -150,11 +150,12 @@ callback.invoke(etudiant)
 }
 
     fun  Interest(id_user: String, id_event: String){
-        var user : UserController = UserController()
+        var user = UserController()
         user.editEventArray(id_user, id_event)
-        var event : Event = Event()
         getEvent(id_event){
-            var subs: SubscribeEventController = SubscribeEventController()
+            Log.d("FONCTION INTEREST","Dans la fonction interesst")
+
+            var subs = SubscribeEventController()
             subs.addUserOnEvent(it.id_subscribe_event, id_user)
         }
     }
@@ -162,9 +163,10 @@ callback.invoke(etudiant)
 
 
     fun  UnInterest(id_user: String, id_event: String  ){
-        var user : UserController = UserController()
         getEvent(id_event) {
-            var subs: SubscribeEventController = SubscribeEventController()
+            Log.d("FONCTION UNINTEREST","Dans la fonction uninteresst")
+
+            var subs = SubscribeEventController()
             subs.deleteUseronEvent(it.id_subscribe_event, id_user)
 
         }

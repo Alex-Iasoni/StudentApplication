@@ -123,7 +123,7 @@ class EventsActivity : AppCompatActivity() {
             }
 
             searchButton.setOnClickListener {
-
+                Log.d("Click","Click")
                 val uid = FirebaseAuth.getInstance().uid ?: ""
                 var eventController: EventController = EventController()
 

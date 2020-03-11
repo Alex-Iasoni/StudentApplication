@@ -23,48 +23,48 @@ class SubscribeEventController {
 
                     }
                 }
-                Log.d("AVANT CALLBACK SUSCRIBE","Call back suscrube")
-
-                callback.invoke(subsevent)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 //Log.d
             }
         })
+        callback.invoke(subsevent)
+
     }
 
 
     fun addUserOnEvent(id_subscribe_event: String, id_user: String) {
         IdSubscribeExist(id_subscribe_event) {
+            Log.d("IdSuscribeExiste",it.toString())
             if (!it) {
                 val dataPost = database.getReference("SubscribeEvent")
-                var newusers: ArrayList<String> = ArrayList<String>()
+                var newusers = ArrayList<String>()
                 newusers.add(id_user)
                 val sub = SubscribeEvent(id_subscribe_event, newusers)
                 dataPost.child(id_subscribe_event).setValue(sub)
             } else {
                 val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
-                var subsevent: SubscribeEvent = SubscribeEvent()
                 getSubscribeEvent(id_subscribe_event) {
-                    subsevent = it
-                    var users: ArrayList<String>? = ArrayList<String>()
-                    users = subsevent!!.users
-                    var exist = true
-                    for (sub in users) {
-                        if (sub != id_user) {
+                    Log.d("SUSCRIBE EVENT SIZE", it.users.size.toString())
+                    var users = ArrayList<String>()
+                    users = it.users
+                    var exist = false
+                    for (sub in it.users) {
+                        if (sub == id_user) {
                             exist = true
-                        } else {
-                            exist = false
                             break;
                         }
                     }
-                    if (exist == true) {
-                        users!!.add(id_user)
+                    if (exist == false) {
+                        if (users != null) {
+                            users.add(id_user)
+                            val childUpdates = HashMap<String, Any>()
+                            Log.d("ADD DE USER",users.toString())
+                            childUpdates.put("users", users)
+                            data.updateChildren(childUpdates)
 
-                        val childUpdates = HashMap<String, Any>()
-                        childUpdates.put("users", users)
-                        data.updateChildren(childUpdates)
+                        }
 
                     }
 
@@ -87,10 +87,13 @@ class SubscribeEventController {
                         exist = false
                     } else {
                         exist = true
+                        Log.d("ID SUSCRIBE TRUE","EXIST")
+                        callback.invoke(exist)
+
                         break;
                     }
                 }
-                callback.invoke(exist)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -102,25 +105,22 @@ class SubscribeEventController {
 
     fun deleteUseronEvent(id_subscribe_event: String?, id_user: String) {
         val data = database.getReference("SubscribeEvent/" + id_subscribe_event)
+        Log.d("DELETE1","DELETE USER ON EVENT")
 
-        var subsevent: SubscribeEvent = SubscribeEvent()
         getSubscribeEvent(id_subscribe_event) {
-            subsevent = it
-            var users: ArrayList<String>? = ArrayList<String>()
-            users = subsevent!!.users
-            var exist = true
-            for (sub in users) {
+            Log.d("SUSCRIBE EVENT SIZE", it.users.size.toString())
+            var users = ArrayList<String>()
+            users = it.users
+            var exist = false
+            for (sub in it.users) {
                 if (sub == id_user) {
                     exist = true
-                } else {
-                    exist = false
-                    break;
+                    users.remove(id_user)
                 }
             }
             if (exist == true) {
-                users!!.remove(id_user)
-
                 val childUpdates = HashMap<String, Any>()
+                Log.d("DELETE DE USER",users.toString())
                 childUpdates.put("users", users)
                 data.updateChildren(childUpdates)
             }

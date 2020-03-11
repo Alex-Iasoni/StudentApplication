@@ -62,7 +62,7 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
 
             view.eventDisplayImageView.setOnClickListener {
 
-
+                Log.d("VALUE INTERREST",change_interrested.toString())
                 if(change_interrested!!){
                     //etoile appuyé
                     val resID_full = context.getResources().getIdentifier(
@@ -73,9 +73,8 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                     view.eventDisplayImageView.setImageResource(resID_full)
 
                     if (event != null) {
-                        change_interrested = !change_interrested!!
                         eventController.Interest(uid, event.id_event.toString())
-                       Log.d("Etoile appyé", "etoile appyUUUYEEE")
+                       Log.d("INTERRESSER", "etoile appyUUUYEEE")
 
                     }
 
@@ -85,12 +84,13 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                     val resID_empty = context.getResources().getIdentifier(star_empty, "drawable", "fr.isen.iasoni.studentapplication")
                     view.eventDisplayImageView.setImageResource(resID_empty)
                     if (event != null) {
-                        change_interrested = !change_interrested!!
                         eventController.UnInterest(uid, event.id_event.toString())
-                        Log.d("Etoile pas Apppuyé", "etoile pas appyUUUYEEE")
+                        Log.d("PAS INTERRESSER", "etoile pas appyUUUYEEE")
 
                     }
                 }
+                change_interrested = !change_interrested!!
+
 
             }
 
