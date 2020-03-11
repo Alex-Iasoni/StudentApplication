@@ -11,6 +11,7 @@ import fr.isen.iasoni.studentapplication.Controller.EventController
 import fr.isen.iasoni.studentapplication.Modele.Event.Event
 import fr.isen.iasoni.studentapplication.R
 import fr.isen.iasoni.studentapplication.View.EventInfoActivity
+import fr.isen.iasoni.studentapplication.View.SwipeActivity
 import kotlinx.android.synthetic.main.recycler_view_event_cell.view.*
 
 class PassedEventsAdapter (val events: ArrayList<Event>, val context: Context): RecyclerView.Adapter<PassedEventsAdapter.EventViewHolder>() {
@@ -47,7 +48,7 @@ class PassedEventsAdapter (val events: ArrayList<Event>, val context: Context): 
 
 
             view.eventDisplayInfoView.setOnClickListener{
-                val foo = Intent(context, EventInfoActivity::class.java)
+                val foo = Intent(context, SwipeActivity::class.java)
                 if (event != null) {
                     foo.putExtra("idEvent", event.id_event)
                     context.startActivity(foo)

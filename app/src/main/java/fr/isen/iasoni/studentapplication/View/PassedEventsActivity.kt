@@ -20,6 +20,9 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
+import com.google.firebase.database.FirebaseDatabase
+import fr.isen.iasoni.studentapplication.Controller.SubscribeEventController
+import fr.isen.iasoni.studentapplication.Modele.Event.SubscribeEvent
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -61,23 +64,68 @@ class PassedEventsActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
         //---------------------------------------------------------------------------------
+
+//        for (current_event in it){
+//            val sdf = SimpleDateFormat("dd/MM/yyyy")
+//            val event_date = sdf.parse(current_event?.end_date)
+//            if (Date().after(event_date)) {
+//                if (current_event != null) {
+//                    eventPassed.add(current_event)
+//                }
+//            }
+//        }
+        var eventController = EventController()
+        val database = FirebaseDatabase.getInstance()
         val uid = FirebaseAuth.getInstance().uid ?: ""
 
-        var eventController = EventController()
 
-        eventController.GetUserEvent(uid){
-            Log.d("SIZE EVENTS", it.size.toString())
-            var eventPassed = ArrayList<Event>();
-            for (current_event in it){
-                val sdf = SimpleDateFormat("dd/MM/yyyy")
-                val event_date = sdf.parse(current_event.end_date)
-                if (Date().after(event_date)) {
-                    eventPassed.add(current_event)
+        val data = database.getReference("Events")
+        eventController.getEvents{
+            var size_event: Int = it.size
+            var count: Int = 0
+            var userevent : ArrayList<Event> = ArrayList<Event>()
+            var events : ArrayList<Event?> = ArrayList<Event?>()
+            events = it
+            for(event in events ){
+                var user_find: Boolean = false
+
+                var subsCon : SubscribeEventController = SubscribeEventController()
+                var subscribe : SubscribeEvent = SubscribeEvent()
+                subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
+                    subscribe = it
+                    var users: ArrayList<String> = subscribe.users
+                    for (user in users) {
+
+                        if (user == uid) {
+                            Log.d("User Find!","FIND")
+                            val sdf = SimpleDateFormat("dd/MM/yyyy")
+                            val event_date = sdf.parse(event?.end_date)
+                            Log.d("User DATE NOT GOOD!",event?.end_date)
+
+                            if (Date().after(event_date)) {
+
+                                userevent.add(event)
+
+                            }
+                            count++
+                            user_find = true
+
+                        }
+
+                    }
+                    if (user_find == false) {
+                        count++
+                    }
+                    if (count == size_event){
+
+                        notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                        notifRecyclerView.adapter = PassedEventsAdapter(userevent, this)
+                    }
+
                 }
             }
-            notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-            notifRecyclerView.adapter = PassedEventsAdapter(eventPassed, this)
         }
+
 
     }
 }

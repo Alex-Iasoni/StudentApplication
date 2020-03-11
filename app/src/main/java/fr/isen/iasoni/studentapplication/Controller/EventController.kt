@@ -107,9 +107,8 @@ callback.invoke(etudiant)
 
     fun GetUserEvent(id_user : String?,callback: (ArrayList<Event?>) -> Unit ){
         val data = database.getReference("Events")
-
-
         getEvents{
+            var size_event: Int = it.size
             var userevent : ArrayList<Event?> = ArrayList<Event?>()
             var events : ArrayList<Event?> = ArrayList<Event?>()
             events = it

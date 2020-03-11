@@ -11,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import fr.isen.iasoni.studentapplication.Adapters.BadgeProfilAdapter
-import fr.isen.iasoni.studentapplication.Controller.CityController
-import fr.isen.iasoni.studentapplication.Controller.MusicController
-import fr.isen.iasoni.studentapplication.Controller.SchoolController
-import fr.isen.iasoni.studentapplication.Controller.UserController
+import fr.isen.iasoni.studentapplication.Controller.*
 import fr.isen.iasoni.studentapplication.Modele.Badge
 import fr.isen.iasoni.studentapplication.Modele.City
 import fr.isen.iasoni.studentapplication.Modele.Music
@@ -103,40 +100,28 @@ class ProfilActivity : AppCompatActivity() {
 
         var badgeList = ArrayList<Badge?>()
 
-        var badge_buveur = Badge();
-        badge_buveur.img = "badge_sleep"
-        badge_buveur.name= "Buveur"
-        badgeList.add(badge_buveur)
 
-        var badge_gaul = Badge();
-        badge_gaul.img = "badge_disquette"
-        badge_gaul.name= "Gaulé"
-        badgeList.add(badge_gaul)
+        var userControllerBadge = UserController()
+        userControllerBadge.getUser(mAuth.uid){
+            var badgeController = BadgeController()
+            var count: Int = 0
+            var size_badge: Int = it.badges.size
+            for (badge in it.badges){
+                badgeController.getBadge(badge){
+                    badgeList.add(it)
+                    count++
+                    if (count == size_badge){
+                        badgeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                        badgeRecyclerView.adapter = BadgeProfilAdapter(badgeList, this)
+                    }
 
-        var badge_fetard = Badge();
-        badge_fetard.img = "badge_charo"
-        badge_fetard.name= "Fetard"
-        badgeList.add(badge_fetard)
-
-        var badge_again = Badge();
-        badge_again.img = "badge_alcolo"
-        badge_again.name= "A refaire"
-        badgeList.add(badge_again)
-
-
-        badgeList.add(badge_buveur)
-
-        badgeList.add(badge_gaul)
-
-        badgeList.add(badge_fetard)
-
-
-        badgeList.add(badge_again)
+                }
+            }
+        }
 
 
 
-        badgeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        badgeRecyclerView.adapter = BadgeProfilAdapter(badgeList, this)
+
 
     }
 }

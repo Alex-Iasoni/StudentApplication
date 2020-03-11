@@ -120,24 +120,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/choose_badge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/chose_badge"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/badgeRecyclerView"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/nameforbadge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="userName"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/choose_badge"
-        app:layout_constraintStart_toEndOf="@+id/choose_badge" />
 </androidx.constraintlayout.widget.ConstraintLayout>
