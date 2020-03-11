@@ -123,21 +123,19 @@ class EventsActivity : AppCompatActivity() {
             }
 
             searchButton.setOnClickListener {
-
+                Log.d("Click","Click")
                 val uid = FirebaseAuth.getInstance().uid ?: ""
                 var eventController: EventController = EventController()
-
-                Log.d("UIDDDD", uid)
 
                 eventController.FilterEventInterestUser(ville, null, arrayListOf(), uid) {
                     var interestArray : ArrayList<Boolean?> = ArrayList<Boolean?>()
                     interestArray = it
 
+                    Log.d("SIZE BOOLEAN", it.size.toString())
 
                     eventController.FilterCityEvent("Toulon") {
 
                         Log.d("SIZE EVENTS", it.size.toString())
-
 
                         eventRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                         eventRecyclerView.adapter = EventAdapter(interestArray,it, this)

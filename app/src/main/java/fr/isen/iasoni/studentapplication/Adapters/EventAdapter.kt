@@ -5,6 +5,7 @@ import fr.isen.iasoni.studentapplication.R
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,16 +62,19 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
 
             view.eventDisplayImageView.setOnClickListener {
 
-                change_interrested = !change_interrested!!
+                Log.d("VALUE INTERREST",change_interrested.toString())
                 if(change_interrested!!){
                     //etoile appuyé
-                    val resID_full = context.getResources().getIdentifier(star_full,"drawable","fr.isen.iasoni.studentapplication")
+                    val resID_full = context.getResources().getIdentifier(
+                        star_full,
+                        "drawable",
+                        "fr.isen.iasoni.studentapplication"
+                    )
                     view.eventDisplayImageView.setImageResource(resID_full)
 
                     if (event != null) {
-
                         eventController.Interest(uid, event.id_event.toString())
-
+                       Log.d("INTERRESSER", "etoile appyUUUYEEE")
 
                     }
 
@@ -80,10 +84,13 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                     val resID_empty = context.getResources().getIdentifier(star_empty, "drawable", "fr.isen.iasoni.studentapplication")
                     view.eventDisplayImageView.setImageResource(resID_empty)
                     if (event != null) {
-
                         eventController.UnInterest(uid, event.id_event.toString())
+                        Log.d("PAS INTERRESSER", "etoile pas appyUUUYEEE")
+
                     }
                 }
+                change_interrested = !change_interrested!!
+
 
             }
 
