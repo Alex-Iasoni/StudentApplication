@@ -30,7 +30,7 @@ data class User(
 
         constructor() : this(null,null,null,null,null,null, null,arrayListOf(),arrayListOf(),null,null,null,null,null,
             arrayListOf(),arrayListOf(),null,null,null,null)
-        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?,certified : String?) : this(){ //Inscription
+        constructor(id : String?, name : String?, surname: String?, email: String?, birthday: String?, id_school: String?, id_city: String?,certified : String?, img_profil: String?) : this(){ //Inscription
             this.id_user = id
             this.name = name
             this.surname = surname
@@ -39,7 +39,7 @@ data class User(
             this.id_school = id_school
             this.id_city = id_city
             this.certified = certified
-
+            this.img_profil = img_profil
         }
 
     fun getNameUser(): String?{

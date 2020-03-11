@@ -24,25 +24,7 @@ data class Event(
 
 {
     constructor() : this(null,null,null,null,"",null,null,null,null,null,null,null,null,null,null,null,null)
-    constructor(id : String?, name : String?, id_user_admin: String?, id_subscribe_event: String, adresse: String?, zip: String?, id_city: String?,id_school : String?, id_music : ArrayList<String>?, start_date: String?, end_date: String?, description: String?, etudiant : String?,limit_user: Int?, date_added: String?, complete: String?) : this(){ //Inscription
-        this.id_event = id
-        this.name = name
-        this.id_user_admin = id_user_admin
-        this.id_subscribe_event = id_subscribe_event
-        this.adresse = adresse
-        this.zip = zip
-        this.id_city = id_city
-        this.id_school = id_school
-        this.id_music = id_music
-        this.start_date = start_date
-        this.end_date = end_date
-        this.description = description
-        this.etudiant = etudiant
-        this.limit_user = limit_user
-        this.date_added = date_added
-        this.complete = complete
 
-    }
 
 }
 

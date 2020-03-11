@@ -418,7 +418,7 @@ callback.invoke(etudiant)
 
 
 
-    fun createEvent(name : String?, id_user_admin: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : String, limit_user: String?){
+    fun createEvent(name : String?, id_user_admin: String?,img: String?, adresse: String?, zip: String?, city: String?, school : String?, musics : ArrayList<String>, start_date: String?, end_date: String?, description: String?, etudiant : String, limit_user: String?){
 
         val data = database.getReference("Events")
         val newId = data.push().key.toString()
@@ -452,7 +452,7 @@ callback.invoke(etudiant)
 
                     val newId2 = data.push().key.toString()
 
-                    val event = Event(newId,name, id_user_admin, newId2, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user!!.toInt(), date,"false")
+                    val event = Event(newId,name,img, id_user_admin, newId2, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user!!.toInt(), date,"false")
                     data.child(newId).setValue(event)
                     }
                 }

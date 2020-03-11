@@ -56,14 +56,7 @@ class EditProfilActivity : AppCompatActivity() {
             performRegister()
         }
 
-        val uid = FirebaseAuth.getInstance().uid ?: ""
-        var userContollerImg = UserController()
-        userContollerImg.getUser(uid){
-            if(it.img_profil != "none" && it.img_profil != null) {
-                Glide.with(this).load(it.img_profil).into(imageView)
-            }
 
-        }
 
         selectphoto_button_register.setOnClickListener {
             Log.d(TAG, "Try to show photo selector")
