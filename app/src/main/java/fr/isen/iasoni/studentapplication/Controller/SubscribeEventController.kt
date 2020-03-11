@@ -33,6 +33,32 @@ class SubscribeEventController {
 
 
     }
+    fun FindSubsbyUser(id_user: String, callback: (ArrayList<SubscribeEvent>) -> Unit ){
+        var subsevent: SubscribeEvent = SubscribeEvent()
+        val myRef = database.getReference("SubscribeEvent")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var subs : ArrayList<SubscribeEvent> = ArrayList<SubscribeEvent>()
+                for (value in dataSnapshot.children) {
+                    subsevent = value.getValue(SubscribeEvent::class.java)!!
+                  for(te in subsevent.users){
+                      if(te == id_user){
+                          subs.add(subsevent)
+
+
+                          break;
+                      }
+                  }
+                }
+                callback.invoke(subs)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //Log.d
+            }
+        })
+
+    }
 
 
     fun addUserOnEvent(users: ArrayList<String>,id_subscribe_event: String, id_user: String) {

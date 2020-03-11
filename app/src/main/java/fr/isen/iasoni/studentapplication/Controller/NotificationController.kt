@@ -47,12 +47,12 @@ class NotificationController {
         return dateString
     }
 
-    fun addNotif(name:String?,id_event: String?,id_user: String?,id_user_admin : String){
+    fun addNotif(name:String?,id_event: String?,id_user: String?){
         val data = database.getReference("Notification")
         val newId = data.push().key.toString()
         val date = DateCurrent()
-        var exist : Boolean = false
-        var notif = Notification(newId,name, id_event,id_user,id_user_admin,date)
+
+        var notif = Notification(newId,name,id_event,id_user,date)
         data.child(newId).setValue(notif)
 
     }
@@ -83,6 +83,7 @@ class NotificationController {
 
 
     }
+
 
 
 
