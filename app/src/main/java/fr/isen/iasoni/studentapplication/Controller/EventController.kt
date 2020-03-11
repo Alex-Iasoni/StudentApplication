@@ -159,7 +159,7 @@ fun  Interest(id_user: String, id_event: String){
             var user : UserController = UserController()
             LimitUser(it.id_event,it.id_subscribe_event){
 
-           if(!it){
+               if(!it){
                interest = true
                user.UserCertified(id_user) {
                    if (it.equals("false") && event.etudiant.equals("false")) {
@@ -183,12 +183,13 @@ fun  Interest(id_user: String, id_event: String){
 
     fun  UnInterest(id_user: String, id_event: String  ){
         var user : UserController = UserController()
-        user.editEventArray(id_user, id_event)
+
         var event : Event = Event()
         getEvent(id_event){
             event = it
             var user : UserController = UserController()
             user.UserCertified(id_user){
+
                 if(it.equals("false") && event.etudiant.equals("false")){
                     var subs : SubscribeEventController = SubscribeEventController()
                     subs.deleteUseronEvent(event.id_subscribe_event, id_user)
@@ -364,11 +365,11 @@ subs.NumberSubscribeUser(id_subscribe_event){
                             if(user_find == false){
                                 interest.add(false)
                             }
-                            Log.d("ddeeeee",interest.toString())
-                            callback.invoke(interest)
+
                         }
                     }
-
+                    Log.d("ddeeeee",interest.toString())
+                    callback.invoke(interest)
 
                 }
 

@@ -34,7 +34,7 @@ class SubscribeEventController {
 
     fun addUserOnEvent(id_subscribe_event: String, id_user: String) {
         IdSubscribeExist(id_subscribe_event) {
-            if (!it) {
+            if (it == false) {
                 val dataPost = database.getReference("SubscribeEvent")
                 var newusers: ArrayList<String> = ArrayList<String>()
                 newusers.add(id_user)
@@ -51,9 +51,10 @@ class SubscribeEventController {
                     for (sub in users) {
                         if (sub != id_user) {
                             exist = true
+
                         } else {
                             exist = false
-                            break;
+
                         }
                     }
                     if (exist == true) {
@@ -74,9 +75,10 @@ class SubscribeEventController {
 
     fun IdSubscribeExist(id_subscribe_event: String?, callback: (Boolean) -> Unit) {
         val data = database.getReference("SubscribeEvent")
-        var exist: Boolean = false
+
         data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var exist: Boolean = false
                 for (value in dataSnapshot.children) {
 
                     if (value.key != id_subscribe_event) {
@@ -109,9 +111,10 @@ class SubscribeEventController {
             for (sub in users) {
                 if (sub == id_user) {
                     exist = true
+                    break;
                 } else {
                     exist = false
-                    break;
+
                 }
             }
             if (exist == true) {

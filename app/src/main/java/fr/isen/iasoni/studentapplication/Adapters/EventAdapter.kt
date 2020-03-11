@@ -61,20 +61,16 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
 
             view.eventDisplayImageView.setOnClickListener {
 
-
+                change_interrested = !change_interrested!!
                 if(change_interrested!!){
                     //etoile appuyé
-                    val resID_full = context.getResources().getIdentifier(
-                        star_full,
-                        "drawable",
-                        "fr.isen.iasoni.studentapplication"
-                    )
+                    val resID_full = context.getResources().getIdentifier(star_full,"drawable","fr.isen.iasoni.studentapplication")
                     view.eventDisplayImageView.setImageResource(resID_full)
 
                     if (event != null) {
-                        change_interrested = !change_interrested!!
+
                         eventController.Interest(uid, event.id_event.toString())
-                       
+
 
                     }
 
@@ -84,7 +80,7 @@ class EventAdapter (val interrested: ArrayList<Boolean?>, val events: ArrayList<
                     val resID_empty = context.getResources().getIdentifier(star_empty, "drawable", "fr.isen.iasoni.studentapplication")
                     view.eventDisplayImageView.setImageResource(resID_empty)
                     if (event != null) {
-                        change_interrested = !change_interrested!!
+
                         eventController.UnInterest(uid, event.id_event.toString())
                     }
                 }
