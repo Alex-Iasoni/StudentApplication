@@ -46,7 +46,7 @@ class NotifActivity : AppCompatActivity() {
         }
         //--------------------------------------------------------------
 
-
+        //ADAPETR(NOTIF, context)
 
     }
 
