@@ -34,8 +34,7 @@ class EventController {
                 var events : ArrayList<Event?> = ArrayList<Event?>()
 
                 for (value in dataSnapshot.children){
-                var event : Event? = Event()
-                    event = value.getValue(Event::class.java)
+                var event : Event? = value.getValue(Event::class.java)
 
                         events.add(event)
 
@@ -75,10 +74,11 @@ class EventController {
     }
 
     fun VerifiedEtudiantSchool(id_event: String?, callback: (String) -> Unit){
-    var etudiant = "false"
-        var event : Event = Event()
+
+
         getEvent(id_event){
-            event = it
+            var etudiant : String
+            var event : Event =  it
          if( event.etudiant.equals("true")){
              etudiant = "true"
 
@@ -90,23 +90,10 @@ callback.invoke(etudiant)
 
 
     }
-    fun NotifEvent(id_event: String?){
-        val data = database.getReference("Events")
-        var userevent : ArrayList<String?> = ArrayList<String?>()
-        data.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-
-            }
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-
-    }
 
     fun GetUserEvent(id_user : String?,callback: (ArrayList<Event?>) -> Unit ){
-        val data = database.getReference("Events")
+
 
 
         getEvents{

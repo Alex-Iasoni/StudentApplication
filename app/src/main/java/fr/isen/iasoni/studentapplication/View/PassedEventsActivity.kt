@@ -73,7 +73,7 @@ class PassedEventsActivity : AppCompatActivity() {
             var eventPassed = ArrayList<Event>();
             for (current_event in it){
                 val sdf = SimpleDateFormat("dd/MM/yyyy")
-                val event_date = sdf.parse(current_event.end_date)
+                val event_date = sdf.parse(current_event!!.end_date)
                 if (Date().after(event_date)) {
                     eventPassed.add(current_event)
                 }
