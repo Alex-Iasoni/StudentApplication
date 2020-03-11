@@ -40,8 +40,10 @@ class EventInfoActivity : AppCompatActivity() {
             description_event.text = it.description
             start_time_event.text = it.start_date
             end_time_event.text = it.end_date
+/*
             date_event.text = it.date_added
-            tickets_event.text = it.limit_user.toString()
+*/
+            num_tickets_event.text = it.limit_user.toString()
 
 
             if(it.img != "none" && it.img != null) {

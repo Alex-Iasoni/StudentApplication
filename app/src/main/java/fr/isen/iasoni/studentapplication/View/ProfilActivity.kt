@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,12 @@ class ProfilActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
+    fun switchPageDisconnect(view: View){
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -42,6 +49,7 @@ class ProfilActivity : AppCompatActivity() {
         edit_profil.setOnClickListener {
             startActivity(Intent(this, EditProfilActivity::class.java))
         }
+
 
         var userController = UserController()
         userController.getUser(user!!.uid){

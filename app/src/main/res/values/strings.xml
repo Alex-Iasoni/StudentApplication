@@ -89,6 +89,12 @@
     <string name="event_ticket">Nb places</string>
     <string name="edit_school">Choisissez un école</string>
     <string name="edit_city">Choisissez une ville</string>
+    <string name="intro">Bienvenue dans Student App ! \n
+        Ici vous allez découvrir un réseau social exclusivement réservé aux etudiants ! \n
+        Créez des Evenements a théme libre ! Qu\'ils soient Public ou Privé \n
+        Recherchez des soirées selon vos propres critères, mais ne buvez pas trop \n
+        Matchez avec les participants de vos soirées passé dans votre espace Swipe ! \n
+        Et encore bien plus avec Student App ! </string>
 
     <string name="filter_assos">Associations</string>
     <string name="filter_city">Ville</string>
