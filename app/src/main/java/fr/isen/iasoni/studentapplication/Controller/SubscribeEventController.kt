@@ -23,13 +23,14 @@ class SubscribeEventController {
 
                     }
                 }
+                callback.invoke(subsevent)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 //Log.d
             }
         })
-        callback.invoke(subsevent)
+
 
     }
 
@@ -61,6 +62,7 @@ class SubscribeEventController {
                             users.add(id_user)
                             val childUpdates = HashMap<String, Any>()
                             Log.d("ADD DE USER",users.toString())
+
                             childUpdates.put("users", users)
                             data.updateChildren(childUpdates)
 

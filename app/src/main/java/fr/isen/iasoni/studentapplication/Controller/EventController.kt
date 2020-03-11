@@ -447,9 +447,7 @@ callback.invoke(etudiant)
                 FindMusic(newId,musics){
                     var id_musics : ArrayList<String>? = ArrayList<String>()
                     id_musics = it
-
-
-
+                    Log.d("DEEEEEEEEEEe",it.toString())
                     val newId2 = data.push().key.toString()
 
                     val event = Event(newId,name, id_user_admin, newId2, adresse,zip, id_city, id_school, id_musics,start_date, end_date, description,etudiant, limit_user!!.toInt(), date,"false")
@@ -462,18 +460,23 @@ callback.invoke(etudiant)
     fun FindMusic(newId : String,musics : ArrayList<String>, callback: (ArrayList<String>?) -> Unit){
         var musicController = MusicController()
         var id_musics: ArrayList<String> = ArrayList<String>()
+        var count = 0
         for (music in musics) {
             musicController.getIdMusic(music) {
 
                 if (it != null) {
                     id_musics.add(it)
+                    count++
                 }
                 musicController.editEventArray(it, newId)
+                if(count == musics.size){
+                    callback.invoke(id_musics)
+                }
 
             }
 
         }
-        callback.invoke(id_musics)
+
     }
 
     fun editEvent(id_event : String?, name : String, adresse: String, zip: String, start_date: String, end_date: String, description: String, limit_user: Int){
