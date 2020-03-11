@@ -5,8 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.auth.User
 import fr.isen.iasoni.studentapplication.Adapters.NotifAdapter
 import fr.isen.iasoni.studentapplication.Adapters.PassedEventsAdapter
+import fr.isen.iasoni.studentapplication.Controller.EventController
+import fr.isen.iasoni.studentapplication.Controller.NotificationController
+import fr.isen.iasoni.studentapplication.Controller.SubscribeEventController
+import fr.isen.iasoni.studentapplication.Controller.UserController
+import fr.isen.iasoni.studentapplication.Modele.Event.SubscribeEvent
 import fr.isen.iasoni.studentapplication.Modele.Notification
 import fr.isen.iasoni.studentapplication.R
 import kotlinx.android.synthetic.main.activity_passed_events.*
@@ -51,10 +58,32 @@ class NotifActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
         //--------------------------------------------------------------
-        
-        var notifList = ArrayList<Notification>()
-        notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        notifRecyclerView.adapter = NotifAdapter(notifList, this)
+
+
+        var subs : SubscribeEventController = SubscribeEventController()
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+  var user : UserController = UserController()
+        var no : NotificationController = NotificationController()
+        var name = ""
+        no.FindNotifUser(uid){
+            notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            notifRecyclerView.adapter = NotifAdapter(it, this)
+
+
+            subs.FindSubsbyUser(uid){
+                var event : EventController = EventController()
+                for(id_subs in it)
+                event.getIdEventBySubs(id_subs.id_subscribe_event){
+                    var notif : NotificationController = NotificationController()
+                    notif.addNotif("Test",it,uid)
+                }
+
+
+        }
+        }
+
+
+
 
     }
 

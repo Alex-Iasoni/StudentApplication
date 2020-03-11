@@ -40,6 +40,7 @@ class NotifAdapter (val notifs: ArrayList<Notification>, val context: Context): 
         fun bind(notif: Notification?, position: Int) {
             view.notifDisplayContentView.text = notif?.name
 
+
             view.layoutDisplayNotifView.setOnClickListener{
                 val foo = Intent(context, EventInfoActivity::class.java)
                 if (notif != null) {

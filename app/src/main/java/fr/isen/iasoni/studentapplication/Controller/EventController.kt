@@ -246,6 +246,27 @@ callback.invoke(etudiant)
 
     }
 
+    fun getIdEventBySubs(id_subscribe_event: String?, callback: (String?) -> Unit){
+        val data = database.getReference("Events")
+
+        data.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var id : String? = ""
+                for (value in dataSnapshot.children){
+               var event = value.getValue(Event::class.java)!!
+                    if(event.id_subscribe_event.equals(id_subscribe_event)){
+                        id = event.id_event
+                    }
+                }
+                callback.invoke(id)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
+    }
     fun FilterSchoolEvent(school: String?, callback: (ArrayList<Event?>) -> Unit){
 
 
