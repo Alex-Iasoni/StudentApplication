@@ -381,26 +381,33 @@ callback.invoke(etudiant)
         }
         else if(school != null){
             FilterSchoolEvent(school) {
-                events = it
-                var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
+                var interest = ArrayList<Boolean?>()
+                var count: Int = 0
+                var size_tab_event = it.size
                 for (event in events) {
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
-
                     if (event != null) {
                         subsCon.getSubscribeEvent(event.id_subscribe_event) {
                             var user_find: Boolean = false
                             for (subsuser in it.users) {
-                                if (subsuser.equals(id_user)) {
+                                if (subsuser.equals(id_user) && user_find == false) {
                                     interest.add(true)
                                     user_find = true
+                                    count++
                                 }
 
                             }
+
                             if(user_find == false){
                                 interest.add(false)
+                                count++
                             }
-                            callback.invoke(interest)
+                            if(count == size_tab_event){
+                                callback.invoke(interest)
+
+                            }
+
 
                         }
                     }
@@ -411,28 +418,34 @@ callback.invoke(etudiant)
 
         }else if (musics.size != 0){
             FilterMusicEvent(musics) {
-                events = it
-                var interest: ArrayList<Boolean?> = ArrayList<Boolean?>()
+                var interest = ArrayList<Boolean?>()
+                var count: Int = 0
+                var size_tab_event = it.size
                 for (event in events) {
                     var subs: SubscribeEvent? = SubscribeEvent()
                     var subsCon: SubscribeEventController = SubscribeEventController()
-
                     if (event != null) {
                         subsCon.getSubscribeEvent(event.id_subscribe_event) {
                             var user_find: Boolean = false
                             for (subsuser in it.users) {
-                                if (subsuser.equals(id_user)) {
+                                if (subsuser.equals(id_user) && user_find == false) {
                                     interest.add(true)
                                     user_find = true
+                                    count++
                                 }
 
                             }
+
                             if(user_find == false){
                                 interest.add(false)
+                                count++
+                            }
+                            if(count == size_tab_event){
+                                callback.invoke(interest)
 
                             }
 
-                            callback.invoke(interest)
+
                         }
                     }
                 }
