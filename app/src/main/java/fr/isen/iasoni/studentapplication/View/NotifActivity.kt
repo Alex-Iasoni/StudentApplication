@@ -51,7 +51,7 @@ class NotifActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
         //--------------------------------------------------------------
-        
+
         var notifList = ArrayList<Notification>()
         notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         notifRecyclerView.adapter = NotifAdapter(notifList, this)

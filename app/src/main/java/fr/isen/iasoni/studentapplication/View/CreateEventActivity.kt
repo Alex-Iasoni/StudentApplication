@@ -323,8 +323,6 @@ class CreateEventActivity : AppCompatActivity(){
             foo.putExtra("idEvent", it)
             this.startActivity(foo)
         }
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
