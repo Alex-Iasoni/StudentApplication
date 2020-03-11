@@ -50,6 +50,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_button"
         android:text="Mettre à jour le profil"
+        android:onClick="switchPageProfile"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

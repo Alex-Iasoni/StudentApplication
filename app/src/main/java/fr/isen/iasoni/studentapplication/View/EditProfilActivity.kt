@@ -39,6 +39,8 @@ class EditProfilActivity : AppCompatActivity() {
     companion object {
         val TAG = "RegisterActivity"
     }
+
+
     var selectedPhotoUri: Uri? = null
     lateinit var optionVille : Spinner
     lateinit var optionSchool : Spinner
@@ -55,6 +57,14 @@ class EditProfilActivity : AppCompatActivity() {
         register_button_register.setOnClickListener {
             performRegister()
         }
+
+        register_button_register.setOnClickListener{
+            val intent = Intent(this, ProfilActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
 
         val uid = FirebaseAuth.getInstance().uid ?: ""
         var userContollerImg = UserController()
