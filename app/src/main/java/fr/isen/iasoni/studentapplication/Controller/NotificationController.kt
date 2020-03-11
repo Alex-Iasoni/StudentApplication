@@ -59,21 +59,27 @@ class NotificationController {
 
     fun FindNotifUser(id_user: String?,callback: (ArrayList<Notification>) -> Unit){
         val myRef = database.getReference("Notification")
+
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var notifList : ArrayList<Notification> = ArrayList<Notification> ()
                 var notif : Notification = Notification()
                 for (value in dataSnapshot.children){
                     var notif: Notification =  value.getValue(Notification::class.java)!!
-                    if(notif.equals(id_user)){
+                    var count = 0
+                    if(notif.id_user.equals(id_user)){
+                        count++
+                        if(count == 1){
+                            notifList.add(notif)
+                        }
 
-                        notifList.add(notif)
+
 
                     }
 
                 }
-                callback.invoke(notifList)
 
+                callback.invoke(notifList)
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -83,6 +89,9 @@ class NotificationController {
 
 
     }
+
+
+
 
 
 

@@ -3,6 +3,7 @@ package fr.isen.iasoni.studentapplication.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -63,23 +64,19 @@ class NotifActivity : AppCompatActivity() {
         var subs : SubscribeEventController = SubscribeEventController()
         val uid = FirebaseAuth.getInstance().uid ?: ""
   var user : UserController = UserController()
-        var no : NotificationController = NotificationController()
+        var  no: NotificationController = NotificationController()
+        subs.FindSubsbyUser(uid){
+            no.addNotif("Notification de votre event","Event",uid)
+        }
 
         no.FindNotifUser(uid){
+
+
+            Log.d("it",it.toString())
             notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             notifRecyclerView.adapter = NotifAdapter(it, this)
 
 
-            subs.FindSubsbyUser(uid){
-                var event : EventController = EventController()
-                for(id_subs in it)
-                event.getIdEventBySubs(id_subs.id_subscribe_event){
-                    var notif : NotificationController = NotificationController()
-                    notif.addNotif("Test",it,uid)
-                }
-
-
-        }
         }
 
 
