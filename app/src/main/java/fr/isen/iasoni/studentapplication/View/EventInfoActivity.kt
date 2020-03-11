@@ -68,6 +68,7 @@ class EventInfoActivity : AppCompatActivity() {
 
             //pour add les chips musique
             var music_array = it.id_music
+            Log.d("MUSIC ARRAY ----->>>>>>", music_array.toString())
             val inflater = LayoutInflater.from(this@EventInfoActivity)
             if (music_array != null) {
                 for(musicid in music_array) {
@@ -77,9 +78,10 @@ class EventInfoActivity : AppCompatActivity() {
                         val chips_music = inflater.inflate(R.layout.chips_music,null, false) as Chip
 
                         chips_music.text = it.name
-                        chips_music.setOnCloseIconClickListener{
-                            chips_group.removeView(it)
-                        }
+                        Log.d("MUSIC NAME ---->>>", chips_music.text.toString())
+
+
+
                         chips_group.addView(chips_music)
 
                     }
