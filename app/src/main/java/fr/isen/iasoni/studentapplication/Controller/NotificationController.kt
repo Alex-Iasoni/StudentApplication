@@ -17,7 +17,7 @@ class NotificationController {
 
     fun getNotification(id_notification: String?,callback: (Notification) -> Unit ) {
 
-        val myRef = database.getReference("SwipeUser")
+        val myRef = database.getReference("Notification")
         myRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -48,7 +48,7 @@ class NotificationController {
     }
 
     fun addNotif(name:String?,id_event: String?,id_user: String?,id_user_admin : String){
-        val data = database.getReference("Musics")
+        val data = database.getReference("Notification")
         val newId = data.push().key.toString()
         val date = DateCurrent()
         var exist : Boolean = false
@@ -57,30 +57,33 @@ class NotificationController {
 
     }
 
-//    fun FindNotifUser(id_user: String?,callback: (ArrayList<Notification>) -> Unit){
-//
-//        val myRef = database.getReference("SwipeUser")
-//        myRef.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                var notif : Notification = Notification()
-//                for (value in dataSnapshot.children){
-//
-//                    if(value.key.equals(id_notification)){
-//
-//                        notif  = value.getValue(Notification::class.java)!!
-//
-//                    }
-//                }
-//                callback.invoke(notif)
-//
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//
-//                //Log.d
-//            }
-//        })
-//
-//
-//    }
+    fun FindNotifUser(id_user: String?,callback: (ArrayList<Notification>) -> Unit){
+        val myRef = database.getReference("Notification")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var notifList : ArrayList<Notification> = ArrayList<Notification> ()
+                var notif : Notification = Notification()
+                for (value in dataSnapshot.children){
+                    var notif: Notification =  value.getValue(Notification::class.java)!!
+                    if(notif.equals(id_user)){
+
+                        notifList.add(notif)
+
+                    }
+
+                }
+                callback.invoke(notifList)
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+                //Log.d
+            }
+        })
+
+
+    }
+
+
 
 }
