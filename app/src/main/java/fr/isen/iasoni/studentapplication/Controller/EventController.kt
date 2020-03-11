@@ -105,33 +105,35 @@ callback.invoke(etudiant)
 
     }
 
-    fun GetUserEvent(id_user : String?,callback: (ArrayList<Event>) -> Unit ){
+    fun GetUserEvent(id_user : String?,callback: (ArrayList<Event?>) -> Unit ){
         val data = database.getReference("Events")
-        var userevent : ArrayList<Event> = ArrayList<Event>()
-        data.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (value in dataSnapshot.children){
-                    var event = value.getValue(Event::class.java)!!
-                    var subsCon : SubscribeEventController = SubscribeEventController()
-                    var subscribe : SubscribeEvent = SubscribeEvent()
-                    subsCon.getSubscribeEvent(event.id_subscribe_event) {
-                        subscribe = it
-                        var users: ArrayList<String> = subscribe.users
-                        for(user in users){
 
-                            if (user == id_user){
-                                userevent.add(event)
-                            }
+
+        getEvents{
+            var userevent : ArrayList<Event?> = ArrayList<Event?>()
+            var events : ArrayList<Event?> = ArrayList<Event?>()
+            events = it
+            for(event in events ){
+                var subsCon : SubscribeEventController = SubscribeEventController()
+                var subscribe : SubscribeEvent = SubscribeEvent()
+                subsCon.getSubscribeEvent(event!!.id_subscribe_event) {
+                    subscribe = it
+                    var users: ArrayList<String> = subscribe.users
+                    for(user in users){
+
+                        if (user == id_user){
+                            userevent.add(event)
                         }
-
                     }
-                }
-                callback.invoke(userevent)
-            }
-            override fun onCancelled(error: DatabaseError) {
 
+                }
             }
-        })
+            callback.invoke(userevent)
+        }
+
+
+
+
 
     }
 
@@ -269,15 +271,12 @@ callback.invoke(etudiant)
     }
     fun FilterSchoolEvent(school: String?, callback: (ArrayList<Event?>) -> Unit){
 
-
-
-
                 var shoolcontroller = SchoolController()
                 shoolcontroller.getIdSchool(school) {
                     var eventsToReturn = ArrayList<Event?>()
 
                     var eventfilter : ArrayList<Event?> = ArrayList<Event?>()
-                    var current_id_school = it;
+                    var current_id_school = it
                     var eventC = EventController()
                     eventC.getEvents {
 
@@ -292,13 +291,7 @@ callback.invoke(etudiant)
                         callback.invoke(eventsToReturn)
                     }
                 }
-
-
-
             }
-
-
-
 
 
     fun FilterCityEvent(city: String?, callback: (ArrayList<Event?>) -> Unit){
@@ -324,9 +317,6 @@ callback.invoke(etudiant)
 
                     }
                 }
-
-
-
 
     }
 

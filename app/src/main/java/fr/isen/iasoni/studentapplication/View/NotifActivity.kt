@@ -64,7 +64,7 @@ class NotifActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
   var user : UserController = UserController()
         var no : NotificationController = NotificationController()
-        var name = ""
+
         no.FindNotifUser(uid){
             notifRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             notifRecyclerView.adapter = NotifAdapter(it, this)
